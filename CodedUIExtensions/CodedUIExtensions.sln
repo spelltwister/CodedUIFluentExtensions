@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApplication.CodedU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodedUIAdditionalControls", "CodedUIAdditionalControls\CodedUIAdditionalControls.csproj", "{CDB90E9B-31C6-4101-B806-0C2AF88A3936}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApplication.FluentCodedUITests", "SampleWebApplication.FluentCodedUITests\SampleWebApplication.FluentCodedUITests.csproj", "{679343CA-7E1F-4AC4-8CC4-B62CE3D7E005}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CDB90E9B-31C6-4101-B806-0C2AF88A3936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDB90E9B-31C6-4101-B806-0C2AF88A3936}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDB90E9B-31C6-4101-B806-0C2AF88A3936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{679343CA-7E1F-4AC4-8CC4-B62CE3D7E005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679343CA-7E1F-4AC4-8CC4-B62CE3D7E005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679343CA-7E1F-4AC4-8CC4-B62CE3D7E005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679343CA-7E1F-4AC4-8CC4-B62CE3D7E005}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
