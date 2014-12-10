@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CodedUIPageModeling;
+using CodedUIExtensionsAndHelpers.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace SampleWebApplication.FluentCodedUITests.PageModels

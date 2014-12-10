@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
-namespace CodedUIFluentExtensions
+namespace CodedUIExtensionsAndHelpers.Fluent
 {
     public static class FluentCodedUIControlExtensions
     {

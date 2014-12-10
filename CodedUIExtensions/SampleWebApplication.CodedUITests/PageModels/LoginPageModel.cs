@@ -1,5 +1,5 @@
-﻿using CodedUIAdditionalControls.Html;
-using CodedUIPageModeling;
+﻿using CodedUIExtensionsAndHelpers.AdditionalControls.Html;
+using CodedUIExtensionsAndHelpers.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 

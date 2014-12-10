@@ -1,5 +1,5 @@
-﻿using CodedUIFluentExtensions;
-using CodedUIPageModeling;
+﻿using CodedUIExtensionsAndHelpers.Fluent;
+using CodedUIExtensionsAndHelpers.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 

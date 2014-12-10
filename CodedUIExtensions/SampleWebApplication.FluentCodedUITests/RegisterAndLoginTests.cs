@@ -12,11 +12,13 @@ namespace SampleWebApplication.FluentCodedUITests
     [CodedUITest]
     public class RegisterAndLoginTests
     {
+        private static readonly string CodedUIExamplesWebsiteHome = "http://codeduiexamples.azurewebsites.net/Home/Index";
+        private static readonly string LocalhostWebsiteHome = "http://localhost:49355/Home/Index";
         private static Random r = new Random(DateTime.Now.Second);
         private Lazy<BrowserWindow> _window = new Lazy<BrowserWindow>(() =>
         {
             //BrowserWindow.CurrentBrowser = "Chrome";
-            return BrowserWindow.Launch("http://localhost:49355/");
+            return BrowserWindow.Launch(LocalhostWebsiteHome);
         });
         private BrowserWindow Window { get { return this._window.Value; } }
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UITesting;
 
-namespace CodedUIAdditionalControls.Html
+namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
 {
     public class HtmlForm : HtmlCustomTag
     {

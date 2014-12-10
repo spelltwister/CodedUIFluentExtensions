@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
-namespace CodedUIAdditionalControls.Html
+namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
 {
     public class HtmlCustomTag : HtmlCustom
     {

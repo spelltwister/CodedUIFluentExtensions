@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UITesting;
 
-namespace CodedUIPageModeling
+namespace CodedUIExtensionsAndHelpers.PageModeling
 {
     public static class CodedUIControlExtensions
     {

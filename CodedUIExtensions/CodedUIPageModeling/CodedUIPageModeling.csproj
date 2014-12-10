@@ -36,10 +36,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodedUIControlExtensions.cs" />
-    <Compile Include="HtmlBaseModels.cs" />
-    <Compile Include="IPageModel.cs" />
-    <Compile Include="PageModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

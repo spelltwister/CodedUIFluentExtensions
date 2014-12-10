@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UITesting;
 
-namespace CodedUIPageModeling
+namespace CodedUIExtensionsAndHelpers.PageModeling
 {
     /// <summary>
     /// Default implementation of a page model

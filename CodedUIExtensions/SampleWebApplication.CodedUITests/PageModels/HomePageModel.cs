@@ -1,4 +1,4 @@
-﻿using CodedUIPageModeling;
+﻿using CodedUIExtensionsAndHelpers.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 

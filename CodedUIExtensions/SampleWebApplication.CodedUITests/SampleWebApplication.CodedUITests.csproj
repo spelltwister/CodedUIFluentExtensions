@@ -60,13 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodedUIAdditionalControls\CodedUIAdditionalControls.csproj">
-      <Project>{cdb90e9b-31c6-4101-b806-0c2af88a3936}</Project>
-      <Name>CodedUIAdditionalControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CodedUIPageModeling\CodedUIPageModeling.csproj">
-      <Project>{ab35da85-e81b-4e10-a109-d853928e5cb0}</Project>
-      <Name>CodedUIPageModeling</Name>
+    <ProjectReference Include="..\CodedUIExtensionsAndHelpers\CodedUIExtensionsAndHelpers.csproj">
+      <Project>{ea51865f-8764-4d9a-b066-92af5264c552}</Project>
+      <Name>CodedUIExtensionsAndHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

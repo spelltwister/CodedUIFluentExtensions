@@ -1,4 +1,4 @@
-﻿namespace CodedUIPageModeling
+﻿namespace CodedUIExtensionsAndHelpers.PageModeling
 {
     /// <summary>
     /// Interface for interacting with page models

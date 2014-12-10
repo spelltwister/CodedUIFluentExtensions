@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
-namespace CodedUIPageModeling
+namespace CodedUIExtensionsAndHelpers.PageModeling
 {
     /// <summary>
     /// Default implementation of an HTML page model
