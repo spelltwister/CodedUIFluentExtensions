@@ -212,15 +212,15 @@ namespace CodedUIExtensionsAndHelpers.Fluent
         public static T Find<T>(this UITestControl parent, string propertyValue) where T : UITestControl
         {
             string id = null;
-            if (typeof(T).IsSubclassOf(typeof(HtmlControl)))
+            if (typeof(T).IsSubclassOf(typeof(HtmlControl)) || typeof(T).Equals(typeof(HtmlControl)))
             {
                 id = HtmlControl.PropertyNames.Id;
             }
-            else if (typeof(T).IsSubclassOf(typeof(WpfControl)))
+            else if (typeof(T).IsSubclassOf(typeof(WpfControl)) || typeof(T).Equals(typeof(WpfControl)))
             {
                 id = WpfControl.PropertyNames.AutomationId;
             }
-            else if (typeof(T).IsSubclassOf(typeof(WinControl)))
+            else if (typeof(T).IsSubclassOf(typeof(WinControl)) || typeof(T).Equals(typeof(WinControl)))
             {
                 id = WinControl.PropertyNames.ControlId;
             }
