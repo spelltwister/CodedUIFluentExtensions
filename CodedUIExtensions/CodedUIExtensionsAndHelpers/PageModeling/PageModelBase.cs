@@ -30,5 +30,25 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         {
             return this.Me.IsNotClickable(wait);
         }
+
+        public virtual bool CanFind(int? wait = null)
+        {
+            return this.Me.CanFind(wait);
+        }
+
+        public virtual bool CanNotFind(int? wait = null)
+        {
+            return this.Me.CanNotFind(wait);
+        }
+
+        public virtual bool IsActionable(int? wait = null)
+        {
+            return this.Me.IsActionable(wait);
+        }
+
+        public virtual bool IsNotActionable(int? wait = null)
+        {
+            return this.Me.IsNotActionable(wait);
+        }
     }
 }
