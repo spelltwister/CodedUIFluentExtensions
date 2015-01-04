@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Example 1 - Simple Form";
+}
+
+<h2>Simple Form</h2>
+<form id="simpleFormId" action="" method="POST">
+    <div id="resultMessage" style="display:none;">
+
+    </div>
+    <div>
+        <label for="fName">First Name:</label><input type="text" id="fName" />
+    </div>
+    <div>
+        <label for="lName">Last Name:</label><input type="text" id="lName" />
+    </div>
+    <div>
+        <label for="pass1">Password:</label><input type="password" id="pass1" />
+    </div>
+    <div>
+        <label for="pass2">Confirm Password:</label><input type="password" id="pass2" />
+    </div>
+    <button id="submitButton">Submit</button>
+    <button type="reset">Reset</button>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        $('#submitButton').on("click", function () {
+            $('#resultMessage p').remove();
+            var fName = $('#fName').val();
+            var lName = $('#lName').val();
+            var pass1 = $('#pass1').val();
+            var pass2 = $('#pass2').val();
+
+            var errorString = "";
+            if (!fName || !fName.length) {
+                errorString += "Must set first name. "
+            }
+            if (!lName || !lName.length) {
+                errorString += "Must set last name. "
+            }
+            if (!pass1 || !pass1.length || !pass1 || !pass1.length || pass1 != pass2) {
+                errorString += "Passwords must be set and match."
+            }
+            if (errorString.length) {
+                $('#resultMessage').append("<p>" + errorString + "</p>");
+            } else {
+                $('#resultMessage').append("<p>Success!</p>");
+            }
+        });
+    });
+</script>

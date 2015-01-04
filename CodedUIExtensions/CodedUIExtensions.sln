@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApplication.Fluent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodedUIExtensionsAndHelpers", "CodedUIExtensionsAndHelpers\CodedUIExtensionsAndHelpers.csproj", "{EA51865F-8764-4D9A-B066-92AF5264C552}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleSite", "ExampleSite\ExampleSite.csproj", "{23108CFB-23B1-45A8-9179-B31B8085B13B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleSite.FluentCodedUITests", "ExampleSite.FluentCodedUITests\ExampleSite.FluentCodedUITests.csproj", "{564DDAB8-5BEC-4E63-9FBE-B64ECD274DA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{EA51865F-8764-4D9A-B066-92AF5264C552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA51865F-8764-4D9A-B066-92AF5264C552}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA51865F-8764-4D9A-B066-92AF5264C552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23108CFB-23B1-45A8-9179-B31B8085B13B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23108CFB-23B1-45A8-9179-B31B8085B13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23108CFB-23B1-45A8-9179-B31B8085B13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23108CFB-23B1-45A8-9179-B31B8085B13B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564DDAB8-5BEC-4E63-9FBE-B64ECD274DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564DDAB8-5BEC-4E63-9FBE-B64ECD274DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564DDAB8-5BEC-4E63-9FBE-B64ECD274DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564DDAB8-5BEC-4E63-9FBE-B64ECD274DA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Coded UI Fluent Syntax Extension &amp; Page Model Helpers</h1>
+    <p class="lead">
+        Coded UI is a power framework that comes with Visual Studio for testing User Interfaces.
+        Here you will find a fluent syntax set of extension methods to make searching for elements simpler and more natrual.
+        You will also find a set of helper classes that can be used to quickly create page models for html pages.
+    </p>
+    <p><a href="http://msdn.microsoft.com/en-us/library/dd286726.aspx" class="btn btn-primary btn-lg">Coded UI &raquo;</a></p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Fluent Syntax</h2>
+        <p>
+            Fluent syntax is an interface style that allows the code to flow more easily and is often more readible.
+            I find that the selenium syntax for searching a browser is 'backwards' and seems to involve way more typing than necessary.
+            While Coded UI's syntax is better, I find that it is still 'backwards' and I find myself thinking in an unnatural way.
+            These fluent extensions help to have a 'forward search' mentality.  Before I wrote these extensions, I searched to see
+            if anyone else had already written them, but could not find any.  Of course, after I wrote them I found Code First extensions
+            which seem to be quite similar to what I have completed so I just open sourced the project.  There is also a jQuery set of
+            extensions to help find elements using selectors.
+        </p>
+
+        <p><a class="btn btn-default" href="http://codeduicodefirst.codeplex.com/">Code First Extensions &raquo;</a></p>
+        <p><a class="btn btn-default" href="https://github.com/rpearsondev/CodedUI.jQueryExtensions">jQuery Extensions &raquo;</a></p>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Page Modeling</h2>
+        <p>
+            Page modeling is a programming pattern where each page or section of a page is represented by some model in our system.
+            I consider it more of a 'Control Modeling' pattern now that Single Page Applications are becoming more and more popular.
+            Effectively, anything on a page that has well defined functionality and behaviors or can represent some meaningful state would
+            be modeled as a page model.  The goal of this site is to show some examples of how you can use page modeling to model a web page.
+            Whenever I come across a design which is difficult to test, I will try to add an example of how to model the page; then I will
+            try to recommend changes that would allow the page to be more testible with as little impact to the page as possible.
+        </p>
+        <p><a class="btn btn-default" href="https://code.google.com/p/selenium/wiki/PageObjects">Selenium Page Objects &raquo;</a></p>
+    </div>
+</div>
