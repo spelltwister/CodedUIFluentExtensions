@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalControls\Html\HtmlCustomTag.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlFieldset.cs" />
     <Compile Include="AdditionalControls\Html\HtmlForm.cs" />
     <Compile Include="AdditionalControls\Html\HtmlSection.cs" />
     <Compile Include="AdditionalControls\Html\HtmlUnorderedList.cs" />
