@@ -44,6 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalControls\Html\Html5GlobalAttributes.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlNavigation.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlMeter.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlMark.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlMain.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlFooter.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlHeader.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlFigure.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlDialog.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlDetails.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlDataList.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlCanvas.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlAside.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlArticle.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlAbbreviation.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlAddress.cs" />
     <Compile Include="AdditionalControls\Html\HtmlCustomTag.cs" />
     <Compile Include="AdditionalControls\Html\HtmlFieldset.cs" />
     <Compile Include="AdditionalControls\Html\HtmlForm.cs" />
