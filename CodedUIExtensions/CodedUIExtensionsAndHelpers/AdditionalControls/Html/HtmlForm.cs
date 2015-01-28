@@ -1,15 +1,45 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UITesting;
+using CodedUIExtensionsAndHelpers.Fluent;
 
 namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
 {
     public class HtmlForm : HtmlCustomTag
     {
         public static readonly string FormTag = "form";
+        public static readonly string MethodAttributeName = "method";
+        public static readonly string ActionAttributeName = "action";
 
         public HtmlForm() : base(FormTag) { }
         public HtmlForm(UITestControl parent) : base(parent, FormTag) { }
 
-        public string Method { get { throw new System.NotImplementedException(); } }
-        public string Action { get { throw new System.NotImplementedException(); } }
+        /// <summary>
+        /// Gets the method used to submit the form; if not method attribute
+        /// is present, GET is returned
+        /// </summary>
+        /// <remarks>
+        /// GET is the default method so if the attribute is not present,
+        /// GET is still returned.  To determine if the Attribute is present,
+        /// use the HasProperty extension
+        /// </remarks>
+        public string Method
+        {
+            get
+            {
+                return this.GetPropertyOrDefault(MethodAttributeName, "GET");
+            }
+        }
+
+        /// <summary>
+        /// Gets the action called when the form is posted or null if the
+        /// action is not specified
+        /// </summary>
+        public string Action
+        {
+            get
+            {
+                return this.GetPropertyOrDefault(MethodAttributeName, null);
+            }
+        }
     }
 }

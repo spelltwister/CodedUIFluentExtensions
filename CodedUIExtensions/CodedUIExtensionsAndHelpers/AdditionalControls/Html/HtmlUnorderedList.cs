@@ -1,8 +1,30 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UITesting;
+using CodedUIExtensionsAndHelpers.Fluent;
 
 namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
 {
-    public class HtmlUnorderedList : HtmlCustomTag
+    /// <summary>
+    /// Base class used to provide an Items property for list-type elements
+    /// </summary>
+    public abstract class HtmlListBase : HtmlCustomTag
+    {
+        internal HtmlListBase(string tagName) : base(tagName) { }
+        internal HtmlListBase(UITestControl parent, string tagName) : base(parent, tagName) { }
+
+        /// <summary>
+        /// Gets the Items in the list
+        /// </summary>
+        public IEnumerable<HtmlReadonlyListItem> Items
+        {
+            get
+            {
+                return this.FindAll<HtmlReadonlyListItem>(); // TODO: Make sure only the first level children are included and not nested list child items
+            }
+        }
+    }
+
+    public class HtmlUnorderedList : HtmlListBase
     {
         public static readonly string UnorderedListTag = "ul";
 
@@ -10,7 +32,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
         public HtmlUnorderedList(UITestControl parent) : base(parent, UnorderedListTag) { }
     }
 
-    public class HtmlOrderedList : HtmlCustomTag
+    public class HtmlOrderedList : HtmlListBase
     {
         public static readonly string OrderedListTag = "ol";
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UITesting;
+using CodedUIExtensionsAndHelpers.Fluent;
 
 namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
 {
@@ -9,7 +10,13 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
         public HtmlFieldset() : base(FieldsetTag) { }
         public HtmlFieldset(UITestControl parent) : base(parent, FieldsetTag) { }
 
-        public HtmlLegend Legend { get { throw new System.NotImplementedException(); } }
+        /// <summary>
+        /// Gets the legend associated with this fieldset
+        /// </summary>
+        public HtmlLegend Legend
+        {
+            get { return this.Find<HtmlLegend>(); }
+        }
     }
 
     public class HtmlLegend : HtmlCustomTag
