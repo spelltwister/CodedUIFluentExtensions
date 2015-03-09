@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CodedUIExtensionsAndHelpers")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Set of classes that can be used to help implement the Page Model pattern along with a set of fluent syntax extensions for CodedUI.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CodedUIExtensionsAndHelpers")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCompany("Captain Pav on Software")]
+[assembly: AssemblyProduct("CodedUI Fluent Extensions And Page Model Helpers")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.4.5.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
