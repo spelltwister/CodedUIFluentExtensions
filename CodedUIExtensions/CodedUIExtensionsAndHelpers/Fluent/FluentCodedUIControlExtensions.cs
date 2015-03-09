@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
+
+using CodedUIExtensionsAndHelpers.PageModeling;
 
 namespace CodedUIExtensionsAndHelpers.Fluent
 {
@@ -756,6 +759,23 @@ namespace CodedUIExtensionsAndHelpers.Fluent
             return control.TryGetProperty(propertyName, out obj);
         }
         #endregion
+
+        /// <summary>
+        /// Wraps the current control in an IPageModel adapter
+        /// </summary>
+        /// <typeparam name="T">
+        /// Type of control to wrap
+        /// </typeparam>
+        /// <param name="current">
+        /// The control to wrap in an IPageModel adapter
+        /// </param>
+        /// <returns>
+        /// The current control wrapped as an IPageModel
+        /// </returns>
+        public static IPageModel AsPageModel<T>(this T current) where T : UITestControl
+        {
+            return new UIControlPageModelWrapper<T>(current);
+        }
 
         private static bool IsMatch<T>(this UITestControl current, T other) where T : UITestControl
         {
