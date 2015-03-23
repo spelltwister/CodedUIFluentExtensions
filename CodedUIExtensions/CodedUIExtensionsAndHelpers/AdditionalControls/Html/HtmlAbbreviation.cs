@@ -13,7 +13,10 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
         public HtmlAbbreviation() : base(AbbreviationTag) { }
         public HtmlAbbreviation(UITestControl parent) : base(parent, AbbreviationTag) { }
 
-        public string Title
+        /// <summary>
+        /// Gets the value of the title attribute
+        /// </summary>
+        public string TitleAttributeValue
         {
             get
             {
