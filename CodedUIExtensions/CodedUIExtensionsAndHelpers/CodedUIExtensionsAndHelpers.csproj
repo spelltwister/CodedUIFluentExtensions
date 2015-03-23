@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalControls\Html\Html5GlobalAttributes.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlHeadings.cs" />
     <Compile Include="AdditionalControls\Html\HtmlNavigation.cs" />
     <Compile Include="AdditionalControls\Html\HtmlMeter.cs" />
     <Compile Include="AdditionalControls\Html\HtmlMark.cs" />
@@ -66,7 +67,9 @@
     <Compile Include="AdditionalControls\Html\HtmlFieldset.cs" />
     <Compile Include="AdditionalControls\Html\HtmlForm.cs" />
     <Compile Include="AdditionalControls\Html\HtmlSection.cs" />
+    <Compile Include="AdditionalControls\Html\HtmlSubmitButton.cs" />
     <Compile Include="AdditionalControls\Html\HtmlUnorderedList.cs" />
+    <Compile Include="AdditionalControls\Win\IESecurityAlert.cs" />
     <Compile Include="AdditionalControls\Win\Office2013\OutlookNewEmailWindow.cs" />
     <Compile Include="AdditionalControls\Win\Office2013\OutlookSavePendingEmailChangesAlert.cs" />
     <Compile Include="Fluent\FluentCodedUIControlExtensions.cs" />
