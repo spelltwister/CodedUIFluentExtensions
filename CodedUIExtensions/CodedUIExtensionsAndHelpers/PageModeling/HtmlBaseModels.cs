@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
@@ -11,6 +12,10 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         protected readonly BrowserWindow parent;
         protected HtmlPageModelBase(BrowserWindow bw)
         {
+            if (null == bw)
+            {
+                throw new ArgumentNullException("bw");
+            }
             parent = bw;
         }
 
@@ -46,12 +51,30 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         protected readonly T _me;
         protected HtmlChildPageModelBase(BrowserWindow bw, T me) : base(bw)
         {
+            if (null == me)
+            {
+                throw new ArgumentNullException("me");
+            }
             this._me = me;
         }
 
         protected override T Me
         {
             get { return this._me; }
+        }
+    }
+
+    public abstract class HtmlRelatedPageModelBase<T, TParent> : HtmlPageModelBase<T> where T : HtmlControl where TParent : UITestControl
+    {
+        protected readonly TParent _parent;
+
+        public HtmlRelatedPageModelBase(BrowserWindow bw, TParent parent) : base(bw)
+        {
+            if (null == parent)
+            {
+                throw new ArgumentNullException("parent");
+            }
+            this._parent = parent;
         }
     }
 }
