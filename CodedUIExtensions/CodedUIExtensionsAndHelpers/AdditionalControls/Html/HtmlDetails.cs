@@ -16,7 +16,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
         {
             get
             {
-                return this.Find<HtmlSummary>().InnerText;
+                return new HtmlSummary(this).InnerText;
             }
         }
 

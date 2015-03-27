@@ -16,7 +16,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
         {
             get
             {
-                return this.Find<HtmlFigureCaption>().InnerText;
+                return new HtmlFigureCaption(this).InnerText;
             }
         }
 

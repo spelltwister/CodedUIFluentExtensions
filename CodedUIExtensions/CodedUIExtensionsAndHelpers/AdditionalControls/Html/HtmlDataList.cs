@@ -25,6 +25,8 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
         {
             public static readonly string DataListOptionTagName = "option";
 
+            public HtmlDataListOption() : base(DataListOptionTagName) { }
+            public HtmlDataListOption(UITestControl parent) : base(parent, DataListOptionTagName) { }
             public HtmlDataListOption(HtmlDataList parent) : base(parent, DataListOptionTagName) { }
 
             public string Value { get { return this.ValueAttribute; } }
