@@ -942,6 +942,12 @@ namespace CodedUIExtensionsAndHelpers.Fluent
         {
             return current.WithAttribute(String.Format("data-{0}", dataAttributeName), dataAttributeValue);
         }
+
+        public static IEnumerable<T> WithDataAttribute<T>(this IEnumerable<T> current, string dataAttribute,
+            string dataAttributeValue) where T : HtmlControl
+        {
+            return current.Select(x => x.WithDataAttribute(dataAttribute, dataAttributeValue));
+        }
         #endregion
 
         #region Find Siblings
