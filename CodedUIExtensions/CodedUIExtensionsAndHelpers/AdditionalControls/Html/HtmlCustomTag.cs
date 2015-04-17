@@ -12,7 +12,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html
     {
         private void Init()
         {
-            this.SearchProperties.Add(HtmlControl.PropertyNames.TagName, this._tagName, this._expressionOperator);
+            this.SearchProperties.Add(PropertyNames.TagName, this._tagName, this._expressionOperator);
         }
 
         /// <summary>

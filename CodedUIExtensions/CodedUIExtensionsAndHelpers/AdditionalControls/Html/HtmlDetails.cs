@@ -1,6 +1,7 @@
 ﻿using System;
+
 using Microsoft.VisualStudio.TestTools.UITesting;
-using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
+
 using CodedUIExtensionsAndHelpers.Fluent;
 
 namespace CodedUIExtensionsAndHelpers.AdditionalControls.Html

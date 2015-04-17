@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
+    /// <summary>
+    /// Extensions providing convenience implementations for the Page Model
+    /// test methods
+    /// </summary>
     public static class CodedUIControlExtensions
     {
         #region Find Helpers
@@ -57,6 +61,24 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
 
         #region Visibility Helpers
         /// <summary>
+        /// Returns true if an element is filling space; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for filling space
+        /// </param>
+        /// <returns>
+        /// True if an element is filling space; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// The element must have non-zero width and height to be
+        /// considered filling space
+        /// </remarks>
+        public static bool IsFillingSpace(this UITestControl toTest)
+        {
+            return toTest.Width > 0 && toTest.Height > 0;
+        }
+
+        /// <summary>
         /// Returns true if an element is visible, but not
         /// necessarily clickable; otherwise, false
         /// </summary>
@@ -79,7 +101,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             {
                 toTest.WaitForControlExist(wait.Value);
             }
-            return toTest.TryFind() && toTest.Width > 0 && toTest.Height > 0;
+            return toTest.TryFind() && toTest.IsFillingSpace();
         }
 
         /// <summary>
@@ -101,7 +123,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             {
                 toTest.WaitForControlNotExist(wait.Value);
             }
-            return !toTest.TryFind() || (toTest.Width <= 0 && toTest.Height <= 0);
+            return !toTest.TryFind() || !toTest.IsFillingSpace();
         }
         #endregion
 

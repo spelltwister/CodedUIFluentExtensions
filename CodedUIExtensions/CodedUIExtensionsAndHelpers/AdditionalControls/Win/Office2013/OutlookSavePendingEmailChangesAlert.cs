@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualStudio.TestTools.UITesting;
+using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
+
 using CodedUIExtensionsAndHelpers.Fluent;
 using CodedUIExtensionsAndHelpers.PageModeling;
-using Microsoft.VisualStudio.TestTools.UITesting;
-using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 
 namespace CodedUIExtensionsAndHelpers.AdditionalControls.Win.Office2013
 {
     public class OutlookSavePendingChangesAlert<T> : PageModelBase<WinWindow>
     {
-
         protected const string EmailWindowName = "Microsoft Outlook";
 
         protected override WinWindow Me
@@ -47,7 +42,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Win.Office2013
             }
         }
 
-        private readonly OutlookNewEmailWindow<T> _nextModel;
+        protected readonly OutlookNewEmailWindow<T> _nextModel;
         public OutlookSavePendingChangesAlert(OutlookNewEmailWindow<T> nextWindow)
         {
             this._nextModel = nextWindow;

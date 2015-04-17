@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
-using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
+﻿using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
@@ -17,41 +16,6 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         protected WpfWindow DocumentWindow
         {
             get { return this.parent; }
-        }
-    }
-
-    /// <summary>
-    /// Default implementation of a Wpf page model which represents
-    /// the entire Wpf window
-    /// </summary>
-    public abstract class WpfDocumentPageModelBase : WpfPageModelBase<WpfWindow>
-    {
-        protected WpfDocumentPageModelBase(WpfWindow bw) : base(bw) { }
-
-        protected override WpfWindow Me
-        {
-            get { return this.DocumentWindow; }
-        }
-    }
-
-    /// <summary>
-    /// Helper implementation for a child page model which has its Me property
-    /// set via constructor dependency injection
-    /// </summary>
-    /// <typeparam name="T">
-    /// Type of element that represents this child page model
-    /// </typeparam>
-    public abstract class WpfChildPageModelBase<T> : WpfPageModelBase<T> where T : WpfControl
-    {
-        protected readonly T _me;
-        protected WpfChildPageModelBase(WpfWindow bw, T me) : base(bw)
-        {
-            this._me = me;
-        }
-
-        protected override T Me
-        {
-            get { return this._me; }
         }
     }
 }

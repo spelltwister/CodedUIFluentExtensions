@@ -26,20 +26,6 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     }
 
     /// <summary>
-    /// Default implementation of an HTML page model which represents
-    /// the entire HTML document
-    /// </summary>
-    public abstract class HtmlDocumentPageModelBase : HtmlPageModelBase<HtmlDocument>
-    {
-        protected HtmlDocumentPageModelBase(BrowserWindow bw) : base(bw) { }
-
-        protected override HtmlDocument Me
-        {
-            get { return this.DocumentWindow; }
-        }
-    }
-
-    /// <summary>
     /// Helper implementation for a child page model which has its Me property
     /// set via constructor dependency injection
     /// </summary>
@@ -61,20 +47,6 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         protected override T Me
         {
             get { return this._me; }
-        }
-    }
-
-    public abstract class HtmlRelatedPageModelBase<T, TParent> : HtmlPageModelBase<T> where T : HtmlControl where TParent : UITestControl
-    {
-        protected readonly TParent _parent;
-
-        public HtmlRelatedPageModelBase(BrowserWindow bw, TParent parent) : base(bw)
-        {
-            if (null == parent)
-            {
-                throw new ArgumentNullException("parent");
-            }
-            this._parent = parent;
         }
     }
 }
