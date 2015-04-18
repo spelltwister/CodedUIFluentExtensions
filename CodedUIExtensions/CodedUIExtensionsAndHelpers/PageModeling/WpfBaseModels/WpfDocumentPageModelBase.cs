@@ -10,7 +10,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     {
         protected WpfDocumentPageModelBase(WpfWindow bw) : base(bw) { }
 
-        protected override WpfWindow Me
+        internal protected override WpfWindow Me
         {
             get { return this.DocumentWindow; }
         }

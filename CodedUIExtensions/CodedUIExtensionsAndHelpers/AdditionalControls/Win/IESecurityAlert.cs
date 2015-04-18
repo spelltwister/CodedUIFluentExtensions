@@ -9,7 +9,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Win
     {
         protected const string SecurityWindowName = "Internet Explorer Security";
 
-        protected override WinWindow Me
+        internal protected override WinWindow Me
         {
             get
             {

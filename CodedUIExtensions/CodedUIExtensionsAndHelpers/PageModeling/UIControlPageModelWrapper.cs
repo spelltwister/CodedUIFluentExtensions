@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
@@ -22,9 +23,24 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             this._control = control;
         }
 
-        protected override T Me
+        internal protected override T Me
         {
             get { return this._control; }
+        }
+    }
+
+    public abstract class HasNextModelUIControlPageModelWrapperBase<TUIControl, TNextModel> : UIControlPageModelWrapper<TUIControl>
+                                                                                              where TUIControl : UITestControl
+                                                                                              where TNextModel : IPageModel
+    {
+        protected readonly TNextModel NextModel;
+        protected HasNextModelUIControlPageModelWrapperBase(TUIControl control, TNextModel nextModel) : base(control)
+        {
+            if (null == nextModel)
+            {
+                throw new ArgumentNullException("nextModel");
+            }
+            NextModel = nextModel;
         }
     }
 
@@ -39,19 +55,12 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     /// <typeparam name="TNextModel">
     /// Type of Model that results from the Click action
     /// </typeparam>
-    public class ButtonControlPageModelWrapper<TUIControl, TNextModel> : UIControlPageModelWrapper<TUIControl> where TUIControl : UITestControl
+    public class ClickableControlPageModelWrapper<TUIControl, TNextModel> : HasNextModelUIControlPageModelWrapperBase<TUIControl, TNextModel>, IClickablePageModel<TNextModel> 
+                                                                            where TUIControl : UITestControl
+                                                                            where TNextModel : IPageModel
     {
-        /// <summary>
-        /// The next model to interact with after clicking
-        /// </summary>
-        protected readonly TNextModel NextModel;
-        public ButtonControlPageModelWrapper(TUIControl control, TNextModel nextModel) : base(control) 
+        public ClickableControlPageModelWrapper(TUIControl control, TNextModel nextModel) : base(control, nextModel)
         {
-            if (null == nextModel)
-            {
-                throw new ArgumentNullException("nextModel");
-            }
-            this.NextModel = nextModel;
         }
 
         /// <summary>
@@ -65,5 +74,18 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             Mouse.Click(this._control);
             return this.NextModel;
         }
+    }
+
+    public abstract class SelectableControlPageModelWrapper<TUIControl, TNextModel> : HasNextModelUIControlPageModelWrapperBase<TUIControl, TNextModel>, ISelectablePageModel<TNextModel>
+                                                                                      where TUIControl : UITestControl
+                                                                                      where TNextModel : IPageModel
+    {
+        protected SelectableControlPageModelWrapper(TUIControl control, TNextModel nextModel) : base(control, nextModel)
+        {
+        }
+
+        public abstract bool IsSelected { get; }
+
+        public abstract TNextModel SetSelected(bool selectionState);
     }
 }

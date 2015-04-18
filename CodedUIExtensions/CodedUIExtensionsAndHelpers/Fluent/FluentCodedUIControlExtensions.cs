@@ -942,6 +942,21 @@ namespace CodedUIExtensionsAndHelpers.Fluent
         {
             return current.WithAttribute(String.Format("data-{0}", dataAttributeName), dataAttributeValue);
         }
+
+        public static IEnumerable<T> AllWithAttribute<T>(this T current, string attributeName, string attributeValue) where T : HtmlControl, new()
+        {
+            return current.WithAttribute(attributeName, attributeValue).FindAllOfMe();
+        }
+
+        public static IEnumerable<T> AllWithDataAttribute<T>(this T current, string dataAttributeName, string dataAttributeValue) where T : HtmlControl, new()
+        {
+            return current.WithDataAttribute(dataAttributeName, dataAttributeValue).FindAllOfMe();
+        }
+
+        public static IEnumerable<T> AllWithAttributes<T>(this T current, IDictionary<string, string> attributes) where T : HtmlControl, new()
+        {
+            return current.WithAttributes(attributes).FindAllOfMe();
+        } 
         #endregion
 
         #region Find Siblings
@@ -1134,23 +1149,6 @@ namespace CodedUIExtensionsAndHelpers.Fluent
             return control.TryGetProperty(propertyName, out obj);
         }
         #endregion
-
-        /// <summary>
-        /// Wraps the current control in an IPageModel adapter
-        /// </summary>
-        /// <typeparam name="T">
-        /// Type of control to wrap
-        /// </typeparam>
-        /// <param name="current">
-        /// The control to wrap in an IPageModel adapter
-        /// </param>
-        /// <returns>
-        /// The current control wrapped as an IPageModel
-        /// </returns>
-        public static IPageModel AsPageModel<T>(this T current) where T : UITestControl
-        {
-            return new UIControlPageModelWrapper<T>(current);
-        }
 
         private static bool IsMatch<T>(this UITestControl current, T other) where T : UITestControl
         {

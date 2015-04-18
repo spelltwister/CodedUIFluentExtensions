@@ -16,7 +16,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Win.Office2013
         /// </summary>
         protected readonly string _emailWindowName;
 
-        protected override WinWindow Me
+        internal protected override WinWindow Me
         {
             get
             {

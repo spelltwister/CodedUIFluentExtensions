@@ -17,7 +17,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             this._me = me;
         }
 
-        protected override T Me
+        internal protected override T Me
         {
             get { return this._me; }
         }

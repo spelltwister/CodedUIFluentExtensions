@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
@@ -10,7 +11,8 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     /// </typeparam>
     public abstract class PageModelBase<T> : IPageModel where T : UITestControl
     {
-        protected abstract T Me { get; }
+        internal protected abstract T Me { get; }
+
         public virtual bool IsVisible(int? wait = null)
         {
             return this.Me.IsVisible(wait);
@@ -49,6 +51,24 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         public virtual bool IsNotActionable(int? wait = null)
         {
             return this.Me.IsNotActionable(wait);
+        }
+    }
+
+    internal abstract class ExplicitControlPageModelBase<T> : PageModelBase<T> where T : UITestControl // diamond problem
+    {
+        protected readonly T _me;
+        protected ExplicitControlPageModelBase(T me)
+        {
+            if (null == me)
+            {
+                throw new ArgumentNullException("me");
+            }
+            this._me = me;
+        }
+
+        protected internal override T Me
+        {
+            get { return _me; }
         }
     }
 }

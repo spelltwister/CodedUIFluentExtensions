@@ -10,7 +10,7 @@ namespace CodedUIExtensionsAndHelpers.AdditionalControls.Win.Office2013
     {
         protected const string EmailWindowName = "Microsoft Outlook";
 
-        protected override WinWindow Me
+        internal protected override WinWindow Me
         {
             get
             {

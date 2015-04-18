@@ -11,7 +11,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     {
         protected HtmlDocumentPageModelBase(BrowserWindow bw) : base(bw) { }
 
-        protected override HtmlDocument Me
+        internal protected override HtmlDocument Me
         {
             get { return this.DocumentWindow; }
         }

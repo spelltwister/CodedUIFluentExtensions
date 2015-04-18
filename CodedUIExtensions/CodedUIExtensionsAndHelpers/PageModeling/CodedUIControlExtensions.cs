@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+
 using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
@@ -184,6 +185,54 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         public static bool IsNotActionable(this UITestControl toTest, int? wait = null)
         {
             return toTest.IsNotClickable(wait) || !toTest.Enabled;
+        }
+        #endregion
+
+        #region Page Model Extensions
+        /// <summary>
+        /// Wraps the current control in an IPageModel adapter
+        /// </summary>
+        /// <param name="current">
+        /// The control to wrap in an IPageModel adapter
+        /// </param>
+        /// <returns>
+        /// The current control wrapped as an IPageModel
+        /// </returns>
+        /// <remarks>
+        /// Remember, we do not want to expose native controls, instead
+        /// we want to work with page models.  Every UITestControl can
+        /// be represented as a stand alone page model which simply
+        /// provides an interface for testing the visibility,
+        /// actionability, ... of an element.
+        /// </remarks>
+        public static IPageModel AsPageModel(this UITestControl current)
+        {
+            return new UIControlPageModelWrapper<UITestControl>(current);
+        }
+
+        /// <summary>
+        /// Wraps the current control in an IClickablePageModel adapter
+        /// </summary>
+        /// <typeparam name="TNextModel">
+        /// Type of next model after clicking
+        /// </typeparam>
+        /// <param name="current">
+        /// THe control to wrap in an IClickablePageModel adapter
+        /// </param>
+        /// <param name="nextModel">
+        /// The next model after clicking
+        /// </param>
+        /// <returns>
+        /// The current control wrapped as an IClickablePageModel
+        /// </returns>
+        /// <remarks>
+        /// While just about every control supports being clicked on,
+        /// many do not have a useful semantic around clicking.  This is
+        /// why IPageModel does not natively support a click action.
+        /// </remarks>
+        public static IClickablePageModel<TNextModel> AsClickablePageModel<TNextModel>(this UITestControl current, TNextModel nextModel) where TNextModel : IPageModel
+        {
+            return new ClickableControlPageModelWrapper<UITestControl, TNextModel>(current, nextModel);
         }
         #endregion
     }
