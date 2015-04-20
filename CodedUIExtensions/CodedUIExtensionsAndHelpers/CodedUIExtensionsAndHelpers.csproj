@@ -73,22 +73,30 @@
     <Compile Include="AdditionalControls\Win\Office2013\OutlookNewEmailWindow.cs" />
     <Compile Include="AdditionalControls\Win\Office2013\OutlookSavePendingEmailChangesAlert.cs" />
     <Compile Include="Fluent\FluentCodedUIControlExtensions.cs" />
-    <Compile Include="PageModeling\DialogPageModels\AlertPageModelBase.cs" />
-    <Compile Include="PageModeling\DialogPageModels\CancellablePageModelBase.cs" />
     <Compile Include="PageModeling\CodedUIControlExtensions.cs" />
-    <Compile Include="PageModeling\DialogPageModels\ConfirmDenyPageModelBase.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlBaseModels.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlChildPageModelBase.cs" />
-    <Compile Include="PageModeling\HtmlBaseModels\HtmlDialogModels\HtmlAlertPageModelBase.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\DialogModels\HtmlAlertPageModelBase.cs" />
     <Compile Include="PageModeling\DialogPageModels\IAlertPageModel.cs" />
     <Compile Include="PageModeling\DialogPageModels\ICancellablePageModel.cs" />
     <Compile Include="PageModeling\DialogPageModels\IConfirmDenyPageModel.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\DialogModels\HtmlCancellablePageModelBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PageModeling\HtmlBaseModels\DialogModels\HtmlConfirmDenyPageModelBase.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\DialogModels\HtmlHasNextModelPageModelBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PageModeling\HtmlBaseModels\HtmlDocumentPageModelBase.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlStaticChildPageModelBase.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PageModeling\HtmlBaseModels\HtmlCheckboxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlControlPageModelExtensions.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfAlertPageModelBase.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfCancellablePageModelBase.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfConfirmDenyPageModelBase.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfHasNextModelPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfControlPageModelExtensions.cs" />
     <Compile Include="PageModeling\IClickablePageModel.cs" />
     <Compile Include="PageModeling\IPageModel.cs" />
@@ -97,7 +105,7 @@
     <Compile Include="PageModeling\UIControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfStaticChildPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfBaseModels.cs" />
-    <Compile Include="PageModeling\DialogPageModels\YesNoCancelPageModelBase.cs" />
+    <Compile Include="PageModeling\DialogPageModels\IYesNoCancelPageModel.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfChildPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfDocumentPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfCheckboxControlPageModelWrapper.cs" />
