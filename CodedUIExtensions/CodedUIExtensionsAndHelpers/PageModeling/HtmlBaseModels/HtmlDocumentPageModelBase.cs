@@ -16,4 +16,11 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             get { return this.DocumentWindow; }
         }
     }
+
+    public class HtmlBrowserPageModel : HtmlDocumentPageModelBase
+    {
+        public HtmlBrowserPageModel(BrowserWindow bw) : base(bw)
+        {
+        }
+    }
 }
