@@ -12,12 +12,16 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         {
         }
 
-        abstract protected TUICancelClickElement ClickToAcknowledge { get; }
+        abstract protected TUICancelClickElement ClickToCancelElement { get; }
+
+        public IClickablePageModel<TNextModel> CancelModel
+        {
+            get { return this.ClickToCancelElement.AsClickablePageModel(this.NextModel1); }
+        } 
 
         public TNextModel Cancel()
         {
-            Mouse.Click(ClickToAcknowledge);
-            return this.NextModel1;
+            return this.CancelModel.Click();
         }
     }
 }

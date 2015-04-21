@@ -17,18 +17,26 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
 
         abstract protected TUIConfirmClickElement ConfirmElement { get; }
 
+        public IClickablePageModel<TConfirmModel> ConfirmModel
+        {
+            get { return this.ConfirmElement.AsClickablePageModel(this.NextModel1); }
+        }
+
         public TConfirmModel Confirm()
         {
-            Mouse.Click(ConfirmElement);
-            return this.NextModel1;
+            return this.ConfirmModel.Click();
         }
 
         abstract protected TUIDenyClickElement DenyElement { get; }
 
+        public IClickablePageModel<TDenyModel> DenyModel
+        {
+            get { return this.DenyElement.AsClickablePageModel(this.NextModel2); }
+        }
+
         public TDenyModel Deny()
         {
-            Mouse.Click(ConfirmElement);
-            return this.NextModel2;
+            return DenyModel.Click();
         }
     }
 }

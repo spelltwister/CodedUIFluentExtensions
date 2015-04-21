@@ -14,10 +14,14 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
 
         abstract protected TUIClickElement ClickToAcknowledge { get; }
 
+        public IClickablePageModel<TNextModel> AcknowledgeModel
+        {
+            get { return this.ClickToAcknowledge.AsClickablePageModel(this.NextModel1); }
+        }
+
         public TNextModel Acknowledge()
         {
-            Mouse.Click(ClickToAcknowledge);
-            return this.NextModel1;
+            return this.AcknowledgeModel.Click();
         }
     }
 }
