@@ -4,7 +4,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     /// Interface for page model which can be considered seleted or not
     /// </summary>
     /// <typeparam name="TNextModel"></typeparam>
-    public interface ISelectablePageModel<out TNextModel> : IPageModel where TNextModel : IPageModel
+    public interface ISelectablePageModel<out TNextModel> : IValueablePageModel<bool, TNextModel> where TNextModel : IPageModel
     {
         bool IsSelected { get; }
 

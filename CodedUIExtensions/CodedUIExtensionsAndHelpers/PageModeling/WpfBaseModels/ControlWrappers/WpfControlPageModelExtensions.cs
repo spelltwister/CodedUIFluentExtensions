@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
@@ -13,6 +14,9 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     /// </remarks>
     public static class WpfControlPageModelExtensions
     {
+        public static readonly Func<string, string> StringReturnSelfFunc = (inString) => inString;
+
+        #region Clickable Extensions
         public static IClickablePageModel<TNextModel> AsPageModel<TNextModel>(this WpfButton button, TNextModel nextModel) where TNextModel : IPageModel
         {
             return button.AsClickablePageModel(nextModel);
@@ -27,7 +31,8 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         {
             return button.AsClickablePageModel(nextModel);
         }
-        
+        #endregion
+
         public static ISelectablePageModel<TNextModel> AsPageModel<TNextModel>(this WpfCheckBox checkbox, TNextModel nextModel) where TNextModel : IPageModel
         {
             return new WpfCheckboxControlPageModelWrapper<TNextModel>(checkbox, nextModel);
@@ -44,10 +49,21 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         /// WPF Radio button is an ISelectablePageModel because you can
         /// set the selection state to false explicitly
         /// </remarks>
-        public static ISelectablePageModel<TNextModel> AsPageModel<TNextModel>(this WpfRadioButton radioButton, TNextModel nextModel) 
-            where TNextModel : IPageModel
+        public static ISelectablePageModel<TNextModel> AsPageModel<TNextModel>(this WpfRadioButton radioButton, TNextModel nextModel) where TNextModel : IPageModel
         {
             return new WpfRadioButtonControlPageModelWrapper<TNextModel>(radioButton, nextModel);
         }
+
+        #region Text Valuable Extensions
+        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this WpfEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
+        {
+            return new WpfTextboxControlPageModelWrapper<TValue, TNextModel>(textBox, nextModel, stringToValueFunc, valueToStringFunc);
+        }
+
+        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfEdit textBox, TNextModel nextModel) where TNextModel : IPageModel
+        {
+            return textBox.AsPageModel(nextModel, StringReturnSelfFunc, StringReturnSelfFunc);
+        }
+        #endregion
     }
 }

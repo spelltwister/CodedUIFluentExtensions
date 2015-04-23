@@ -13,5 +13,15 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         public abstract bool IsSelected { get; }
 
         public abstract TNextModel SetSelected(bool selectionState);
+
+        TNextModel IValueablePageModel<bool, TNextModel>.SetValue(bool toValue)
+        {
+            return SetSelected(toValue);
+        }
+
+        bool IValuedPageModel<bool>.Value
+        {
+            get { return this.IsSelected; }
+        }
     }
 }

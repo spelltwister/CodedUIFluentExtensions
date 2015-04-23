@@ -90,21 +90,32 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PageModeling\HtmlBaseModels\HtmlDocumentPageModelBase.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlEditableSpanControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlStaticChildPageModelBase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PageModeling\HtmlBaseModels\HtmlCheckboxControlPageModelWrapper.cs" />
-    <Compile Include="PageModeling\HtmlBaseModels\HtmlControlPageModelExtensions.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlCheckboxControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlControlPageModelExtensions.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlEditableDivControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlTextAreaControlPageModelWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlTextboxControlPageModelWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PageModeling\TextControlPageModelWrapperBase.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\IE\IE10CertificateErrorPageModel.cs" />
+    <Compile Include="PageModeling\IValueablePageModel.cs" />
     <Compile Include="PageModeling\SelectableControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\UIControlPageModelWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTextboxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfAlertPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfCancellablePageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfConfirmDenyPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfHasNextModelPageModelBase.cs" />
-    <Compile Include="PageModeling\WpfBaseModels\WpfControlPageModelExtensions.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfControlPageModelExtensions.cs" />
     <Compile Include="PageModeling\IClickablePageModel.cs" />
     <Compile Include="PageModeling\IPageModel.cs" />
     <Compile Include="PageModeling\ISelectablePageModel.cs" />
@@ -114,7 +125,7 @@
     <Compile Include="PageModeling\DialogPageModels\IYesNoCancelPageModel.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfChildPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\WpfDocumentPageModelBase.cs" />
-    <Compile Include="PageModeling\WpfBaseModels\WpfCheckboxControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfCheckboxControlPageModelWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
