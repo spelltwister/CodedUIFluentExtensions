@@ -7,8 +7,6 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
-using CodedUIExtensionsAndHelpers.PageModeling;
-
 namespace CodedUIExtensionsAndHelpers.Fluent
 {
     public static class FluentCodedUIControlExtensions
@@ -664,7 +662,7 @@ namespace CodedUIExtensionsAndHelpers.Fluent
         /// </returns>
         public static IEnumerable<T> FindAllOfMe<T>(this T current) where T : UITestControl, new()
         {
-            return current.FindAllAsType<T>();
+            return current.FindAllAsType();
         }
 
         /// <summary>
@@ -1104,7 +1102,7 @@ namespace CodedUIExtensionsAndHelpers.Fluent
         
         public static bool TryGetProperty<T>(this UITestControl control, string propertyName, out T propertyValue) where T : class
         {
-            return control.TryGetProperty<T>(propertyName, x => x as T, out propertyValue);
+            return control.TryGetProperty(propertyName, x => x as T, out propertyValue);
         }
 
         public static bool TryGetProperty<T>(this UITestControl control, string propertyName, Func<object, T> transformFunction, out T propertyValue) where T : class

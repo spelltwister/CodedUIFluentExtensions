@@ -5,8 +5,9 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
     /// <summary>
-    /// Extensions providing convenience implementations for the Page Model
-    /// test methods
+    /// Extensions for testing whether a UI control can be found, whether
+    /// it is clickable, etc... along with some helpers for treating UI
+    /// controls as page models with common semantics
     /// </summary>
     public static class CodedUIControlExtensions
     {

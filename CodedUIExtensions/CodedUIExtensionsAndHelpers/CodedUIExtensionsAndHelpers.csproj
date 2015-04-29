@@ -73,9 +73,11 @@
     <Compile Include="AdditionalControls\Win\Office2013\OutlookNewEmailWindow.cs" />
     <Compile Include="AdditionalControls\Win\Office2013\OutlookSavePendingEmailChangesAlert.cs" />
     <Compile Include="Fluent\FluentCodedUIControlExtensions.cs" />
-    <Compile Include="PageModeling\ClickableControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\ControlWrappers\ClickableControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\CodedUIControlExtensions.cs" />
-    <Compile Include="PageModeling\HasNextModelUIControlPageModelWrapperBase.cs" />
+    <Compile Include="PageModeling\ControlWrappers\HasNextModelUIControlPageModelWrapperBase.cs" />
+    <Compile Include="PageModeling\ControlWrappers\NamedSelectableControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlComboBoxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlBaseModels.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlChildPageModelBase.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\DialogModels\HtmlAlertPageModelBase.cs" />
@@ -103,13 +105,20 @@
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlTextboxControlPageModelWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PageModeling\TextControlPageModelWrapperBase.cs" />
-    <Compile Include="PageModeling\HtmlBaseModels\IE\IE10CertificateErrorPageModel.cs" />
-    <Compile Include="PageModeling\IValueablePageModel.cs" />
-    <Compile Include="PageModeling\SelectableControlPageModelWrapper.cs" />
-    <Compile Include="PageModeling\UIControlPageModelWrapper.cs">
+    <Compile Include="PageModeling\INamedSelectablePageModel.cs" />
+    <Compile Include="PageModeling\ISelectionPageModel.cs" />
+    <Compile Include="PageModeling\ITextValueablePageModel.cs" />
+    <Compile Include="PageModeling\IValueablePageModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PageModeling\IValuedPageModel.cs" />
+    <Compile Include="PageModeling\ControlWrappers\TextControlPageModelWrapperBase.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\IE\IE10CertificateErrorPageModel.cs" />
+    <Compile Include="PageModeling\ControlWrappers\SelectableControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\ControlWrappers\UIControlPageModelWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfComboBoxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTextboxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfAlertPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfCancellablePageModelBase.cs" />

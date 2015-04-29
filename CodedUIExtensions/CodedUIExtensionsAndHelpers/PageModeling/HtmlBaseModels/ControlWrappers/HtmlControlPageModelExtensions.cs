@@ -100,5 +100,15 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             return textArea.AsPageModel(nextModel, StringReturnSelfFunc, StringReturnSelfFunc);
         }
         #endregion
+
+        public static ISelectionPageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
+        {
+            return new HtmlComboBoxControlPageModelWrapper<TValue, TNextModel>(comboBox, nextModel, stringToValue, valueToString);
+        }
+
+        public static ISelectionPageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
+        {
+            return new HtmlComboBoxControlPageModelWrapper<string, TNextModel>(comboBox, nextModel, StringReturnSelfFunc, StringReturnSelfFunc);
+        }
     }
 }
