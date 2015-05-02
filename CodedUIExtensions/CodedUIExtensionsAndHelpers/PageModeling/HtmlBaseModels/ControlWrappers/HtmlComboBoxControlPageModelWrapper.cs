@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
@@ -70,7 +71,16 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
 
             if (!selectionState && this.IsSelected)
             {
-                this.Container.SelectedIndex = -1;
+                BrowserWindow parentWindow = this._control.TopParent as BrowserWindow;
+                if (parentWindow != null && parentWindow.Process.ProcessName == "iexplore")
+                {
+                    dynamic test = this.Container.NativeElement;
+                    test.selectedIndex = -1;
+                }
+                else
+                {
+                    throw new NotSupportedException("Deselecting an item in a combobox is only supported in IE.");
+                }
             }
             return this.NextModel;
         }

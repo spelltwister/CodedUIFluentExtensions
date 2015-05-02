@@ -13,7 +13,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
 
         public override string ValueText
         {
-            get { return Me.Text; }
+            get { return Me.InnerText; }
         }
 
         public override TNextModel SetValueText(string valueText)

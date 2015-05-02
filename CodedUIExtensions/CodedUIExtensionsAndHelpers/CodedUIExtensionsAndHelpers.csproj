@@ -78,6 +78,7 @@
     <Compile Include="PageModeling\ControlWrappers\HasNextModelUIControlPageModelWrapperBase.cs" />
     <Compile Include="PageModeling\ControlWrappers\NamedSelectableControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlComboBoxControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlRadioButtonControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlBaseModels.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlChildPageModelBase.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\DialogModels\HtmlAlertPageModelBase.cs" />
@@ -119,6 +120,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfComboBoxControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfRadioButtonControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTextboxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfAlertPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfCancellablePageModelBase.cs" />
