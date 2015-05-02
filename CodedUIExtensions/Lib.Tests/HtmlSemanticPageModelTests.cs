@@ -47,7 +47,13 @@ namespace Lib.Tests
         {
             const string testString = "Some Text";
             Assert.IsTrue(new SemanticTestPageModel(this.Window).EditableDiv.SetValue(testString).EditableDiv.Value == testString);
-            // To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
+        }
+
+        [TestMethod]
+        public void EditableSpanCanSetText()
+        {
+            const string testString = "Some Text";
+            Assert.IsTrue(new SemanticTestPageModel(this.Window).EditableSpan.SetValue(testString).EditableSpan.Value == testString);
         }
 
         [TestMethod]
@@ -55,6 +61,13 @@ namespace Lib.Tests
         {
             const string testString = "Some Text";
             Assert.IsTrue(new SemanticTestPageModel(this.Window).Edit.SetValue(testString).Edit.Value == testString);
+        }
+
+        [TestMethod]
+        public void TextAreaCanSetText()
+        {
+            const string testString = "Some Text";
+            Assert.IsTrue(new SemanticTestPageModel(this.Window).TextArea.SetValue(testString).TextArea.Value == testString);
         }
 
         [TestMethod]

@@ -77,6 +77,7 @@
     <Compile Include="PageModeling\CodedUIControlExtensions.cs" />
     <Compile Include="PageModeling\ControlWrappers\HasNextModelUIControlPageModelWrapperBase.cs" />
     <Compile Include="PageModeling\ControlWrappers\NamedSelectableControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\ControlWrappers\StandardFunctionProvider.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlComboBoxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlRadioButtonControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlBaseModels.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="PageModeling\INamedSelectablePageModel.cs" />
     <Compile Include="PageModeling\ISelectionPageModel.cs" />
     <Compile Include="PageModeling\ITextValueablePageModel.cs" />
+    <Compile Include="PageModeling\ITextValuedPageModel.cs" />
     <Compile Include="PageModeling\IValueablePageModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -119,9 +121,16 @@
     <Compile Include="PageModeling\ControlWrappers\UIControlPageModelWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PageModeling\ControlWrappers\TextValuedControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfCellControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfComboBoxControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfDatePickerControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfProgressBarControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfRadioButtonControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTabListControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTextboxControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTextControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTitleBarControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfAlertPageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfCancellablePageModelBase.cs" />
     <Compile Include="PageModeling\WpfBaseModels\DialogModels\WpfConfirmDenyPageModelBase.cs" />

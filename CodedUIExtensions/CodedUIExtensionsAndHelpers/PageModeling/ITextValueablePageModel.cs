@@ -10,17 +10,8 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     /// <typeparam name="TNextModel">
     /// Type of model returned after setting the value of this model
     /// </typeparam>
-    public interface ITextValueablePageModel<TValue, out TNextModel> : IValueablePageModel<TValue, TNextModel> where TNextModel : IPageModel
+    public interface ITextValueablePageModel<TValue, out TNextModel> : ITextValuedPageModel<TValue>, IValueablePageModel<TValue, TNextModel> where TNextModel : IPageModel
     {
-        /// <summary>
-        /// Gets the value text displayed to the user
-        /// </summary>
-        /// <remarks>
-        /// This string representation can be used to validate formatting of
-        /// the value type stored in this page model
-        /// </remarks>
-        string ValueText { get; }
-
         TNextModel SetValueText(string valueText);
     }
 }
