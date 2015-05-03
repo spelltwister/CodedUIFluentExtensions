@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
-    public class HtmlTextboxControlPageModelWrapper<TValue, TNextModel> : TextControlPageModelWrapperBase<HtmlEdit, TValue, TNextModel>
+    public class HtmlTextboxControlPageModelWrapper<TValue, TNextModel> : TextValuableControlPageModelWrapperBase<HtmlEdit, TValue, TNextModel>
         where TNextModel : IPageModel
     {
         public HtmlTextboxControlPageModelWrapper(HtmlEdit toWrap, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc)

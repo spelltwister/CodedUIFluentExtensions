@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
-    internal class WpfTabListControlPageModelWrapper<TNextModel> : TextControlPageModelWrapperBase<WpfTabList, string, TNextModel>, ISelectionPageModel<string, TNextModel>
+    internal class WpfTabListControlPageModelWrapper<TNextModel> : TextValuableControlPageModelWrapperBase<WpfTabList, string, TNextModel>, ISelectionPageModel<string, TNextModel>
         where TNextModel : IPageModel
     {
         public WpfTabListControlPageModelWrapper(WpfTabList control, TNextModel nextModel)

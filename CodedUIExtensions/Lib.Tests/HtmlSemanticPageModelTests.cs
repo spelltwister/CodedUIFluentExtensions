@@ -73,7 +73,6 @@ namespace Lib.Tests
         [TestMethod]
         public void ComboboxCanSelectItem()
         {
-            const string testString = "More text";
             var page = new SemanticTestPageModel(this.Window);
             ISelectionPageModel_StandardTests(page.Combobox);
         }

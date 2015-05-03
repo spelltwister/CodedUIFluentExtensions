@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
-    public class WpfDatePickerControlPageModelWrapper<TNextModel> : TextControlPageModelWrapperBase<WpfDatePicker, DateTime?, TNextModel>
+    public class WpfDatePickerControlPageModelWrapper<TNextModel> : TextValuableControlPageModelWrapperBase<WpfDatePicker, DateTime?, TNextModel>
         where TNextModel : IPageModel
     {
         public WpfDatePickerControlPageModelWrapper(WpfDatePicker datePicker, TNextModel nextModel, Func<string, DateTime?> stringToDateFunc, Func<DateTime?, string> dateFormatFunction)

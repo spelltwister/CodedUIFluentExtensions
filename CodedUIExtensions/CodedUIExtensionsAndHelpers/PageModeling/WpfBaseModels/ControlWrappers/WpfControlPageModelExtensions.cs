@@ -14,8 +14,6 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
     /// </remarks>
     public static class WpfControlPageModelExtensions
     {
-        public static readonly Func<string, string> StringReturnSelfFunc = (inString) => inString;
-
         #region Clickable Extensions
         public static IClickablePageModel<TNextModel> AsPageModel<TNextModel>(this WpfButton button, TNextModel nextModel) where TNextModel : IPageModel
         {
@@ -33,6 +31,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         }
         #endregion
 
+        #region Selectable Extensions
         public static ISelectablePageModel<TNextModel> AsPageModel<TNextModel>(this WpfCheckBox checkbox, TNextModel nextModel) where TNextModel : IPageModel
         {
             return new WpfCheckboxControlPageModelWrapper<TNextModel>(checkbox, nextModel);
@@ -53,19 +52,9 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         {
             return new WpfRadioButtonControlPageModelWrapper<TNextModel>(radioButton, nextModel);
         }
-
-        #region Text Valuable Extensions
-        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this WpfEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
-        {
-            return new WpfTextboxControlPageModelWrapper<TValue, TNextModel>(textBox, nextModel, stringToValueFunc, valueToStringFunc);
-        }
-
-        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfEdit textBox, TNextModel nextModel) where TNextModel : IPageModel
-        {
-            return textBox.AsPageModel(nextModel, StringReturnSelfFunc, StringReturnSelfFunc);
-        }
         #endregion
 
+        #region Selection Extensions
         public static ISelectionPageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this WpfComboBox combobox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
         {
             return new WpfComboBoxControlPageModelWrapper<TValue, TNextModel>(combobox, nextModel, stringToValue, valueToString);
@@ -73,7 +62,67 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
 
         public static ISelectionPageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
         {
-            return comboBox.AsPageModel(nextModel, StringReturnSelfFunc, StringReturnSelfFunc);
+            return comboBox.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
+        }
+        #endregion
+
+        #region Text Valuable Extensions
+        public static ITextValueablePageModel<DateTime?, TNextModel> AsPageModel<TNextModel>(this WpfDatePicker datePicker, TNextModel nextModel, Func<string, DateTime?> stringToValueFunc, Func<DateTime?, string> valueToStringFunc) where TNextModel : IPageModel
+        {
+            return new WpfDatePickerControlPageModelWrapper<TNextModel>(datePicker, nextModel, stringToValueFunc, valueToStringFunc);
+        }
+
+        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this WpfEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
+        {
+            return new WpfTextboxControlPageModelWrapper<TValue, TNextModel>(textBox, nextModel, stringToValueFunc, valueToStringFunc);
+        }
+
+        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfEdit textBox, TNextModel nextModel) where TNextModel : IPageModel
+        {
+            return textBox.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
+        }
+        #endregion
+        
+        #region Valued Extensions
+        public static IValuedPageModel<TValue> AsPageModel<TValue>(this WpfCell cell, Func<string, TValue> stringToValueFunc, Func<WpfCell, string> cellToStringFunc)
+        {
+            return new WpfCellControlPageModelWrapper<TValue>(cell, stringToValueFunc, cellToStringFunc);
+        }
+
+        public static IValuedPageModel<TValue> AsPageModel<TValue>(this WpfCell cell, Func<string, TValue> stringToValueFunc)
+        {
+            return new WpfCellControlPageModelWrapper<TValue>(cell, stringToValueFunc);
+        }
+
+        public static IValuedPageModel<string> AsPageModel(this WpfCell cell, Func<WpfCell, string> cellToStringFunc)
+        {
+            return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf, cellToStringFunc);
+        }
+
+        public static IValuedPageModel<string> AsPageModel(this WpfCell cell)
+        {
+            return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf);
+        }
+
+        public static IValuedPageModel<double> AsPageModel(this WpfProgressBar progressBar)
+        {
+            return new WpfProgressBarControlPageModelWrapper(progressBar);
+        }
+
+        public static IValuedPageModel<TValue> AsPageModel<TValue>(this WpfText label, Func<string, TValue> stringToValueFunc)
+        {
+            return new WpfTextControlPageModelWrapper<TValue>(label, stringToValueFunc);
+        }
+
+        public static IValuedPageModel<string> AsPageModel(this WpfText label)
+        {
+            return label.AsPageModel(StandardFunctionProvider.StringReturnSelf);
+        }
+
+        public static IValuedPageModel<string> AsPageModel(this WpfTitleBar titleBar)
+        {
+            return new WpfTitleBarControlPageModelWrapper(titleBar);
         } 
+        #endregion
     }
 }

@@ -53,22 +53,4 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             return this.Me.IsNotActionable(wait);
         }
     }
-
-    internal abstract class ExplicitControlPageModelBase<T> : PageModelBase<T> where T : UITestControl // diamond problem
-    {
-        protected readonly T _me;
-        protected ExplicitControlPageModelBase(T me)
-        {
-            if (null == me)
-            {
-                throw new ArgumentNullException("me");
-            }
-            this._me = me;
-        }
-
-        protected internal override T Me
-        {
-            get { return _me; }
-        }
-    }
 }

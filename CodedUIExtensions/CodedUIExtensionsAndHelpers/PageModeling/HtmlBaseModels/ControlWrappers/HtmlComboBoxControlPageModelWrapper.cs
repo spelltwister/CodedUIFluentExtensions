@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
-    public class HtmlComboBoxControlPageModelWrapper<TValue, TNextModel> : TextControlPageModelWrapperBase<HtmlComboBox, TValue, TNextModel>, ISelectionPageModel<TValue, TNextModel>, ITextValueablePageModel<TValue, TNextModel> where TNextModel : IPageModel
+    public class HtmlComboBoxControlPageModelWrapper<TValue, TNextModel> : TextValuableControlPageModelWrapperBase<HtmlComboBox, TValue, TNextModel>, ISelectionPageModel<TValue, TNextModel>, ITextValueablePageModel<TValue, TNextModel> where TNextModel : IPageModel
     {
         public HtmlComboBoxControlPageModelWrapper(HtmlComboBox toWrap, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc)
             : base(toWrap, nextModel, stringToValueFunc, valueToStringFunc)

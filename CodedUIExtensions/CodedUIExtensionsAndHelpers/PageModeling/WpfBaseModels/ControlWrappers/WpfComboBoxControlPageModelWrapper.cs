@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
-    public class WpfComboBoxControlPageModelWrapper<TValue, TNextModel> : TextControlPageModelWrapperBase<WpfComboBox, TValue, TNextModel>, ISelectionPageModel<TValue, TNextModel>
+    public class WpfComboBoxControlPageModelWrapper<TValue, TNextModel> : TextValuableControlPageModelWrapperBase<WpfComboBox, TValue, TNextModel>, ISelectionPageModel<TValue, TNextModel>
         where TNextModel : IPageModel
     {
         public  WpfComboBoxControlPageModelWrapper(WpfComboBox toWrap, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc)

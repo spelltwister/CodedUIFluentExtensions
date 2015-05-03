@@ -72,7 +72,12 @@
     <Compile Include="AdditionalControls\Win\IESecurityAlert.cs" />
     <Compile Include="AdditionalControls\Win\Office2013\OutlookNewEmailWindow.cs" />
     <Compile Include="AdditionalControls\Win\Office2013\OutlookSavePendingEmailChangesAlert.cs" />
-    <Compile Include="Fluent\FluentCodedUIControlExtensions.cs" />
+    <Compile Include="Fluent\CodedUIControlPropertyGetterExtensions.cs" />
+    <Compile Include="Fluent\CodedUIControlTypeExtensions.cs" />
+    <Compile Include="Fluent\FluentSearchExtensions.cs" />
+    <Compile Include="Fluent\FluentHtmlSearchExtensions.cs" />
+    <Compile Include="Fluent\FluentLegacyExtensions.cs" />
+    <Compile Include="Fluent\FluentSandboxExtensions.cs" />
     <Compile Include="PageModeling\ControlWrappers\ClickableControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\CodedUIControlExtensions.cs" />
     <Compile Include="PageModeling\ControlWrappers\HasNextModelUIControlPageModelWrapperBase.cs" />
@@ -115,7 +120,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PageModeling\IValuedPageModel.cs" />
-    <Compile Include="PageModeling\ControlWrappers\TextControlPageModelWrapperBase.cs" />
+    <Compile Include="PageModeling\ControlWrappers\TextValuableControlPageModelWrapperBase.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\IE\IE10CertificateErrorPageModel.cs" />
     <Compile Include="PageModeling\ControlWrappers\SelectableControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\ControlWrappers\UIControlPageModelWrapper.cs">
