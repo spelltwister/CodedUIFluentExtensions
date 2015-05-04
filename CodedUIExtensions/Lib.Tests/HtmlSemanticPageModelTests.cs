@@ -77,6 +77,14 @@ namespace Lib.Tests
             ISelectionPageModel_StandardTests(page.Combobox);
         }
 
+        [TestMethod]
+        public void AbbreviationSetupCorrectly()
+        {
+            var afa = new SemanticTestPageModel(this.Window).AFAIK;
+            Assert.IsTrue(afa.ValueText == "AFAIK");
+            Assert.IsTrue(afa.Value == "As Far As I Know");
+        }
+
         private static void ISelectionPageModel_StandardTests<T, U>(ISelectionPageModel<T, U> selection)
             where U : IPageModel
         {

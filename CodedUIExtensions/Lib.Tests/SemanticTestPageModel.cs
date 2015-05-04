@@ -1,4 +1,5 @@
-﻿using CodedUIExtensionsAndHelpers.Fluent;
+﻿using CodedUIExtensionsAndHelpers.AdditionalControls.Html;
+using CodedUIExtensionsAndHelpers.Fluent;
 using CodedUIExtensionsAndHelpers.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
@@ -70,5 +71,10 @@ namespace Lib.Tests
         {
             get { return this.DocumentWindow.Find<HtmlTextArea>().AsPageModel(this); }
         }
+
+        public ITextValuedPageModel<string> AFAIK
+        {
+            get { return this.DocumentWindow.Find<HtmlAbbreviation>().AsPageModel(); }
+        } 
     }
 }

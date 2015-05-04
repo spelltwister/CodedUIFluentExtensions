@@ -83,8 +83,21 @@
     <Compile Include="PageModeling\ControlWrappers\HasNextModelUIControlPageModelWrapperBase.cs" />
     <Compile Include="PageModeling\ControlWrappers\NamedSelectableControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\ControlWrappers\StandardFunctionProvider.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlAbbreviationControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlCellControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlCheckboxControlPageModelWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlComboBoxControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlTextValuedControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlLabelControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlProgressBarControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlRadioButtonControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlSliderControlPageModelWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlSpanControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlStringValuedControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlBaseModels.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\HtmlChildPageModelBase.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\DialogModels\HtmlAlertPageModelBase.cs" />
@@ -103,7 +116,6 @@
     <Compile Include="PageModeling\HtmlBaseModels\HtmlStaticChildPageModelBase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlCheckboxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlControlPageModelExtensions.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlEditableDivControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlTextAreaControlPageModelWrapper.cs">
@@ -132,6 +144,7 @@
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfDatePickerControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfProgressBarControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfRadioButtonControlPageModelWrapper.cs" />
+    <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfSliderControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTabListControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTextboxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfTextControlPageModelWrapper.cs" />

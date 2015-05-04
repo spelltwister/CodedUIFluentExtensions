@@ -82,7 +82,12 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             return textBox.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
         #endregion
-        
+
+        public static IValueablePageModel<double, TNextModel> AsPageModel<TNextModel>(WpfSlider slider, TNextModel nextModel) where TNextModel : IPageModel
+        {
+            return new WpfSliderControlPageModelWrapper<TNextModel>(slider, nextModel);
+        }
+
         #region Valued Extensions
         public static IValuedPageModel<TValue> AsPageModel<TValue>(this WpfCell cell, Func<string, TValue> stringToValueFunc, Func<WpfCell, string> cellToStringFunc)
         {
