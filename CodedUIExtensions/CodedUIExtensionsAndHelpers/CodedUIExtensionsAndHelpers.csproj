@@ -83,6 +83,10 @@
     <Compile Include="PageModeling\ControlWrappers\HasNextModelUIControlPageModelWrapperBase.cs" />
     <Compile Include="PageModeling\ControlWrappers\NamedSelectableControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\ControlWrappers\StandardFunctionProvider.cs" />
+    <Compile Include="PageModeling\ControlWrappers\TextValuedControlPageModelWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PageModeling\ControlWrappers\ValuedControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlAbbreviationControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlCellControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\HtmlBaseModels\ControlWrappers\HtmlCheckboxControlPageModelWrapper.cs">
@@ -138,7 +142,6 @@
     <Compile Include="PageModeling\ControlWrappers\UIControlPageModelWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PageModeling\ControlWrappers\TextValuedControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfCellControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfComboBoxControlPageModelWrapper.cs" />
     <Compile Include="PageModeling\WpfBaseModels\ControlWrappers\WpfDatePickerControlPageModelWrapper.cs" />

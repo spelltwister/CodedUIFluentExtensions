@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 using Microsoft.VisualStudio.TestTools.UITesting;
 
@@ -218,7 +219,7 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         /// Type of next model after clicking
         /// </typeparam>
         /// <param name="current">
-        /// THe control to wrap in an IClickablePageModel adapter
+        /// The control to wrap in an IClickablePageModel adapter
         /// </param>
         /// <param name="nextModel">
         /// The next model after clicking
@@ -234,6 +235,70 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         public static IClickablePageModel<TNextModel> AsClickablePageModel<TNextModel>(this UITestControl current, TNextModel nextModel) where TNextModel : IPageModel
         {
             return new ClickableControlPageModelWrapper<UITestControl, TNextModel>(current, nextModel);
+        }
+
+        /// <summary>
+        /// Wraps the current control in an IValuedPageModel adapter
+        /// </summary>
+        /// <typeparam name="TValue">
+        /// Type of value stored in this control
+        /// </typeparam>
+        /// <typeparam name="TControl">
+        /// Type of GUI element
+        /// </typeparam>
+        /// <param name="current">
+        /// The control to wrap in an IValuedPageModel adapter
+        /// </param>
+        /// <param name="controlToValueFunc">
+        /// Function that can convert the control to its value
+        /// </param>
+        /// <returns>
+        /// The current control wrapped as an IValuedPageModel
+        /// </returns>
+        /// <remarks>
+        /// Just about every control stores a value that the user
+        /// can observe, though it may not be textual.  Consider a
+        /// checkbox; it does not have &quot;text&quot; shown to the user,
+        /// simply some sort of checkmark or the absense of it is shown.
+        /// </remarks>
+        public static IValuedPageModel<TValue> AsValuedPageModel<TValue, TControl>(this TControl current, Func<TControl, TValue> controlToValueFunc) where TControl : UITestControl
+        {
+            return new ValuedControlPageModelWrapper<TControl, TValue>(current, controlToValueFunc);
+        }
+
+        /// <summary>
+        /// Wraps the current control in an ITextValuedPageModel adapter
+        /// </summary>
+        /// <typeparam name="TValue">
+        /// Type of value stored in this control
+        /// </typeparam>
+        /// <typeparam name="TControl">
+        /// Type of GUI element
+        /// </typeparam>
+        /// <param name="current">
+        /// The control to wrap in an ITextValuedPageModel adapter
+        /// </param>
+        /// <param name="stringToValueFunc">
+        /// Function that can convert the text shown to the user into
+        /// the native value type
+        /// </param>
+        /// <param name="controlToStringFunc">
+        /// Function that can get the text shown to the user from the control
+        /// </param>
+        /// <returns>
+        /// The current control wrapped as an ITextValuedPageModel
+        /// </returns>
+        /// <remarks>
+        /// Many controls show some text to the user to represent a value type.
+        /// Examples include Date column in a table, text block with a money
+        /// value inside, etc.
+        /// 
+        /// However, many controls do not have a text component and should not
+        /// be coerced into this representation.
+        /// </remarks>
+        public static ITextValuedPageModel<TValue> AsTextValuedPageModel<TValue, TControl>(this TControl current, Func<string, TValue> stringToValueFunc, Func<TControl, string> controlToStringFunc) where TControl : UITestControl
+        {
+            return new TextValuedControlPageModelWrapper<TControl, TValue>(current, stringToValueFunc, controlToStringFunc);
         }
         #endregion
     }

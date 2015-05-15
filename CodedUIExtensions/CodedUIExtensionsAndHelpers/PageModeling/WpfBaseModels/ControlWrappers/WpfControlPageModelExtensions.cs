@@ -88,45 +88,50 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
             return new WpfSliderControlPageModelWrapper<TNextModel>(slider, nextModel);
         }
 
-        #region Valued Extensions
-        public static IValuedPageModel<TValue> AsPageModel<TValue>(this WpfCell cell, Func<string, TValue> stringToValueFunc, Func<WpfCell, string> cellToStringFunc)
-        {
-            return new WpfCellControlPageModelWrapper<TValue>(cell, stringToValueFunc, cellToStringFunc);
-        }
-
-        public static IValuedPageModel<TValue> AsPageModel<TValue>(this WpfCell cell, Func<string, TValue> stringToValueFunc)
-        {
-            return new WpfCellControlPageModelWrapper<TValue>(cell, stringToValueFunc);
-        }
-
-        public static IValuedPageModel<string> AsPageModel(this WpfCell cell, Func<WpfCell, string> cellToStringFunc)
-        {
-            return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf, cellToStringFunc);
-        }
-
-        public static IValuedPageModel<string> AsPageModel(this WpfCell cell)
-        {
-            return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf);
-        }
-
         public static IValuedPageModel<double> AsPageModel(this WpfProgressBar progressBar)
         {
             return new WpfProgressBarControlPageModelWrapper(progressBar);
         }
 
-        public static IValuedPageModel<TValue> AsPageModel<TValue>(this WpfText label, Func<string, TValue> stringToValueFunc)
+        #region Valued Extensions
+        public static ITextValuedPageModel<TValue> AsPageModel<TValue>(this WpfCell cell, Func<string, TValue> stringToValueFunc, Func<WpfCell, string> cellToStringFunc)
+        {
+            return new WpfCellControlPageModelWrapper<TValue>(cell, stringToValueFunc, cellToStringFunc);
+        }
+
+        public static ITextValuedPageModel<TValue> AsPageModel<TValue>(this WpfCell cell, Func<string, TValue> stringToValueFunc)
+        {
+            return new WpfCellControlPageModelWrapper<TValue>(cell, stringToValueFunc);
+        }
+
+        public static ITextValuedPageModel<string> AsPageModel(this WpfCell cell, Func<WpfCell, string> cellToStringFunc)
+        {
+            return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf, cellToStringFunc);
+        }
+
+        public static ITextValuedPageModel<string> AsPageModel(this WpfCell cell)
+        {
+            return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf);
+        }
+
+        public static ITextValuedPageModel<TValue> AsPageModel<TValue>(this WpfText label, Func<string, TValue> stringToValueFunc)
         {
             return new WpfTextControlPageModelWrapper<TValue>(label, stringToValueFunc);
         }
 
-        public static IValuedPageModel<string> AsPageModel(this WpfText label)
+        public static ITextValuedPageModel<string> AsPageModel(this WpfText label)
         {
             return label.AsPageModel(StandardFunctionProvider.StringReturnSelf);
         }
 
-        public static IValuedPageModel<string> AsPageModel(this WpfTitleBar titleBar)
+        public static ITextValuedPageModel<string> AsPageModel(this WpfTitleBar titleBar, Func<string, string> stringToValueFunc)
         {
-            return new WpfTitleBarControlPageModelWrapper(titleBar);
+            return new WpfTitleBarControlPageModelWrapper(titleBar, stringToValueFunc);
+        }
+
+        public static ITextValuedPageModel<string> AsPageModel(this WpfTitleBar titleBar)
+        {
+            return titleBar.AsPageModel(StandardFunctionProvider.StringReturnSelf);
         } 
         #endregion
     }

@@ -3,27 +3,20 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace CodedUIExtensionsAndHelpers.PageModeling
 {
-    public class TextValuedControlPageModelWrapper<TUIType, TValue> : UIControlPageModelWrapper<TUIType>, ITextValuedPageModel<TValue>
+    public class TextValuedControlPageModelWrapper<TUIType, TValue> : ValuedControlPageModelWrapper<TUIType, TValue>, ITextValuedPageModel<TValue>
         where TUIType : UITestControl
     {
-        protected readonly Func<TUIType, string> ValueToStringFunc;
-        protected readonly Func<string, TValue> StringToValueFunc;
+        protected readonly Func<TUIType, string> ControlToStringFunc;
 
-        public TextValuedControlPageModelWrapper(TUIType control, Func<string, TValue> stringToValueFunc, Func<TUIType, string> valueToStringFunc)
-            : base(control)
+        public TextValuedControlPageModelWrapper(TUIType control, Func<string, TValue> stringToValueFunc, Func<TUIType, string> controlToStringFunc)
+            : base(control, x => stringToValueFunc(controlToStringFunc(x)))
         {
-            this.ValueToStringFunc = valueToStringFunc;
-            this.StringToValueFunc = stringToValueFunc;
-        }
-
-        public TValue Value
-        {
-            get { return this.StringToValueFunc(this.ValueText); }
+            this.ControlToStringFunc = controlToStringFunc;
         }
 
         public string ValueText
         {
-            get { return this.ValueToStringFunc(this.Me); }
+            get { return this.ControlToStringFunc(this.Me); }
         }
     }
 }
