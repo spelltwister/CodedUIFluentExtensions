@@ -14,8 +14,8 @@ namespace CodedUIExtensionsAndHelpers.PageModeling
         public WpfDatePickerControlPageModelWrapper(WpfDatePicker datePicker, TNextModel nextModel, string formatString, IFormatProvider formatProvider)
             : this(datePicker,
                 nextModel,
-                StandardFunctionProvider.StringToDate(formatString, formatProvider),
-                StandardFunctionProvider.DateToString(formatString, formatProvider))
+                StandardFunctionProvider.StringToNullableDate(formatString, formatProvider),
+                StandardFunctionProvider.NullableDateToString(formatString, formatProvider))
         {
         }
 
