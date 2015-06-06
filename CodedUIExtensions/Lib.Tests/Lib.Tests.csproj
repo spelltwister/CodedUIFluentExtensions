@@ -56,13 +56,21 @@
     <Compile Include="SemanticTestPageModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodedUIExtensionsAndHelpers\CodedUIExtensionsAndHelpers.csproj">
-      <Project>{ea51865f-8764-4d9a-b066-92af5264c552}</Project>
-      <Name>CodedUIExtensionsAndHelpers</Name>
-    </ProjectReference>
+    <Content Include="SemanticModelTests.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SemanticModelTests.html" />
+    <ProjectReference Include="..\CaptainPav.Testing.UI.CodedUI.PageModeling\CaptainPav.Testing.UI.CodedUI.PageModeling.csproj">
+      <Project>{D179901A-0411-4FDB-8E39-77BDC552DBCF}</Project>
+      <Name>CaptainPav.Testing.UI.CodedUI.PageModeling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CaptainPav.Testing.UI.CodedUI\CaptainPav.Testing.UI.CodedUI.csproj">
+      <Project>{93FA4B14-68AB-42B2-B57C-4A39CF110014}</Project>
+      <Name>CaptainPav.Testing.UI.CodedUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CaptainPav.Testing.UI.PageModeling\CaptainPav.Testing.UI.PageModeling.csproj">
+      <Project>{4EDFE513-CF75-4541-B705-0B5952AC457F}</Project>
+      <Name>CaptainPav.Testing.UI.PageModeling</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

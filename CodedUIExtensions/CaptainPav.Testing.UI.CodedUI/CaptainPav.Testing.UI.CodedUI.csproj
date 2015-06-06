@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{93FA4B14-68AB-42B2-B57C-4A39CF110014}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CaptainPav.Testing.UI.CodedUI</RootNamespace>
+    <AssemblyName>CaptainPav.Testing.UI.CodedUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodedUIControlPropertyGetterExtensions.cs" />
+    <Compile Include="CodedUIControlTypeExtensions.cs" />
+    <Compile Include="FluentSearchExtensions.cs" />
+    <Compile Include="Html\FluentHtmlSearchExtensions.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlAbbreviation.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlAddress.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlArticle.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlAside.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlCanvas.cs" />
+    <Compile Include="Html\HtmlControlPropertyGetterExtensions.cs" />
+    <Compile Include="Html\HtmlCustomTag.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlDataList.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlDetails.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlDialog.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlFieldset.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlFigure.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlFooter.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlForm.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlHeader.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlHeadings.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlMain.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlMark.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlMeter.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlNavigation.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlSection.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlSubmitButton.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlUnorderedList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Win\FluentWinSearchExtensions.cs" />
+    <Compile Include="Wpf\AdditionalControls\WpfDataItem.cs" />
+    <Compile Include="Wpf\FluentWpfSearchExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

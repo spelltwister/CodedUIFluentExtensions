@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using CodedUIExtensionsAndHelpers.PageModeling;
+using CaptainPav.Testing.UI.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

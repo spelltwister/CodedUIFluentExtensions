@@ -1,6 +1,8 @@
-﻿using CodedUIExtensionsAndHelpers.AdditionalControls.Html;
-using CodedUIExtensionsAndHelpers.Fluent;
-using CodedUIExtensionsAndHelpers.PageModeling;
+﻿using CaptainPav.Testing.UI.CodedUI;
+using CaptainPav.Testing.UI.CodedUI.Html;
+using CaptainPav.Testing.UI.CodedUI.PageModeling.Html;
+using CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers;
+using CaptainPav.Testing.UI.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
