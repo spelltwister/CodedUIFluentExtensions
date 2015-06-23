@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Diagnostics;
+using System.Threading;
 using CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers;
 using CaptainPav.Testing.UI.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -182,7 +184,12 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         #region Actionable Helpers
         public static bool IsActionable(this UITestControl toTest, int? wait = null)
         {
-            return toTest.IsClickable(wait) && toTest.Enabled;
+            if (wait == null)
+            {
+                return toTest.IsClickable() && toTest.Enabled;
+            }
+            Thread.Sleep((int)wait);
+            return toTest.IsClickable() && toTest.Enabled;
         }
 
         public static bool IsNotActionable(this UITestControl toTest, int? wait = null)
