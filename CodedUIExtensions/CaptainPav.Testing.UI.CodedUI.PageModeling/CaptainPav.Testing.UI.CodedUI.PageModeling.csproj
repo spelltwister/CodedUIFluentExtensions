@@ -78,7 +78,7 @@
     <Compile Include="Html\DialogModels\HtmlCancellablePageModelBase.cs" />
     <Compile Include="Html\DialogModels\HtmlConfirmDenyPageModelBase.cs" />
     <Compile Include="Html\DialogModels\HtmlHasNextModelPageModelBase.cs" />
-    <Compile Include="Html\HtmlBaseModels.cs" />
+    <Compile Include="Html\HtmlPageModelBase.cs" />
     <Compile Include="Html\HtmlBrowserPageModel.cs" />
     <Compile Include="Html\HtmlDocumentPageModelBase.cs" />
     <Compile Include="Html\HtmlStaticChildPageModelBase.cs" />
@@ -105,7 +105,7 @@
     <Compile Include="Wpf\DialogModels\WpfCancellablePageModelBase.cs" />
     <Compile Include="Wpf\DialogModels\WpfConfirmDenyPageModelBase.cs" />
     <Compile Include="Wpf\DialogModels\WpfHasNextModelPageModelBase.cs" />
-    <Compile Include="Wpf\WpfBaseModels.cs" />
+    <Compile Include="Wpf\WpfPageModelBase.cs" />
     <Compile Include="Wpf\WpfChildPageModelBase.cs" />
     <Compile Include="Wpf\WpfDocumentPageModelBase.cs" />
     <Compile Include="Wpf\WpfStaticChildPageModelBase.cs" />
