@@ -83,6 +83,7 @@
     <Compile Include="Html\HtmlDocumentPageModelBase.cs" />
     <Compile Include="Html\HtmlStaticChildPageModelBase.cs" />
     <Compile Include="Html\IE\IE10CertificateErrorPageModel.cs" />
+    <Compile Include="Html\HtmlChildPageModelBase.cs" />
     <Compile Include="PageModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Win\FluentWinSearchExtensions.cs" />
