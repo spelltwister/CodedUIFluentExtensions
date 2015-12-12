@@ -8,6 +8,10 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CaptainPav.Testing.UI.CodedUI
 {
+    /// <summary>
+    /// Set of extension methods to provide a fluent search syntax on top of
+    /// Microsoft's Coded UI Testing Framework
+    /// </summary>
     public static class FluentSearchExtensions
     {
         #region Find
@@ -582,7 +586,19 @@ namespace CaptainPav.Testing.UI.CodedUI
             current.SearchProperties.AddRange(expressions);
             return current;
         }
+        #endregion
 
+        /// <summary>
+        /// Gets the appropriate string used for finding a control by its id
+        /// based on the base control type (eg, Html, WinForms, or Wpf)
+        /// </summary>
+        /// <typeparam name="T">
+        /// Type of UITestControl for which to get the id string
+        /// </typeparam>
+        /// <returns>
+        /// The appropriate string used for finding a control by its id
+        /// based on the base control type (eg, Html, WinForms, or Wpf)
+        /// </returns>
         internal static string GetIdString<T>() where T : UITestControl
         {
             Type type = typeof(T);
@@ -604,6 +620,5 @@ namespace CaptainPav.Testing.UI.CodedUI
 
             throw new NotImplementedException();
         }
-        #endregion
     }
 }
