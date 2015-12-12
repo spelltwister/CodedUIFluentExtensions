@@ -232,7 +232,7 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </returns>
         public static IEnumerable<T> FindAll<T>(this UITestControl parent) where T : UITestControl, new()
         {
-            return parent.Find<T>().FindAllAsType<T>();
+            return parent.Find<T>().FindAllAsType();
         }
 
         /// <summary>
@@ -244,6 +244,15 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </typeparam>
         /// <param name="parent">
         /// The UITestControl from which to start searching
+        /// </param>
+        /// <param name="propertyName">
+        /// The name of the property whose value is used when searching
+        /// </param>
+        /// <param name="propertyValue">
+        /// The value against which the property should be compared
+        /// </param>
+        /// <param name="expressionOperator">
+        /// The operator to use when comparing the property value
         /// </param>
         /// <returns>
         /// A search control that will find all children of the
@@ -264,13 +273,16 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// <param name="parent">
         /// The UITestControl from which to start searching
         /// </param>
+        /// <param name="expression">
+        /// The search expression to match when searching
+        /// </param>
         /// <returns>
         /// A search control that will find all children of the
         /// specified type matching the property expression
         /// </returns>
         public static IEnumerable<T> FindAll<T>(this UITestControl parent, PropertyExpression expression) where T : UITestControl, new()
         {
-            return parent.Find<T>(expression).FindAllAsType<T>();
+            return parent.Find<T>(expression).FindAllAsType();
         }
 
         /// <summary>
@@ -283,6 +295,9 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </typeparam>
         /// <param name="parent">
         /// The UITestControl from which to start searching
+        /// </param>
+        /// <param name="nameValuePairs">
+        /// Collection of name values pairs representing the search criteria
         /// </param>
         /// <returns>
         /// A search control that will find all children of the
@@ -291,7 +306,7 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </returns>
         public static IEnumerable<T> FindAll<T>(this UITestControl parent, params string[] nameValuePairs) where T : UITestControl, new()
         {
-            return parent.Find<T>(nameValuePairs).FindAllAsType<T>();
+            return parent.Find<T>(nameValuePairs).FindAllAsType();
         }
 
         /// <summary>
@@ -304,13 +319,16 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// <param name="parent">
         /// The UITestControl from which to start searching
         /// </param>
+        /// <param name="expressions">
+        /// The search expressions to match when searching
+        ///</param>
         /// <returns>
         /// A search control that will find all children of the
         /// specified type matching all of the property expression
         /// </returns>
         public static IEnumerable<T> FindAll<T>(this UITestControl parent, IEnumerable<PropertyExpression> expressions) where T : UITestControl, new()
         {
-            return parent.Find<T>(expressions).FindAllAsType<T>();
+            return parent.Find<T>(expressions).FindAllAsType();
         }
 
         /// <summary>
@@ -322,6 +340,9 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </typeparam>
         /// <param name="parent">
         /// The UITestControl from which to start searching
+        /// </param>
+        /// <param name="expressions">
+        /// The search expressions to match when searching
         /// </param>
         /// <returns>
         /// A search control that will find all children of the
@@ -329,7 +350,7 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </returns>
         public static IEnumerable<T> FindAll<T>(this UITestControl parent, PropertyExpressionCollection expressions) where T : UITestControl, new()
         {
-            return parent.Find<T>(expressions).FindAllAsType<T>();
+            return parent.Find<T>(expressions).FindAllAsType();
         }
 
         /// <summary>
@@ -464,6 +485,9 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// <param name="current">
         /// The UITestControl to extend
         /// </param>
+        /// <param name="expression">
+        /// The search expression to match when searching
+        /// </param>
         /// <returns>
         /// The current UITestControl with the additional search property
         /// </returns>
@@ -483,6 +507,8 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// <param name="current">
         /// The UITestControl to extend
         /// </param>
+        /// Collection of name values pairs representing the search criteria 
+        /// <param name="nameValuePairs"></param>
         /// <returns>
         /// The current UITestControl with the additional search property
         /// </returns>
@@ -502,6 +528,9 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// <param name="current">
         /// The UITestControl to extend
         /// </param>
+        /// <param name="expressions">
+        /// The search expressions to match when searching
+        /// </param>
         /// <returns>
         /// The current UITestControl with the additional search property
         /// </returns>
@@ -519,6 +548,9 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </typeparam>
         /// <param name="current">
         /// The UITestControl to extend
+        /// </param>
+        /// <param name="expressions">
+        /// The search expressions to match when searching
         /// </param>
         /// <returns>
         /// The current UITestControl with the additional search property
@@ -538,6 +570,9 @@ namespace CaptainPav.Testing.UI.CodedUI
         /// </typeparam>
         /// <param name="current">
         /// The UITestControl to extend
+        /// </param>
+        /// <param name="expressions">
+        /// The search expressions to match when searching
         /// </param>
         /// <returns>
         /// The current UITestControl with the additional search property
