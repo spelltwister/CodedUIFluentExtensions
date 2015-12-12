@@ -4,7 +4,7 @@
     /// Specialized page model that represents a dialog which can only
     /// be acknowledged
     /// </summary>
-    public interface IAlertPageModel<out T> : IPageModel where T : IPageModel
+    public interface IAlertPageModel<out T> : IDialogPageModel where T : IPageModel
     {
         /// <summary>
         /// Acknowledges the alert and returns the next model

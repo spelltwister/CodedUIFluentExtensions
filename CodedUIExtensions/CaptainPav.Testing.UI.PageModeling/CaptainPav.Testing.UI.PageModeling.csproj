@@ -37,6 +37,8 @@
     <Compile Include="DialogPageModels\IAlertPageModel.cs" />
     <Compile Include="DialogPageModels\ICancellablePageModel.cs" />
     <Compile Include="DialogPageModels\IConfirmDenyPageModel.cs" />
+    <Compile Include="DialogPageModels\IDialogPageModel.cs" />
+    <Compile Include="DialogPageModels\IProgressDialogPageModel.cs" />
     <Compile Include="DialogPageModels\IYesNoCancelPageModel.cs" />
     <Compile Include="IClickablePageModel.cs" />
     <Compile Include="INamedSelectablePageModel.cs" />
