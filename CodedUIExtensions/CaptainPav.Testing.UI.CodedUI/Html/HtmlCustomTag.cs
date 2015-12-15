@@ -10,11 +10,6 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
     /// </summary>
     public class HtmlCustomTag : HtmlCustom
     {
-        private void Init()
-        {
-            this.SearchProperties.Add(PropertyNames.TagName, this._tagName, this._expressionOperator);
-        }
-
         /// <summary>
         /// The expression operator used when comparing tag names
         /// </summary>
@@ -35,17 +30,8 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// <param name="expressionOperator">
         /// The expression operator used when comparing tag names
         /// </param>
-        public HtmlCustomTag(string tagName, PropertyExpressionOperator expressionOperator = PropertyExpressionOperator.EqualTo) : base()
+        public HtmlCustomTag(string tagName, PropertyExpressionOperator expressionOperator = PropertyExpressionOperator.EqualTo) : this(null, tagName, expressionOperator)
         {
-            if (String.IsNullOrWhiteSpace(tagName))
-            {
-                throw new ArgumentException("Tag name cannot be null, empty, or white space.", "tagName");
-            }
-
-            this._tagName = tagName;
-            this._expressionOperator = expressionOperator;
-
-            Init();
         }
 
         /// <summary>
@@ -71,7 +57,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
             this._tagName = tagName;
             this._expressionOperator = expressionOperator;
 
-            Init();
+            this.SearchProperties.Add(PropertyNames.TagName, this._tagName, this._expressionOperator);
         }
     }
 }

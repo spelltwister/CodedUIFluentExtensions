@@ -11,12 +11,9 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
 
         public static string GetPropertyOrDefault(this HtmlControl control, string propertyName, string defaultValue)
         {
-            string value;
-            if (!control.TryGetProperty(propertyName, out value))
-            {
-                return defaultValue;
-            }
-            return value;
+            string ret;
+            control.GetPropertyOrDefault(propertyName, defaultValue, out ret);
+            return ret;
         }
 
         // TODO: ensure that properties without values return true (eg, &lt;details open&gt;)

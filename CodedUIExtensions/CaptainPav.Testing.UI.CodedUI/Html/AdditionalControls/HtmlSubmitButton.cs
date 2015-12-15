@@ -7,7 +7,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
     {
         protected const string SubmitType = "submit";
 
-        public HtmlSubmitButton() : base()
+        public HtmlSubmitButton() : this(null)
         {
             this.SearchProperties.Add(HtmlControl.PropertyNames.Type, SubmitType, PropertyExpressionOperator.EqualTo);
         }
