@@ -31,8 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -78,7 +78,7 @@
     <Compile Include="Html\DialogModels\HtmlCancellablePageModelBase.cs" />
     <Compile Include="Html\DialogModels\HtmlConfirmDenyPageModelBase.cs" />
     <Compile Include="Html\DialogModels\HtmlHasNextModelPageModelBase.cs" />
-    <Compile Include="Html\HtmlBaseModels.cs" />
+    <Compile Include="Html\HtmlPageModelBase.cs" />
     <Compile Include="Html\HtmlBrowserPageModel.cs" />
     <Compile Include="Html\HtmlDocumentPageModelBase.cs" />
     <Compile Include="Html\HtmlStaticChildPageModelBase.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Wpf\DialogModels\WpfCancellablePageModelBase.cs" />
     <Compile Include="Wpf\DialogModels\WpfConfirmDenyPageModelBase.cs" />
     <Compile Include="Wpf\DialogModels\WpfHasNextModelPageModelBase.cs" />
-    <Compile Include="Wpf\WpfBaseModels.cs" />
+    <Compile Include="Wpf\WpfPageModelBase.cs" />
     <Compile Include="Wpf\WpfChildPageModelBase.cs" />
     <Compile Include="Wpf\WpfDocumentPageModelBase.cs" />
     <Compile Include="Wpf\WpfStaticChildPageModelBase.cs" />
