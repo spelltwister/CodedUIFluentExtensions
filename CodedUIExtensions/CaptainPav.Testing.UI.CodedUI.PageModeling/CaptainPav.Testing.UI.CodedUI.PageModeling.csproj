@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="CodedUIControlExtensions.cs" />
     <Compile Include="ControlWrappers\ClickableControlPageModelWrapper.cs" />
+    <Compile Include="ControlWrappers\ComboboxControlPageModelWrapper.cs" />
     <Compile Include="ControlWrappers\HasNextModelUIControlPageModelWrapperBase.cs">
       <SubType>Code</SubType>
     </Compile>

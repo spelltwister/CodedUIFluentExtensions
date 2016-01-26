@@ -29,7 +29,7 @@ namespace Lib.Tests
             get { return DocumentWindow.Find<HtmlButton>().AsPageModel(this); }
         }
 
-        public ITextValueablePageModel<string, SemanticTestPageModel> EditableDiv
+        public IReadWriteTextValuePageModel<string, SemanticTestPageModel> EditableDiv
         {
             get { return DocumentWindow.Find<HtmlEditableDiv>().AsPageModel(this); }
         }
@@ -54,22 +54,22 @@ namespace Lib.Tests
         //    get { return this.DocumentWindow.FindAll<HtmlRadioButton>().Skip(1).First().AsPageModel(this); }
         //}
 
-        public ITextValueablePageModel<string, SemanticTestPageModel> Edit
+        public IReadWriteTextValuePageModel<string, SemanticTestPageModel> Edit
         {
             get { return this.DocumentWindow.Find<HtmlEdit>().AsPageModel(this); }
         }
 
-        public ISelectionPageModel<string, SemanticTestPageModel> Combobox
+        public ISelectionPageModel<string, SemanticTestPageModel, HtmlComboBoxItemControlPageModelWrapper<SemanticTestPageModel>> Combobox
         {
             get { return this.DocumentWindow.Find<HtmlComboBox>().AsPageModel(this); }
         }
 
-        public ITextValueablePageModel<string, SemanticTestPageModel> EditableSpan
+        public IReadWriteTextValuePageModel<string, SemanticTestPageModel> EditableSpan
         {
             get { return this.DocumentWindow.Find<HtmlEditableSpan>().AsPageModel(this); }
         }
 
-        public ITextValueablePageModel<string, SemanticTestPageModel> TextArea
+        public IReadWriteTextValuePageModel<string, SemanticTestPageModel> TextArea
         {
             get { return this.DocumentWindow.Find<HtmlTextArea>().AsPageModel(this); }
         }

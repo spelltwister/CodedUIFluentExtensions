@@ -73,45 +73,45 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
         public static ITextValuedPageModel<TValue> AsTextValuedPageModel<T, TValue>(this T htmlControl, Func<string, TValue> stringToValueFunc) where T : HtmlControl
         {
             return new HtmlTextValuedControlPageModelWrapper<T, TValue>(htmlControl, stringToValueFunc);
-        }  
+        }
 
-        #region Text Valuable Extensions
-        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
+        #region Read Write Text Value Extensions
+        public static IReadWriteTextValuePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
         {
             return new HtmlTextboxControlPageModelWrapper<TValue, TNextModel>(textBox, nextModel, stringToValueFunc, valueToStringFunc);
         }
 
-        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlEdit textBox, TNextModel nextModel) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlEdit textBox, TNextModel nextModel) where TNextModel : IPageModel
         {
             return textBox.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
 
-        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlEditableDiv div, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlEditableDiv div, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
         {
             return new HtmlEditableDivControlPageModelWrapper<TValue, TNextModel>(div, nextModel, stringToValueFunc, valueToStringFunc);
         }
 
-        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlEditableDiv div, TNextModel nextModel) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlEditableDiv div, TNextModel nextModel) where TNextModel : IPageModel
         {
             return div.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
 
-        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlEditableSpan span, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlEditableSpan span, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
         {
             return new HtmlEditableSpanControlPageModelWrapper<TValue, TNextModel>(span, nextModel, stringToValueFunc, valueToStringFunc);
         }
 
-        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlEditableSpan span, TNextModel nextModel) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlEditableSpan span, TNextModel nextModel) where TNextModel : IPageModel
         {
             return span.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
 
-        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlTextArea textArea, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlTextArea textArea, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
         {
             return new HtmlTextAreaControlPageModelWrapper<TValue, TNextModel>(textArea, nextModel, stringToValueFunc, valueToStringFunc);
         }
 
-        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlTextArea textArea, TNextModel nextModel) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlTextArea textArea, TNextModel nextModel) where TNextModel : IPageModel
         {
             return textArea.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
@@ -144,16 +144,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
             return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf);
         } 
 
-        public static ISelectionPageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
+        public static ISelectionPageModel<TValue, TNextModel, HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
         {
             return new HtmlComboBoxControlPageModelWrapper<TValue, TNextModel>(comboBox, nextModel, stringToValue, valueToString);
         }
 
-        public static ISelectionPageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
+        public static ISelectionPageModel<string, TNextModel, HtmlComboBoxItemControlPageModelWrapper<TNextModel>> AsPageModel<TNextModel>(this HtmlComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
         {
-            return new HtmlComboBoxControlPageModelWrapper<string, TNextModel>(comboBox, nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
+            return new HtmlComboBoxControlPageModelWrapper<TNextModel>(comboBox, nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
-    
-    
     }
 }

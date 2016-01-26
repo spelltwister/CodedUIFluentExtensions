@@ -3,10 +3,10 @@
     /// <summary>
     /// Interface for page models which represent dialogs
     /// </summary>
-    /// <typeparam name="TNextModel">
-    /// The most likely model with which the user will interact after
-    /// dismissing the dialog
-    /// </typeparam>
+    ///// <typeparam name="TNextModel">
+    ///// The most likely model with which the user will interact after
+    ///// dismissing the dialog
+    ///// </typeparam>
     /// <remarks>
     /// The dialog being modeled here is a control which presents the user
     /// with some message

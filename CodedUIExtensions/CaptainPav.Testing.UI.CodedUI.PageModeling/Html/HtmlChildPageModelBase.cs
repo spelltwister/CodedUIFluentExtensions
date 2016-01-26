@@ -10,6 +10,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
     /// <typeparam name="T">
     /// Type of element that represents this child page model
     /// </typeparam>
+    /// <remarks>
+    /// This type of child model represents models which cannot find themselves
+    /// in a page.  Instead, the parent dictates the children.  This is common
+    /// in repeaters where each child is indistinguishable from the others.
+    /// </remarks>
     public abstract class HtmlChildPageModelBase<T> : HtmlPageModelBase<T> where T : HtmlControl
     {
         protected readonly T _me;

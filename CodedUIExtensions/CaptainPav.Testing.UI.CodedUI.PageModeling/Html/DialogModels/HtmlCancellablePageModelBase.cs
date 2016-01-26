@@ -15,6 +15,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.DialogModels
         }
 
         abstract protected TUICancelClickElement ClickToCancelElement { get; }
+        abstract public string Message { get; }
 
         public IClickablePageModel<TNextModel> CancelModel
         {

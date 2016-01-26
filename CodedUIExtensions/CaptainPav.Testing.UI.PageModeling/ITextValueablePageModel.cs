@@ -10,7 +10,7 @@ namespace CaptainPav.Testing.UI.PageModeling
     /// <typeparam name="TNextModel">
     /// Type of model returned after setting the value of this model
     /// </typeparam>
-    public interface ITextValueablePageModel<TValue, out TNextModel> : ITextValuedPageModel<TValue>, IValueablePageModel<TValue, TNextModel> where TNextModel : IPageModel
+    public interface ITextValueablePageModel<in TValue, out TNextModel> : IValueablePageModel<TValue, TNextModel> where TNextModel : IPageModel
     {
         TNextModel SetValueText(string valueText);
     }

@@ -6,6 +6,9 @@ namespace CaptainPav.Testing.UI.PageModeling
     /// <typeparam name="TValue">
     /// Type of value observable in the model
     /// </typeparam>
+    /// <remarks>
+    /// This interface provides a means of reading a value from the page model
+    /// </remarks>
     public interface IValuedPageModel<out TValue> : IPageModel
     {
         /// <summary>

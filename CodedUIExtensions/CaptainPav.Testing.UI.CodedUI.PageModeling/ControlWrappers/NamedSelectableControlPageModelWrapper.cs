@@ -10,7 +10,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
     /// <typeparam name="TUIControl">
     /// </typeparam>
     /// <typeparam name="TNextModel"></typeparam>
-    public abstract class NamedSelectableControlPageModelWrapper<TUIControl, TNextModel> : SelectableControlPageModelWrapper<TUIControl, TNextModel>, INamedSelectablePageModel<TNextModel>
+    public abstract class NamedSelectableControlPageModelWrapper<TUIControl, TNextModel> : SelectableControlPageModelWrapper<TUIControl, TNextModel>, INamedPageModel
         where TUIControl : UITestControl
         where TNextModel : IPageModel
     {

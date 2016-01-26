@@ -6,7 +6,8 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
 {
-    internal class WpfTabListControlPageModelWrapper<TNextModel> : TextValuableControlPageModelWrapperBase<WpfTabList, string, TNextModel>, ISelectionPageModel<string, TNextModel>
+    internal class WpfTabListControlPageModelWrapper<TNextModel, TSelectionType> : TextValuableControlPageModelWrapperBase<WpfTabList, string, TNextModel>, ISelectionPageModel<string, TNextModel, TSelectionType>
+        where TSelectionType : ISelectablePageModel<TNextModel>, IValuedPageModel<string>
         where TNextModel : IPageModel
     {
         public WpfTabListControlPageModelWrapper(WpfTabList control, TNextModel nextModel)
@@ -24,7 +25,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
             throw new NotImplementedException();
         }
 
-        public INamedSelectablePageModel<TNextModel> SelectedItem
+        public TSelectionType SelectedItem
         {
             get
             {
@@ -32,7 +33,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
             }
         }
 
-        public IEnumerable<INamedSelectablePageModel<TNextModel>> Items
+        public IEnumerable<TSelectionType> Items
         {
             get { throw new NotImplementedException(); }
         }

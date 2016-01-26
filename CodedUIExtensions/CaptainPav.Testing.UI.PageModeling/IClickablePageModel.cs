@@ -1,7 +1,7 @@
 namespace CaptainPav.Testing.UI.PageModeling
 {
     /// <summary>
-    /// Interface for page model which have a logical click action assoricated
+    /// Interface for page models which have a logical click action associated
     /// </summary>
     /// <typeparam name="TNextModel">
     /// The most likely model with which the user will interact as a result of

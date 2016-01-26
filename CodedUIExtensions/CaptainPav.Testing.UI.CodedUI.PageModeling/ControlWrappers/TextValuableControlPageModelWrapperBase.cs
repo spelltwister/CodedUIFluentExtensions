@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
 {
-    public abstract class TextValuableControlPageModelWrapperBase<TUIType, TValue, TNextModel> : HasNextModelUIControlPageModelWrapperBase<TUIType, TNextModel>, ITextValueablePageModel<TValue, TNextModel>
+    public abstract class TextValuableControlPageModelWrapperBase<TUIType, TValue, TNextModel> : HasNextModelUIControlPageModelWrapperBase<TUIType, TNextModel>, IReadWriteTextValuePageModel<TValue, TNextModel>
         where TUIType : UITestControl
         where TNextModel : IPageModel
     {

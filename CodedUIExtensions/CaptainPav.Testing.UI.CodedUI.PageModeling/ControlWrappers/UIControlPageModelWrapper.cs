@@ -27,4 +27,16 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
             get { return this._control; }
         }
     }
+
+    /// <summary>
+    /// Wraps a control in a page model to provide consistent, but abstracted
+    /// access to properties of the control as though it were a page model
+    /// </summary>
+    /// <remarks>
+    /// Convenience wrapper when the control type does not matter
+    /// </remarks>
+    public class UIControlPageModelWrapper : UIControlPageModelWrapper<UITestControl>
+    {
+        public UIControlPageModelWrapper(UITestControl control) : base(control) { }
+    }
 }

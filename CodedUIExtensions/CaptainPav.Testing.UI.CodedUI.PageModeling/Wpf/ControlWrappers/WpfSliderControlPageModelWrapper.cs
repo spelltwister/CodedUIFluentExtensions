@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
 {
-    public class WpfSliderControlPageModelWrapper<TNextModel> : HasNextModelUIControlPageModelWrapperBase<WpfSlider, TNextModel>, IValueablePageModel<double, TNextModel>
+    public class WpfSliderControlPageModelWrapper<TNextModel> : HasNextModelUIControlPageModelWrapperBase<WpfSlider, TNextModel>, IReadWriteValuePageModel<double, TNextModel>
         where TNextModel : IPageModel
     {
         public WpfSliderControlPageModelWrapper(WpfSlider control, TNextModel nextModel) : base(control, nextModel)

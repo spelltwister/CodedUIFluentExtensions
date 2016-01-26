@@ -23,9 +23,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.IE
             get { return FluentHtmlSearchExtensions.Find<HtmlHyperlink>(this.Me, "overridelink"); }
         }
 
-        protected internal override HtmlTable Me
+        internal protected override HtmlTable Me
         {
             get { return new HtmlTable(this.DocumentWindow); }
+        }
+
+        public override string Message
+        {
+            get { throw new System.NotImplementedException(); } // TODO: implement
         }
     }
 }

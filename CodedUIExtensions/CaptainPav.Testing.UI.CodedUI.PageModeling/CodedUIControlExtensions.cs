@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers;
 using CaptainPav.Testing.UI.PageModeling;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -15,27 +14,80 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
     {
         #region Find Helpers
         /// <summary>
-        /// Optionally waits for the control to exist and returns true if
+        /// Returns true if the element can be found; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to try to find
+        /// </param>
+        /// <returns>
+        /// True if the element can be found; otherwise, false
+        /// </returns>
+        public static bool CanFind(this UITestControl toTest)
+        {
+            return toTest.TryFind();
+        }
+
+        /// <summary>
+        /// Waits for the control to exist and returns true if
         /// the element can be found; otherwise, false
         /// </summary>
         /// <param name="toTest">
         /// The element to try to find
         /// </param>
         /// <param name="wait"> 
-        /// Optional wait time in milliseconds to wait for the control to exist
-        /// before trying to find
+        /// Wait time in milliseconds to wait for the control to exist
+        /// before trying to find; if null, Playback.PlaybackSettings.WaitForReadyTimeout
+        /// is used as the wait time 
         /// </param>
         /// <returns>
-        /// True if the element can be found after the specified wait;
+        /// True if the element can be found after waiting; otherwise, false
+        /// </returns>
+        public static bool CanFind(this UITestControl toTest, int? wait)
+        {
+            return toTest.CanFind(x => x.WaitForControlExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+        }
+
+        /// <summary>
+        /// Waits for the control condition and returns true if
+        /// the element can be found; otherwise, false.  If the condition
+        /// is not met before the specified timeout, false is returned.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to try to find
+        /// </param>
+        /// <param name="testFunc"> 
+        /// The predicate describing the control condition for which to wait
+        /// before trying to find the specified test control
+        /// </param>
+        /// <param name="timeOut">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if the element can be found after the condition is met;
         /// otherwise, false
         /// </returns>
-        public static bool CanFind(this UITestControl toTest, int? wait = null)
+        public static bool CanFind<T>(this T toTest, Predicate<T> testFunc, int? timeOut = null) where T : UITestControl
         {
-            if (wait.HasValue)
+            if (!toTest.WaitForControlCondition(testFunc, timeOut))
             {
-                toTest.WaitForControlExist(wait.Value);
+                return false;
             }
-            return toTest.TryFind();
+            return toTest.CanFind();
+        }
+
+        /// <summary>
+        /// Returns false if the element can be found; otherwise, true
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to try to find
+        /// </param>
+        /// <returns>
+        /// True if the element cannot be found; otherwise, false
+        /// </returns>
+        public static bool CanNotFind(this UITestControl toTest)
+        {
+            return !toTest.CanFind();
         }
 
         /// <summary>
@@ -53,13 +105,37 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// True if the element cannot be found after the specified wait;
         /// otherwise, false
         /// </returns>
-        public static bool CanNotFind(this UITestControl toTest, int? wait = null)
+        public static bool CanNotFind(this UITestControl toTest, int? wait)
         {
-            if (wait.HasValue)
+            return toTest.CanNotFind(x => x.WaitForControlNotExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+        }
+
+        /// <summary>
+        /// Optionally waits for the control condition and returns false if
+        /// the element can be found; otherwise, true
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to try to find
+        /// </param>
+        /// <param name="testFunc"> 
+        /// The predicate describing the control condition for which to wait
+        /// before trying to find the specified test control
+        /// </param>
+        /// <param name="timeOut">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if the element cannot be found after the specified condition;
+        /// otherwise, false
+        /// </returns>
+        public static bool CanNotFind<T>(this T toTest, Predicate<T> testFunc, int? timeOut = null) where T : UITestControl
+        {
+            if (!toTest.WaitForControlCondition(testFunc, timeOut))
             {
-                toTest.WaitForControlNotExist(wait.Value);
+                return false;
             }
-            return !toTest.TryFind();
+            return toTest.CanNotFind();
         }
         #endregion
 
@@ -83,8 +159,86 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         }
 
         /// <summary>
+        /// Returns true if an element is filling space after the specified
+        /// condition; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for filling space
+        /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
+        /// <param name="wait">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if an element is filling space; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// The element must have non-zero width and height to be
+        /// considered filling space
+        /// </remarks>
+        public static bool IsFillingSpace<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
+        {
+            if (!toTest.WaitForControlCondition(condition, wait))
+            {
+                return false;
+            }
+            return toTest.IsFillingSpace();
+        }
+
+        /// <summary>
         /// Returns true if an element is visible, but not
-        /// necessarily clickable; otherwise, false
+        /// necessarily clickable; otherwise, false.  A visible element
+        /// must be able to be found and must fill space on the rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered visible if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for visibility
+        /// </param>
+        /// <returns>
+        /// True if an element is visible; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be visible, but not clickable
+        /// </remarks>
+        [Obsolete("Will be removed in future. Use IsRendered instead.")]
+        public static bool IsVisible(this UITestControl toTest)
+        {
+            return toTest.IsRendered();
+        }
+
+        /// <summary>
+        /// Returns true if an element is rendered, but not
+        /// necessarily clickable; otherwise, false.  A rendered element
+        /// must be able to be found and must fill space on rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered rendered if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for rendered
+        /// </param>
+        /// <returns>
+        /// True if an element is rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be rendered, but not clickable or visible to
+        /// the client (eg, off screen)
+        /// </remarks>
+        public static bool IsRendered(this UITestControl toTest)
+        {
+            return toTest.TryFind() && toTest.IsFillingSpace();
+        }
+
+        /// <summary>
+        /// Returns true if an element is visible, but not
+        /// necessarily clickable; otherwise, false.  A visible element
+        /// must be able to be found and must fill space on the screen.
         /// </summary>
         /// <param name="toTest">
         /// The element to test for visibility
@@ -99,17 +253,151 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// <remarks>
         /// An element can be visible, but not clickable
         /// </remarks>
-        public static bool IsVisible(this UITestControl toTest, int? wait = null)
+        [Obsolete("Will be removed in future. Use IsRendered instead.")]
+        public static bool IsVisible(this UITestControl toTest, int? wait)
         {
-            if (wait.HasValue)
-            {
-                toTest.WaitForControlExist(wait.Value);
-            }
-            return toTest.TryFind() && toTest.IsFillingSpace();
+            return toTest.IsRendered(wait);
         }
 
         /// <summary>
-        /// Returns true if an element is hidden; otherwise, false
+        /// Returns true if an element is rendered, but not
+        /// necessarily clickable; otherwise, false.  A rendered element
+        /// must be able to be found and must fill space on rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered rendered if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for rendered
+        /// </param>
+        /// <param name="wait">
+        /// Optional wait time in milliseconds to wait for the control to
+        /// exist before trying to test for rendered
+        /// </param>
+        /// <returns>
+        /// True if an element is rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be rendered, but not clickable or visible to
+        /// the client (eg, off screen)
+        /// </remarks>
+        public static bool IsRendered(this UITestControl toTest, int? wait)
+        {
+            return toTest.IsRendered(x => x.WaitForControlExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+        }
+
+        /// <summary>
+        /// Returns true if an element is visible, but not
+        /// necessarily clickable, after the specified condition; otherwise, false.
+        /// A visible element must be able to be found and must fill space on the screen.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for visibility
+        /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
+        /// <param name="wait">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if an element is visible; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be visible, but not clickable
+        /// </remarks>
+        [Obsolete("Will be removed in future. Use IsRendered instead.")]
+        public static bool IsVisible<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
+        {
+            return toTest.IsRendered(condition, wait);
+        }
+
+        /// <summary>
+        /// Returns true if an element is rendered, but not
+        /// necessarily clickable, after the specified condition; otherwise, false.
+        /// A rendered element must be able to be found and must fill space on rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered rendered if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for rendered
+        /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
+        /// <param name="wait">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if an element is rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be rendered, but not clickable or visible to
+        /// the client (eg, off screen)
+        /// </remarks>
+        public static bool IsRendered<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
+        {
+            if (!toTest.WaitForControlCondition(condition, wait))
+            {
+                return false;
+            }
+            return toTest.IsRendered();
+        }
+
+        /// <summary>
+        /// Returns true if an element is not rendered; otherwise, false.
+        /// A rendered element must be able to be found and must fill space on rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered rendered if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for rendered
+        /// </param>
+        /// <returns>
+        /// True if an element is not rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be rendered, but not clickable or visible to
+        /// the client (eg, off screen)
+        /// </remarks>
+        [Obsolete("Will be removed in future. Use IsNotRendered instead.")]
+        public static bool IsHidden(this UITestControl toTest)
+        {
+            return toTest.IsNotRendered();
+        }
+
+        /// <summary>
+        /// Returns true if an element is not rendered; otherwise, false.
+        /// A rendered element must be able to be found and must fill space on rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered rendered if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for rendered
+        /// </param>
+        /// <returns>
+        /// True if an element is not rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be rendered, but not clickable or visible to
+        /// the client (eg, off screen)
+        /// </remarks>
+        public static bool IsNotRendered(this UITestControl toTest)
+        {
+            return !toTest.IsRendered();
+        }
+
+        /// <summary>
+        /// Returns true if an element is hidden; otherwise, false.  An
+        /// element is hidden if it cannot be found or it is not filling space
+        /// on the screen.
         /// </summary>
         /// <param name="toTest">
         /// The element to test for visibility
@@ -121,19 +409,182 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// <returns>
         /// True if an element is hidden; otherwise, false
         /// </returns>
-        public static bool IsHidden(this UITestControl toTest, int? wait = null)
+        /// <remarks>
+        /// An element that can be found on the page, but is not filling space,
+        /// is considered hidden.  An element that cannot be found is also
+        /// considered hidden.
+        /// </remarks>
+        [Obsolete("Will be removed in future. Use IsNotRendered instead.")]
+        public static bool IsHidden(this UITestControl toTest, int? wait)
         {
-            if (wait.HasValue)
+            return toTest.IsNotRendered(wait);
+        }
+
+        /// <summary>
+        /// Returns true if an element is not rendered; otherwise, false.
+        /// A rendered element must be able to be found and must fill space on rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered rendered if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for rendered
+        /// </param>
+        /// <param name="wait">
+        /// Optional wait time in milliseconds to wait for the control to not
+        /// exist before trying to test for rendered
+        /// </param>
+        /// <returns>
+        /// True if an element is not rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be rendered, but not clickable or visible to
+        /// the client (eg, off screen)
+        /// </remarks>
+        public static bool IsNotRendered(this UITestControl toTest, int? wait)
+        {
+            return toTest.IsNotRendered(x => x.WaitForControlNotExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+        }
+
+        /// <summary>
+        /// Returns true if an element is not rendered; otherwise, false.
+        /// A rendered element must be able to be found and must fill space on rendering canvas.
+        /// An element can be off screen and not visible to the user, but
+        /// still considered rendered if it can be found and has non-zero
+        /// height and width.
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test for rendered
+        /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
+        /// <param name="wait">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if an element is not rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element can be rendered, but not clickable or visible to
+        /// the client (eg, off screen)
+        /// </remarks>
+        public static bool IsNotRendered<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
+        {
+            if (!toTest.WaitForControlCondition(condition, wait))
             {
-                toTest.WaitForControlNotExist(wait.Value);
+                return false;
             }
-            return !toTest.TryFind() || !toTest.IsFillingSpace();
+            return toTest.IsNotRendered();
         }
         #endregion
 
         #region Clickable Helpers
         /// <summary>
-        /// Returns true if an element is not clickable; otherwise, false
+        /// Returns true if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable
+        /// </param>
+        /// <returns>
+        /// True if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element which is clickable is not necessarily enabled and
+        /// clicking may not result in any page model response.  See
+        /// <see cref="IsActionable(Microsoft.VisualStudio.TestTools.UITesting.UITestControl)"/>
+        /// </remarks>
+        public static bool IsClickable(this UITestControl toTest)
+        {
+            return toTest.CanGetClickablePoint();
+        }
+
+        /// <summary>
+        /// Returns true if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable
+        /// </param>
+        /// <param name="wait">
+        /// Optional wait time in milliseconds to wait for the control to
+        /// exist before trying to test for clickability
+        /// </param>
+        /// <returns>
+        /// True if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element which is clickable is not necessarily enabled and
+        /// clicking may not result in any page model response.  See
+        /// <see cref="IsActionable(Microsoft.VisualStudio.TestTools.UITesting.UITestControl, System.Nullable{int})"/>
+        /// </remarks>
+        public static bool IsClickable(this UITestControl toTest, int? wait)
+        {
+            return toTest.IsClickable(x => x.WaitForControlExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+        }
+
+        /// <summary>
+        /// Returns true if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable
+        /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
+        /// <param name="wait">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element which is clickable is not necessarily enabled and
+        /// clicking may not result in any page model response.  See
+        /// <see cref="IsActionable(Microsoft.VisualStudio.TestTools.UITesting.UITestControl, System.Predicate{T}, System.Nullable{int})"/>
+        /// </remarks>
+        public static bool IsClickable<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
+        {
+            if (!toTest.WaitForControlCondition(condition, wait))
+            {
+                return false;
+            }
+            return toTest.IsClickable();
+        }
+
+        /// <summary>
+        /// Returns false if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, true
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable
+        /// </param>
+        /// <returns>
+        /// False if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, true
+        /// </returns>
+        /// <remarks>
+        /// An element which is clickable is not necessarily enabled and
+        /// clicking may not result in any page model response.  See
+        /// <see cref="IsActionable(Microsoft.VisualStudio.TestTools.UITesting.UITestControl)"/>
+        /// </remarks>
+        public static bool IsNotClickable(this UITestControl toTest)
+        {
+            return !toTest.IsClickable();
+        }
+
+        /// <summary>
+        /// Returns false if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, true
         /// </summary>
         /// <param name="toTest">
         /// The element to test if it is clickable
@@ -145,49 +596,165 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// <returns>
         /// True if an element is not clickable; otherwise, false
         /// </returns>
-        public static bool IsNotClickable(this UITestControl toTest, int? wait = null)
+        /// <remarks>
+        /// An element which is clickable is not necessarily enabled and
+        /// clicking may not result in any page model response.  See
+        /// <see cref="IsActionable(Microsoft.VisualStudio.TestTools.UITesting.UITestControl, System.Nullable{int})"/>
+        /// </remarks>
+        public static bool IsNotClickable(this UITestControl toTest, int? wait)
         {
-            if (wait.HasValue)
-            {
-                toTest.WaitForControlNotExist(wait.Value);
-            }
-            Point p;
-            return !toTest.TryGetClickablePoint(out p);
+            return toTest.IsNotClickable(x => x.WaitForControlNotExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
         }
 
         /// <summary>
-        /// Returns true if an element is clickable; otherwise, false
+        /// Returns false if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, true
         /// </summary>
         /// <param name="toTest">
         /// The element to test if it is clickable
         /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
         /// <param name="wait">
-        /// Optional wait time in milliseconds to wait for the control to
-        /// exist before trying to test for clickability
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
         /// </param>
         /// <returns>
-        /// True if an element is clickable; otherwise, false
+        /// False if there is a point on the screen which can trigger
+        /// the click action of this control; otherwise, true
         /// </returns>
-        public static bool IsClickable(this UITestControl toTest, int? wait = null)
+        /// <remarks>
+        /// An element which is clickable is not necessarily enabled and
+        /// clicking may not result in any page model response.  See
+        /// <see cref="IsActionable(Microsoft.VisualStudio.TestTools.UITesting.UITestControl, System.Predicate{T}, System.Nullable{int})"/>
+        /// </remarks>
+        public static bool IsNotClickable<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
         {
-            if (wait.HasValue)
+            if (!toTest.WaitForControlCondition(condition, wait))
             {
-                toTest.WaitForControlExist(wait.Value);
+                return false;
             }
-            Point p;
-            return toTest.TryGetClickablePoint(out p);
+            return toTest.IsNotClickable();
         }
         #endregion
 
         #region Actionable Helpers
-        public static bool IsActionable(this UITestControl toTest, int? wait = null)
+        /// <summary>
+        /// Returns true if this control is clickable and enabled; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable and enabled
+        /// </param>
+        /// <returns>
+        /// True if this control is clickable and enabled; otherwise, false
+        /// </returns>
+        public static bool IsActionable(this UITestControl toTest)
+        {
+            return toTest.IsClickable() && toTest.Enabled;
+        }
+        
+        /// <summary>
+        /// Returns true if this control is clickable and enabled; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable and enabled
+        /// </param>
+        /// <param name="wait">
+        /// Optional wait time in milliseconds to wait for the control to
+        /// exist before trying to test for clickability and enabled status
+        /// </param>
+        /// <returns>
+        /// True if this control is clickable and enabled; otherwise, false
+        /// </returns>
+        public static bool IsActionable(this UITestControl toTest, int? wait)
         {
             return toTest.IsClickable(wait) && toTest.Enabled;
         }
 
-        public static bool IsNotActionable(this UITestControl toTest, int? wait = null)
+        /// <summary>
+        /// Returns true if this control is clickable and enabled; otherwise, false
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable and enabled
+        /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
+        /// <param name="wait">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// True if this control is clickable and enabled; otherwise, false
+        /// </returns>
+        public static bool IsActionable<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
+        {
+            if (!toTest.WaitForControlCondition(condition, wait))
+            {
+                return false;
+            }
+            return toTest.IsActionable();
+        }
+
+        /// <summary>
+        /// Returns false if this control is clickable and enabled; otherwise, true
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable and enabled
+        /// </param>
+        /// <returns>
+        /// False if this control is clickable and enabled; otherwise, true
+        /// </returns>
+        public static bool IsNotActionable(this UITestControl toTest)
+        {
+            return !toTest.IsActionable();
+        }
+
+        /// <summary>
+        /// Returns false if this control is clickable and enabled; otherwise, true
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable and enabled
+        /// </param>
+        /// <param name="wait">
+        /// Optional wait time in milliseconds to wait for the control to not
+        /// exist before trying to test for clickability and enabled status
+        /// </param>
+        /// <returns>
+        /// False if this control is clickable and enabled; otherwise, true
+        /// </returns>
+        public static bool IsNotActionable(this UITestControl toTest, int? wait)
         {
             return toTest.IsNotClickable(wait) || !toTest.Enabled;
+        }
+
+        /// <summary>
+        /// Returns false if this control is clickable and enabled; otherwise, true
+        /// </summary>
+        /// <param name="toTest">
+        /// The element to test if it is clickable and enabled
+        /// </param>
+        /// <param name="condition"> 
+        /// The predicate describing the control condition for which to wait
+        /// before testing
+        /// </param>
+        /// <param name="wait">
+        /// Time to wait for the control condition before returning false; if
+        /// null, Playback.PlaybackSettings.WaitForReadyTimeout is used
+        /// </param>
+        /// <returns>
+        /// False if this control is clickable and enabled; otherwise, true
+        /// </returns>
+        public static bool IsNotActionable<T>(this T toTest, Predicate<T> condition, int? wait = null) where T : UITestControl
+        {
+            if (!toTest.WaitForControlCondition(condition, wait))
+            {
+                return false;
+            }
+            return toTest.IsNotActionable();
         }
         #endregion
 
@@ -210,7 +777,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </remarks>
         public static IPageModel AsPageModel(this UITestControl current)
         {
-            return new UIControlPageModelWrapper<UITestControl>(current);
+            return new UIControlPageModelWrapper(current);
         }
 
         /// <summary>
@@ -235,7 +802,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </remarks>
         public static IClickablePageModel<TNextModel> AsClickablePageModel<TNextModel>(this UITestControl current, TNextModel nextModel) where TNextModel : IPageModel
         {
-            return new ClickableControlPageModelWrapper<UITestControl, TNextModel>(current, nextModel);
+            return new ClickableControlPageModelWrapper<TNextModel>(current, nextModel);
         }
 
         /// <summary>

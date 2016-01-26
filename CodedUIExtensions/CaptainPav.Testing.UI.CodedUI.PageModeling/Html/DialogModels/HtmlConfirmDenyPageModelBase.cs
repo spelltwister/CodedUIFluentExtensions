@@ -18,6 +18,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.DialogModels
         }
 
         abstract protected TUIConfirmClickElement ConfirmElement { get; }
+        abstract public string Message { get; }
 
         public IClickablePageModel<TConfirmModel> ConfirmModel
         {

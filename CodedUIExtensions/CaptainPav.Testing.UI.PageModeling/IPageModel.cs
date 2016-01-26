@@ -1,4 +1,6 @@
-﻿namespace CaptainPav.Testing.UI.PageModeling
+﻿using System;
+
+namespace CaptainPav.Testing.UI.PageModeling
 {
     /// <summary>
     /// Page models describe the behaviors and observations of a user
@@ -29,7 +31,7 @@
         /// this method.  The only way for it to return false would
         /// be that element does not exist anywhere in the page.
         /// </remarks>
-        bool CanFind(int? wait = null);
+        bool CanFind(int? wait);
 
         /// <summary>
         /// Tries to find the control and returns true if the model
@@ -65,7 +67,25 @@
         /// necessarily in view (eg, the control may not actually be able to
         /// be seen due to being off screen or blocked).
         /// </remarks>
+        [Obsolete("Will be removed in future.  Use IsRendered instead.", false)]
         bool IsVisible(int? wait = null);
+
+        /// <summary>
+        /// Returns true if the element is rendered
+        /// </summary>
+        /// <param name="wait">
+        /// [Optional] Time to wait for the control to become rendered
+        /// </param>
+        /// <returns>
+        /// True if the control is rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element is considered rendered if it is able to be found and has
+        /// non-zero width and height.  This does not mean that the controls is
+        /// necessarily in view (eg, the control may not actually be able to
+        /// be seen due to being off screen or blocked).
+        /// </remarks>
+        bool IsRendered(int? wait = null);
 
         /// <summary>
         /// Returns true if the element is hidden
@@ -79,7 +99,25 @@
         /// <remarks>
         /// An off screen or blocked element is not technically hidden
         /// </remarks>
+        [Obsolete("Will be removed in future.  Use IsNotRendered instead.", false)]
         bool IsHidden(int? wait = null);
+
+        /// <summary>
+        /// Returns true if the element is not rendered
+        /// </summary>
+        /// <param name="wait">
+        /// [Optional] Time to wait for the control to become not rendered
+        /// </param>
+        /// <returns>
+        /// True if the control is not rendered; otherwise, false
+        /// </returns>
+        /// <remarks>
+        /// An element is considered rendered if it is able to be found and has
+        /// non-zero width and height.  This does not mean that the controls is
+        /// necessarily in view (eg, the control may not actually be able to
+        /// be seen due to being off screen or blocked).
+        /// </remarks>
+        bool IsNotRendered(int? wait = null);
 
         /// <summary>
         /// Returns true if the element is clickable

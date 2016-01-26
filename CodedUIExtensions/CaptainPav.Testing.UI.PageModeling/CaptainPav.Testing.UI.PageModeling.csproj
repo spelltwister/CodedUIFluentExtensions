@@ -41,8 +41,14 @@
     <Compile Include="DialogPageModels\IProgressDialogPageModel.cs" />
     <Compile Include="DialogPageModels\IYesNoCancelPageModel.cs" />
     <Compile Include="IClickablePageModel.cs" />
-    <Compile Include="INamedSelectablePageModel.cs" />
+    <Compile Include="INamedPageModel.cs" />
     <Compile Include="IPageModel.cs" />
+    <Compile Include="IReadWriteTextValuePageModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IReadWriteValuePageModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ISelectablePageModel.cs" />
     <Compile Include="ISelectionPageModel.cs" />
     <Compile Include="ITextValueablePageModel.cs" />

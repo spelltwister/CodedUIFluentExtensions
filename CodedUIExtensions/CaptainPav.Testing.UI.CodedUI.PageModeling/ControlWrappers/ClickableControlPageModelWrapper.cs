@@ -46,4 +46,20 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
             return this.NextModel;
         }
     }
+
+    /// <summary>
+    /// Wraps a control in a Button-esque Page Model to provide consistent,
+    /// but abstracted access to properties of the control and a means of
+    /// clicking the control to get to the next model
+    /// </summary>
+    /// <typeparam name="TNextModel">
+    /// Type of Model that results from the Click action
+    /// </typeparam>
+    /// <remarks>
+    /// Convenience wrapper when the control type does not matter
+    /// </remarks>
+    public class ClickableControlPageModelWrapper<TNextModel> : ClickableControlPageModelWrapper<UITestControl, TNextModel> where TNextModel : IPageModel 
+    {
+        public ClickableControlPageModelWrapper(UITestControl control, TNextModel nextModel) : base(control, nextModel) { }
+    }
 }

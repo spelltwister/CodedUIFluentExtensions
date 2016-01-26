@@ -57,35 +57,35 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
         #endregion
 
         #region Selection Extensions
-        public static ISelectionPageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this WpfComboBox combobox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
+        public static ISelectionPageModel<TValue, TNextModel, WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this WpfComboBox combobox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
         {
             return new WpfComboBoxControlPageModelWrapper<TValue, TNextModel>(combobox, nextModel, stringToValue, valueToString);
         }
 
-        public static ISelectionPageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
+        public static ISelectionPageModel<string, TNextModel, WpfComboBoxItemControlPageModelWrapper<TNextModel>> AsPageModel<TNextModel>(this WpfComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
         {
-            return comboBox.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
+            return new WpfComboBoxControlPageModelWrapper<TNextModel>(comboBox, nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
         #endregion
 
         #region Text Valuable Extensions
-        public static ITextValueablePageModel<DateTime?, TNextModel> AsPageModel<TNextModel>(this WpfDatePicker datePicker, TNextModel nextModel, Func<string, DateTime?> stringToValueFunc, Func<DateTime?, string> valueToStringFunc) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<DateTime?, TNextModel> AsPageModel<TNextModel>(this WpfDatePicker datePicker, TNextModel nextModel, Func<string, DateTime?> stringToValueFunc, Func<DateTime?, string> valueToStringFunc) where TNextModel : IPageModel
         {
             return new WpfDatePickerControlPageModelWrapper<TNextModel>(datePicker, nextModel, stringToValueFunc, valueToStringFunc);
         }
 
-        public static ITextValueablePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this WpfEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this WpfEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
         {
             return new WpfTextboxControlPageModelWrapper<TValue, TNextModel>(textBox, nextModel, stringToValueFunc, valueToStringFunc);
         }
 
-        public static ITextValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfEdit textBox, TNextModel nextModel) where TNextModel : IPageModel
+        public static IReadWriteTextValuePageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfEdit textBox, TNextModel nextModel) where TNextModel : IPageModel
         {
             return textBox.AsPageModel(nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
         #endregion
 
-        public static IValueablePageModel<double, TNextModel> AsPageModel<TNextModel>(WpfSlider slider, TNextModel nextModel) where TNextModel : IPageModel
+        public static IReadWriteValuePageModel<double, TNextModel> AsPageModel<TNextModel>(WpfSlider slider, TNextModel nextModel) where TNextModel : IPageModel
         {
             return new WpfSliderControlPageModelWrapper<TNextModel>(slider, nextModel);
         }

@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
 {
-    public class WpfComboBoxControlPageModelWrapper<TValue, TNextModel> : TextValuableControlPageModelWrapperBase<WpfComboBox, TValue, TNextModel>, ISelectionPageModel<TValue, TNextModel>
+    public class WpfComboBoxControlPageModelWrapper<TValue, TNextModel> : ComboboxControlPageModelWrapper<WpfComboBox, TValue, TNextModel, WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel>>
         where TNextModel : IPageModel
     {
         public  WpfComboBoxControlPageModelWrapper(WpfComboBox toWrap, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc)
@@ -15,43 +15,46 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
         {
         }
 
-        public override string ValueText
-        {
-            get { return null != this.SelectedItem ? this.SelectedItem.Name : null; }
-        }
-
-        public override TNextModel SetValueText(string toValue)
-        {
-            return this.Items.Single(x => StringComparer.Ordinal.Equals(toValue, x.Name)).SetSelected(true);
-
-            // TODO: compare with
-            //Me.SelectedItem = toValue;
-            //return NextModel;
-        }
-
-        public INamedSelectablePageModel<TNextModel> SelectedItem
-        {
-            get { return this.Items.SingleOrDefault(x => x.IsSelected); }
-        }
-
-        public IEnumerable<INamedSelectablePageModel<TNextModel>> Items
+        public override IEnumerable<WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel>> Items
         {
             get
             {
                 return this.Me.Items
                               .OfType<WpfListItem>()
-                              .Select(x => new WpfComboBoxItemControlPageModelWrapper<TNextModel>(x, this.Me, this.NextModel));
+                              .Select(x => new WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel>(x, this.Me, this.NextModel, this.StringToValueFunc));
             }
         }
     }
 
-    public class WpfComboBoxItemControlPageModelWrapper<TNextModel> : NamedSelectableControlPageModelWrapper<WpfListItem, TNextModel>
+    public class WpfComboBoxControlPageModelWrapper<TNextModel> : ComboboxControlPageModelWrapper<WpfComboBox, string, TNextModel, WpfComboBoxItemControlPageModelWrapper<TNextModel>>
         where TNextModel : IPageModel
     {
-        protected readonly WpfComboBox Container;
-        public WpfComboBoxItemControlPageModelWrapper(WpfListItem control, WpfComboBox comboBox, TNextModel nextModel) : base(control, nextModel)
+        public WpfComboBoxControlPageModelWrapper(WpfComboBox toWrap, TNextModel nextModel, Func<string, string> stringToValueFunc, Func<string, string> valueToStringFunc)
+            : base(toWrap, nextModel, stringToValueFunc, valueToStringFunc)
         {
-            this.Container = comboBox;
+        }
+
+        public override IEnumerable<WpfComboBoxItemControlPageModelWrapper<TNextModel>> Items
+        {
+            get
+            {
+                return this.Me.Items
+                            .OfType<WpfListItem>()
+                            .Select(x => new WpfComboBoxItemControlPageModelWrapper<TNextModel>(x, this.Me, this.NextModel));
+            }
+        }
+    }
+
+    public class WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel> : ComboboxItemControlPageModelWrapper<WpfListItem, WpfComboBox, TValue, TNextModel>
+        where TNextModel : IPageModel
+    {
+        public WpfComboBoxItemControlPageModelWrapper(WpfListItem control, WpfComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<WpfListItem, string> itemToStringFunc)
+            : base(control, comboBox, nextModel, stringToValueFunc, itemToStringFunc)
+        {
+        }
+        public WpfComboBoxItemControlPageModelWrapper(WpfListItem control, WpfComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc)
+            : this(control, comboBox, nextModel, stringToValueFunc, x => x.Name)
+        {
         }
 
         public override string Name
@@ -76,6 +79,15 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
                 this.Container.SelectedIndex = -1;
             }
             return this.NextModel;
+        }
+    }
+
+    public class WpfComboBoxItemControlPageModelWrapper<TNextModel> : WpfComboBoxItemControlPageModelWrapper<string, TNextModel>
+        where TNextModel : IPageModel
+    {
+        public WpfComboBoxItemControlPageModelWrapper(WpfListItem control, WpfComboBox comboBox, TNextModel nextModel)
+            : base(control, comboBox, nextModel, x => x)
+        {
         }
     }
 }

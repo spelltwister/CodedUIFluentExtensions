@@ -14,6 +14,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.DialogModels
         }
 
         abstract protected TUIClickElement ClickToAcknowledge { get; }
+        abstract public string Message { get; }
 
         public IClickablePageModel<TNextModel> AcknowledgeModel
         {

@@ -85,8 +85,9 @@ namespace Lib.Tests
             Assert.IsTrue(afa.Value == "As Far As I Know");
         }
 
-        private static void ISelectionPageModel_StandardTests<T, U>(ISelectionPageModel<T, U> selection)
+        private static void ISelectionPageModel_StandardTests<T, U, V>(ISelectionPageModel<T, U, V> selection)
             where U : IPageModel
+            where V : ISelectablePageModel<U>, ITextValuedPageModel<T>
         {
             if (!selection.Items.Any())
             {
@@ -117,20 +118,23 @@ namespace Lib.Tests
             }
         }
 
-        private static void AssertNothingSelected<T, U>(ISelectionPageModel<T, U> selection)
+        private static void AssertNothingSelected<T, U, V>(ISelectionPageModel<T, U, V> selection)
             where U : IPageModel
+            where V : ISelectablePageModel<U>, ITextValuedPageModel<T>
         {
             Assert.IsTrue(selection.Items.All(x => !x.IsSelected));
         }
 
-        private static void AssertSingleSelection<T, U>(ISelectionPageModel<T, U> selection)
+        private static void AssertSingleSelection<T, U, V>(ISelectionPageModel<T, U, V> selection)
             where U : IPageModel
+            where V : ISelectablePageModel<U>, ITextValuedPageModel<T>
         {
             Assert.IsTrue(selection.Items.SkipWhile(x => !x.IsSelected).Skip(1).All(x => !x.IsSelected));
         }
 
-        private static void AssertValidState<T, U>(ISelectionPageModel<T, U> selection)
+        private static void AssertValidState<T, U, V>(ISelectionPageModel<T, U, V> selection)
             where U : IPageModel
+            where V : ISelectablePageModel<U>, ITextValuedPageModel<T>
         {
             if (selection.SelectedItem == null)
             {

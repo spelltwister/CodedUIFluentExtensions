@@ -52,5 +52,15 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             return this.Me.IsNotActionable(wait);
         }
+        
+        public bool IsRendered(int? wait = null)
+        {
+            return this.Me.IsRendered(wait);
+        }
+
+        public bool IsNotRendered(int? wait = null)
+        {
+            return this.Me.IsNotRendered(wait);
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
             {
                 throw new ArgumentNullException("bw");
             }
-            parent = bw;
+            this.parent = bw;
         }
 
         protected HtmlDocument DocumentWindow
