@@ -34,10 +34,12 @@
     <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodedUIControlPropertyGetterExtensions.cs" />
     <Compile Include="CodedUIControlTypeExtensions.cs" />
+    <Compile Include="CodedUITestControlExtensions.cs" />
     <Compile Include="FluentSearchExtensions.cs" />
     <Compile Include="Html\FluentHtmlSearchExtensions.cs" />
     <Compile Include="Html\AdditionalControls\HtmlAbbreviation.cs" />
