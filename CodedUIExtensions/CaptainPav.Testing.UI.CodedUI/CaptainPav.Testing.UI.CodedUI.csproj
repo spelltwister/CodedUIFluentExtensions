@@ -45,6 +45,7 @@
     <Compile Include="CodedUIControlTypeExtensions.cs" />
     <Compile Include="CodedUITestControlExtensions.cs" />
     <Compile Include="FluentSearchExtensions.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlParagraph.cs" />
     <Compile Include="Html\FluentHtmlSearchExtensions.cs" />
     <Compile Include="Html\AdditionalControls\HtmlAbbreviation.cs" />
     <Compile Include="Html\AdditionalControls\HtmlAddress.cs" />
