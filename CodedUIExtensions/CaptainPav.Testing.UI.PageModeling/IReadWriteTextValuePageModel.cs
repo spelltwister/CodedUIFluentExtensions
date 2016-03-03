@@ -11,7 +11,7 @@
     /// Type of model returned after setting the value of this model
     /// using the text formatted representation
     /// </typeparam>
-    public interface IReadWriteTextValuePageModel<TValue, out TNextModel> : ITextValuedPageModel<TValue>, ITextValueablePageModel<TValue, TNextModel>
+    public interface IReadWriteTextValuePageModel<TValue, out TNextModel> : ITextValuedPageModel<TValue>, ITextValueablePageModel<TValue, TNextModel>, IReadWriteValuePageModel<TValue, TNextModel>
         where TNextModel : IPageModel
     {
     }
