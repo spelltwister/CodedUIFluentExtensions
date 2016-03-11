@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
 {
+    // TODO: remove INamedPageModel, supposed to be on select item type
     /// <summary>
     /// Base class for controls which are selectable and have some label or
     /// other textual name associated with the control

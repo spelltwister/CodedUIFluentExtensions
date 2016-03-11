@@ -94,12 +94,6 @@ namespace Lib.Tests.PageModeling
 			var initialState = model.Check.IsSelected;
 			model.Check.SetSelected(!initialState);
 			Assert.IsTrue(model.Check.IsSelected != initialState);
-
-			IReadWriteValuePageModel<bool, ISimpleHtmlControlsPageModel> check = model.Check;
-
-			Assert.IsTrue(check.Value != initialState);
-			check.SetValue(!check.Value);
-			Assert.IsTrue(check.Value == initialState);
 		}
 
 		[TestMethod]

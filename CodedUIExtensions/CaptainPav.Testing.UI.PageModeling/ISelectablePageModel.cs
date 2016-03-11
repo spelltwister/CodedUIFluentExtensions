@@ -8,7 +8,7 @@ namespace CaptainPav.Testing.UI.PageModeling
     /// setting the selection state of this page model.  This is typically
     /// the containing page model.
     /// </typeparam>
-    public interface ISelectablePageModel<out TNextModel> : IReadWriteValuePageModel<bool, TNextModel> where TNextModel : IPageModel
+    public interface ISelectablePageModel<out TNextModel> : IPageModel where TNextModel : IPageModel
     {
         /// <summary>
         /// Gets whether this page model is in the selected state
