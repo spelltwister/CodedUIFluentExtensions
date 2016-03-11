@@ -11,9 +11,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
     {
         protected HtmlDocumentPageModelBase(BrowserWindow bw) : base(bw) { }
 
-        internal protected override HtmlDocument Me
-        {
-            get { return this.DocumentWindow; }
-        }
+        internal protected override HtmlDocument Me => this.DocumentWindow;
     }
 }

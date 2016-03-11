@@ -15,12 +15,9 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
         {
         }
 
-        public override string ValueText
-        {
-            get { return null != this.SelectedItem ? this.SelectedItem.Name : null; }
-        }
+        public override string ValueText => null != this.SelectedItem ? this.SelectedItem.Name : null;
 
-        public override TNextModel SetValueText(string toValue)
+	    public override TNextModel SetValueText(string toValue)
         {
             return this.Items.Single(x => StringComparer.Ordinal.Equals(toValue, (string) x.Name)).SetSelected(true);
 
@@ -53,14 +50,8 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
             this.TextValuedHelper = new TextValuedControlPageModelWrapper<TUIType, TValue>(itemControl, stringToValueFunc, itemToStringFunc);
         }
 
-        public string ValueText
-        {
-            get { return this.TextValuedHelper.ValueText; }
-        }
+        public string ValueText => this.TextValuedHelper.ValueText;
 
-        public TValue Value
-        {
-            get { return this.TextValuedHelper.Value; }
-        }
+	    public TValue Value => this.TextValuedHelper.Value;
     }
 }

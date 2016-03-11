@@ -7,7 +7,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
 	public class HtmlNumberInput : HtmlCustomInput
 	{
 		public HtmlNumberInput() : this(null) { }
-		public HtmlNumberInput(UITestControl parent) : base(parent, "number", PropertyExpressionOperator.EqualTo)
+		public HtmlNumberInput(UITestControl parent) : base(parent, "number")
 		{
 			this.SearchProperties.Remove(UITestControl.PropertyNames.ControlType);
 		}

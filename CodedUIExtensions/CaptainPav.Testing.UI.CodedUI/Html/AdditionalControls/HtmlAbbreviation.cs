@@ -13,12 +13,6 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// <summary>
         /// Gets the value of the title attribute
         /// </summary>
-        public string TitleAttributeValue
-        {
-            get
-            {
-                return this.GetPropertyOrDefault(TitleAttributeName, null);
-            }
-        }
+        public string TitleAttributeValue => this.GetPropertyOrDefault(TitleAttributeName, null);
     }
 }

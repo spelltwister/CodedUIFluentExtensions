@@ -4,16 +4,14 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
 {
 	public class HtmlCustomInput : HtmlCustomTag
 	{
-		protected readonly PropertyExpressionOperator _inputTypeExpressionOperator;
 		protected readonly string _inputType;
 
-		public HtmlCustomInput(string inputType, PropertyExpressionOperator expressionOperator = PropertyExpressionOperator.EqualTo) : this(null, inputType, expressionOperator) { }
-		public HtmlCustomInput(UITestControl parent, string inputType, PropertyExpressionOperator expressionOperator = PropertyExpressionOperator.EqualTo) : base(parent, "input")
+		public HtmlCustomInput(string inputType) : this(null, inputType) { }
+		public HtmlCustomInput(UITestControl parent, string inputType) : base(parent, "input", PropertyExpressionOperator.EqualTo)
 		{
 			this._inputType = inputType;
-			this._inputTypeExpressionOperator = expressionOperator;
 
-			this.WithAttribute("type", this._inputType);
+			this.WithAttribute("type", this._inputType); // TODO: see if there is a better way to do this
 		}
 	}
 }

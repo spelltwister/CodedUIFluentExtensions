@@ -23,9 +23,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
             this._me = me;
         }
 
-        internal protected override T Me
-        {
-            get { return this._me; }
-        }
+        internal protected override T Me => this._me;
     }
 }

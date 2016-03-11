@@ -26,9 +26,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
             return SetValueText(this.ValueToStringFunc(toValue));
         }
 
-        public TValue Value
-        {
-            get { return this.StringToValueFunc(ValueText); }
-        }
+        public TValue Value => this.StringToValueFunc(ValueText);
     }
 }

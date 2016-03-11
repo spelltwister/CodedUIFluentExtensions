@@ -20,24 +20,18 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.DialogModels
         abstract protected TUIConfirmClickElement ConfirmElement { get; }
         abstract public string Message { get; }
 
-        public IClickablePageModel<TConfirmModel> ConfirmModel
-        {
-            get { return this.ConfirmElement.AsClickablePageModel(this.NextModel1); }
-        }
+        public IClickablePageModel<TConfirmModel> ConfirmModel => this.ConfirmElement.AsClickablePageModel(this.NextModel1);
 
-        public TConfirmModel Confirm()
+	    public TConfirmModel Confirm()
         {
             return this.ConfirmModel.Click();
         }
 
         abstract protected TUIDenyClickElement DenyElement { get; }
 
-        public IClickablePageModel<TDenyModel> DenyModel
-        {
-            get { return this.DenyElement.AsClickablePageModel(this.NextModel2); }
-        }
+        public IClickablePageModel<TDenyModel> DenyModel => this.DenyElement.AsClickablePageModel(this.NextModel2);
 
-        public TDenyModel Deny()
+	    public TDenyModel Deny()
         {
             return this.DenyModel.Click();
         }

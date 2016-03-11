@@ -14,13 +14,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// <summary>
         /// Gets the Items in the list
         /// </summary>
-        public IEnumerable<HtmlReadonlyListItem> Items
-        {
-            get
-            {
-                return this.FindAll<HtmlReadonlyListItem>(); // TODO: Make sure only the first level children are included and not nested list child items
-            }
-        }
+        public IEnumerable<HtmlReadonlyListItem> Items => this.FindAll<HtmlReadonlyListItem>();
     }
 
     public class HtmlUnorderedList : HtmlListBase

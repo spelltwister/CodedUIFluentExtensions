@@ -14,14 +14,12 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
         {
             if (null == bw)
             {
-                throw new ArgumentNullException("bw");
+                throw new ArgumentNullException(nameof(bw));
             }
+
             this.parent = bw;
         }
 
-        protected HtmlDocument DocumentWindow
-        {
-            get { return new HtmlDocument(this.parent); }
-        }
+        protected HtmlDocument DocumentWindow => new HtmlDocument(this.parent);
     }
 }

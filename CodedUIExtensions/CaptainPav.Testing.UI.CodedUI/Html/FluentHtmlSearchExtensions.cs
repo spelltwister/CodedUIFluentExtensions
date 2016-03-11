@@ -88,7 +88,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// </remarks>
         public static T WithDataAttribute<T>(this T current, string dataAttributeName, string dataAttributeValue) where T : HtmlControl
         {
-            return current.WithAttribute(String.Format("data-{0}", dataAttributeName), dataAttributeValue);
+            return current.WithAttribute($"data-{dataAttributeName}", dataAttributeValue);
         }
 
         /// <summary>

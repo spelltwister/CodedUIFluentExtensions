@@ -21,12 +21,9 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
         {
         }
 
-        public override string ValueText
-        {
-            get { return this.Me.DateAsString; }
-        }
+        public override string ValueText => this.Me.DateAsString;
 
-        public override TNextModel SetValueText(string toValue)
+	    public override TNextModel SetValueText(string toValue)
         {
             this.Me.DateAsString = toValue;
             return this.NextModel;

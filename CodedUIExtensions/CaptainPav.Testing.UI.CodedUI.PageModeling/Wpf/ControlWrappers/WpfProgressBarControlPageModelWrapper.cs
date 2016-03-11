@@ -6,14 +6,8 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
 {
     public class WpfProgressBarControlPageModelWrapper : UIControlPageModelWrapper<WpfProgressBar>, IValuedPageModel<double>
     {
-        public WpfProgressBarControlPageModelWrapper(WpfProgressBar control)
-            : base(control)
-        {
-        }
+        public WpfProgressBarControlPageModelWrapper(WpfProgressBar control) : base(control) { }
 
-        public double Value
-        {
-            get { return this.Me.Position; }
-        }
+        public double Value => this.Me.Position;
     }
 }

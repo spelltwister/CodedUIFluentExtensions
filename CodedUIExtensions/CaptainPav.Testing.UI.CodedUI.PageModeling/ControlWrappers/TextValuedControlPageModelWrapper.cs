@@ -15,9 +15,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
             this.ControlToStringFunc = controlToStringFunc;
         }
 
-        public string ValueText
-        {
-            get { return this.ControlToStringFunc(this.Me); }
-        }
+        public string ValueText => this.ControlToStringFunc(this.Me);
     }
 }

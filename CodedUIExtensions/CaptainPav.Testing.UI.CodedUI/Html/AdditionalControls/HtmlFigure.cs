@@ -9,15 +9,9 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         public HtmlFigure() : base(FigureTag) { }
         public HtmlFigure(UITestControl parent) : base(parent, FigureTag) { }
 
-        public string Caption
-        {
-            get
-            {
-                return new HtmlFigureCaption(this).InnerText;
-            }
-        }
+        public string Caption => new HtmlFigureCaption(this).InnerText;
 
-        protected class HtmlFigureCaption : HtmlCustomTag
+	    protected class HtmlFigureCaption : HtmlCustomTag
         {
             public static readonly string FigureCaptionTag = "figcaption";
 

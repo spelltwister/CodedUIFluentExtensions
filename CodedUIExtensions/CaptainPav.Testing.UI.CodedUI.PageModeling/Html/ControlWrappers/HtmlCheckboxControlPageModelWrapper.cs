@@ -7,17 +7,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
     public class HtmlCheckboxControlPageModelWrapper<TNextModel> : SelectableControlPageModelWrapper<HtmlCheckBox, TNextModel>
         where TNextModel : IPageModel
     {
-        public HtmlCheckboxControlPageModelWrapper(HtmlCheckBox toWrap, TNextModel nextModel)
-            : base(toWrap, nextModel)
-        {
-        }
+        public HtmlCheckboxControlPageModelWrapper(HtmlCheckBox toWrap, TNextModel nextModel) : base(toWrap, nextModel) { }
 
-        public override bool IsSelected
-        {
-            get { return this._control.Checked; }
-        }
+        public override bool IsSelected => this._control.Checked;
 
-        public override TNextModel SetSelected(bool selectionState)
+	    public override TNextModel SetSelected(bool selectionState)
         {
             if (selectionState != this.IsSelected)
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf
 {
@@ -14,12 +15,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf
         protected readonly T _me;
         protected WpfChildPageModelBase(WpfWindow bw, T me) : base(bw)
         {
+	        if (null == me)
+	        {
+		        throw new ArgumentNullException(nameof(me));
+	        }
+
             this._me = me;
         }
 
-        internal protected override T Me
-        {
-            get { return this._me; }
-        }
+        internal protected override T Me => this._me;
     }
 }

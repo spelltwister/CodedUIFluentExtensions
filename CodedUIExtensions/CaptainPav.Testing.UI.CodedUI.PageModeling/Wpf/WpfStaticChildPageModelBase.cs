@@ -26,11 +26,12 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf
         {
             if (null == parentModel)
             {
-                throw new ArgumentNullException("parentModel");
+                throw new ArgumentNullException(nameof(parentModel));
             }
+
             this.parentModel = parentModel;
         }
 
-        protected TParentType ParentScope { get { return this.parentModel.Me; } }
+        protected TParentType ParentScope => this.parentModel.Me;
     }
 }

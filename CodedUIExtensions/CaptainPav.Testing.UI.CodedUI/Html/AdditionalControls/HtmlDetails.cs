@@ -10,15 +10,9 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         public HtmlDetails() : base(DetailsTag) { }
         public HtmlDetails(UITestControl parent) : base(parent, DetailsTag) { }
 
-        public string Summary
-        {
-            get
-            {
-                return new HtmlSummary(this).InnerText;
-            }
-        }
+        public string Summary => new HtmlSummary(this).InnerText;
 
-        public string ExpanderText
+	    public string ExpanderText
         {
             get
             {
@@ -34,15 +28,9 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// Regardless of the value of this attribute, if it is present, the
         /// expander should be rendered in the opened state
         /// </remarks>
-        public bool IsExpanderOpen
-        {
-            get
-            {
-                return this.HasProperty("open");
-            }
-        }
+        public bool IsExpanderOpen => this.HasProperty("open");
 
-        protected class HtmlSummary : HtmlCustomTag
+	    protected class HtmlSummary : HtmlCustomTag
         {
             public static readonly string SummaryTag = "summary";
 

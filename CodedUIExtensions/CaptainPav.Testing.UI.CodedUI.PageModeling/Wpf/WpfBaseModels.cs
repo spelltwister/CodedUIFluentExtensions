@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf
 {
@@ -10,12 +11,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf
         protected readonly WpfWindow parent;
         protected WpfPageModelBase(WpfWindow bw)
         {
-            parent = bw;
+	        if (null == bw)
+	        {
+		        throw new ArgumentNullException(nameof(bw));
+	        }
+
+			this.parent = bw;
         }
 
-        protected WpfWindow DocumentWindow
-        {
-            get { return this.parent; }
-        }
+        protected WpfWindow DocumentWindow => this.parent;
     }
 }

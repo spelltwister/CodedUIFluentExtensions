@@ -57,17 +57,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
         {
         }
 
-        public override string Name
-        {
-            get { return Me.DisplayText; }
-        }
+        public override string Name => Me.DisplayText;
 
-        public override bool IsSelected
-        {
-            get { return Me.Selected; }
-        }
+	    public override bool IsSelected => Me.Selected;
 
-        public override TNextModel SetSelected(bool selectionState)
+	    public override TNextModel SetSelected(bool selectionState)
         {
             if (selectionState && !this.IsSelected)
             {

@@ -10,19 +10,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.DialogModels
         where TUIType : HtmlControl
         where TUIClickElement : HtmlControl
     {
-        protected HtmlAlertPageModelBase(BrowserWindow bw, TNextModel nextModel) : base(bw, nextModel)
-        {
-        }
+        protected HtmlAlertPageModelBase(BrowserWindow bw, TNextModel nextModel) : base(bw, nextModel) { }
 
         abstract protected TUIClickElement ClickToAcknowledge { get; }
         abstract public string Message { get; }
 
-        public IClickablePageModel<TNextModel> AcknowledgeModel
-        {
-            get { return this.ClickToAcknowledge.AsClickablePageModel(this.NextModel1); }
-        } 
+        public IClickablePageModel<TNextModel> AcknowledgeModel => this.ClickToAcknowledge.AsClickablePageModel(this.NextModel1);
 
-        public TNextModel Acknowledge()
+	    public TNextModel Acknowledge()
         {
             return this.AcknowledgeModel.Click();
         }

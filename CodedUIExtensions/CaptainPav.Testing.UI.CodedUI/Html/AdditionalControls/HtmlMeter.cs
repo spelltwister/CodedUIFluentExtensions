@@ -16,63 +16,21 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         public HtmlMeter() : base(MeterTag) { }
         public HtmlMeter(UITestControl parent) : base(parent, MeterTag) { }
 
-        public string Form
-        {
-            get
-            {
-                return this.GetPropertyOrDefault("form", null);
-            }
-        }
+        public string Form => this.GetPropertyOrDefault("form", null);
 
-        public double Value
-        {
-            get
-            {
-                return Double.Parse(this.ValueAttribute);
-            }
-        }
+	    public double Value => Double.Parse(this.ValueAttribute);
 
-        public double? Min
-        {
-            get
-            {
-                return GetNullableProperty(MinAttributeName);
-            }
-        }
+	    public double? Min => GetNullableProperty(MinAttributeName);
 
-        public double? Max
-        {
-            get
-            {
-                return GetNullableProperty(MaxAttributeName);
-            }
-        }
+	    public double? Max => GetNullableProperty(MaxAttributeName);
 
-        public double? Low
-        {
-            get
-            {
-                return GetNullableProperty(LowAttributeName);
-            }
-        }
+	    public double? Low => GetNullableProperty(LowAttributeName);
 
-        public double? High
-        {
-            get
-            {
-                return GetNullableProperty(HighAttributeName);
-            }
-        }
+	    public double? High => GetNullableProperty(HighAttributeName);
 
-        public double? Optimum
-        {
-            get
-            {
-                return GetNullableProperty(OptimumAttributeName);
-            }
-        }
+	    public double? Optimum => GetNullableProperty(OptimumAttributeName);
 
-        protected double? GetNullableProperty(string propertyName)
+	    protected double? GetNullableProperty(string propertyName)
         {
             string valueString;
             if (!this.TryGetProperty(propertyName, out valueString))

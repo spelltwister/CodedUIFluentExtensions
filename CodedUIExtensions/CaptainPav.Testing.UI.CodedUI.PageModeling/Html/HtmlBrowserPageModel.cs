@@ -8,8 +8,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
     /// </summary>
     public class HtmlBrowserPageModel : HtmlDocumentPageModelBase
     {
-        public HtmlBrowserPageModel(BrowserWindow bw) : base(bw)
-        {
-        }
+        public HtmlBrowserPageModel(BrowserWindow bw) : base(bw) { }
     }
 }

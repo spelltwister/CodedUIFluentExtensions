@@ -17,15 +17,12 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
         {
             if (null == control)
             {
-                throw new ArgumentNullException("control");
+                throw new ArgumentNullException(nameof(control));
             }
             this._control = control;
         }
 
-        internal protected override T Me
-        {
-            get { return this._control; }
-        }
+        internal protected override T Me => this._control;
     }
 
     /// <summary>

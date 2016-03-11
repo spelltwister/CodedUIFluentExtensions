@@ -20,24 +20,12 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// GET is still returned.  To determine if the Attribute is present,
         /// use the HasProperty extension
         /// </remarks>
-        public string Method
-        {
-            get
-            {
-                return this.GetPropertyOrDefault(MethodAttributeName, "GET");
-            }
-        }
+        public string Method => this.GetPropertyOrDefault(MethodAttributeName, "GET");
 
-        /// <summary>
+	    /// <summary>
         /// Gets the action called when the form is posted or null if the
         /// action is not specified
         /// </summary>
-        public string Action
-        {
-            get
-            {
-                return this.GetPropertyOrDefault(MethodAttributeName, null);
-            }
-        }
+        public string Action => this.GetPropertyOrDefault(ActionAttributeName, null);
     }
 }

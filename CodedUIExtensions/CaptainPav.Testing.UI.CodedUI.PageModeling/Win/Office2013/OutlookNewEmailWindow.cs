@@ -14,35 +14,17 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Win.Office2013
         /// </summary>
         protected readonly string _emailWindowName;
 
-        internal protected override WinWindow Me
-        {
-            get
-            {
-                return new WinWindow().Extend(WinWindow.PropertyNames.Name, _emailWindowName, PropertyExpressionOperator.Contains);
-            }
-        }
+        internal protected override WinWindow Me => new WinWindow().Extend(WinWindow.PropertyNames.Name, _emailWindowName, PropertyExpressionOperator.Contains);
 
-        protected WinButton CloseButton
-        {
-            get
-            {
-                return this.Me.Find<WinWindow>(WinWindow.PropertyNames.AccessibleName, "Ribbon",       PropertyExpressionOperator.EqualTo)
-                              .Find<UITestControl>(UITestControl.PropertyNames.Name,   "Ribbon",       PropertyExpressionOperator.EqualTo)
-                              .Extend(WinWindow.PropertyNames.ControlType,             "PropertyPage", PropertyExpressionOperator.EqualTo)
-                              .Find<WinButton>(WinButton.PropertyNames.Name,           "Close",        PropertyExpressionOperator.EqualTo);
-            }
-        }
+	    protected WinButton CloseButton => this.Me.Find<WinWindow>(WinWindow.PropertyNames.AccessibleName, "Ribbon",       PropertyExpressionOperator.EqualTo)
+		    .Find<UITestControl>(UITestControl.PropertyNames.Name,   "Ribbon",       PropertyExpressionOperator.EqualTo)
+		    .Extend(WinWindow.PropertyNames.ControlType,             "PropertyPage", PropertyExpressionOperator.EqualTo)
+		    .Find<WinButton>(WinButton.PropertyNames.Name,           "Close",        PropertyExpressionOperator.EqualTo);
 
-        protected WinEdit ToField
-        {
-            get
-            {
-                return this.Me.Find<WinWindow>(WinWindow.PropertyNames.AccessibleName, "To", PropertyExpressionOperator.EqualTo)
-                              .Find<WinEdit>(WinEdit.PropertyNames.Name, "To", PropertyExpressionOperator.EqualTo);
-            }
-        }
+	    protected WinEdit ToField => this.Me.Find<WinWindow>(WinWindow.PropertyNames.AccessibleName, "To", PropertyExpressionOperator.EqualTo)
+	        .Find<WinEdit>(WinEdit.PropertyNames.Name, "To", PropertyExpressionOperator.EqualTo);
 
-        /// <summary>
+	    /// <summary>
         /// The next model to use when finished with this email window
         /// </summary>
         internal readonly T NextModel;
@@ -59,9 +41,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Win.Office2013
             return new OutlookSavePendingChangesAlert<T>(this);
         }
 
-        public string To
-        {
-            get { return this.ToField.Text; }
-        }
+        public string To => this.ToField.Text;
     }
 }

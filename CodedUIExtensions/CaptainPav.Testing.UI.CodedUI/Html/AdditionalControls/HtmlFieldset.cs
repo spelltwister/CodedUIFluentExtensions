@@ -12,17 +12,14 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// <summary>
         /// Gets the legend associated with this fieldset
         /// </summary>
-        public HtmlLegend Legend
-        {
-            get { return this.Find<HtmlLegend>(); }
-        }
-    }
+        public HtmlLegend Legend => this.Find<HtmlLegend>();
 
-    public class HtmlLegend : HtmlCustomTag
-    {
-        public static readonly string LegendTag = "legend";
+		public class HtmlLegend : HtmlCustomTag
+		{
+			public static readonly string LegendTag = "legend";
 
-        public HtmlLegend() : base(LegendTag) { }
-        public HtmlLegend(UITestControl parent) : base(parent, LegendTag) { }
-    }
+			public HtmlLegend() : base(LegendTag) { }
+			public HtmlLegend(UITestControl parent) : base(parent, LegendTag) { }
+		}
+	}
 }

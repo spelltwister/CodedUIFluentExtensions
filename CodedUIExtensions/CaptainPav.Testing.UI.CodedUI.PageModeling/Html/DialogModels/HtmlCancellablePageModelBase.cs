@@ -10,19 +10,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.DialogModels
         where TUIType : HtmlControl
         where TUICancelClickElement : HtmlControl
     {
-        protected HtmlCancellablePageModelBase(BrowserWindow bw, TNextModel nextModel) : base(bw, nextModel)
-        {
-        }
+        protected HtmlCancellablePageModelBase(BrowserWindow bw, TNextModel nextModel) : base(bw, nextModel) { }
 
         abstract protected TUICancelClickElement ClickToCancelElement { get; }
         abstract public string Message { get; }
 
-        public IClickablePageModel<TNextModel> CancelModel
-        {
-            get { return this.ClickToCancelElement.AsClickablePageModel(this.NextModel1); }
-        } 
+        public IClickablePageModel<TNextModel> CancelModel => this.ClickToCancelElement.AsClickablePageModel(this.NextModel1);
 
-        public TNextModel Cancel()
+	    public TNextModel Cancel()
         {
             return this.CancelModel.Click();
         }

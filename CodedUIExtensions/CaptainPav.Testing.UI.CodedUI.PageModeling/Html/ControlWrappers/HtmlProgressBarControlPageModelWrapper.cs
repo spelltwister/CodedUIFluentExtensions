@@ -6,13 +6,8 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
 {
     public class HtmlProgressBarControlPageModelWrapper : UIControlPageModelWrapper<HtmlProgressBar>, IValuedPageModel<float>
     {
-        public HtmlProgressBarControlPageModelWrapper(HtmlProgressBar cell):base(cell)
-        {
-        }
+        public HtmlProgressBarControlPageModelWrapper(HtmlProgressBar cell) : base(cell) { }
 
-        public float Value
-        {
-            get { return this.Me.Value; }
-        }
+        public float Value => this.Me.Value;
     }
 }

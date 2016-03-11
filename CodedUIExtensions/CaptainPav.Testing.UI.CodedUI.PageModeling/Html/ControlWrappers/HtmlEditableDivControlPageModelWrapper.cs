@@ -13,12 +13,9 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
         {
         }
 
-        public override string ValueText
-        {
-            get { return Me.InnerText; }
-        }
+        public override string ValueText => Me.InnerText;
 
-        public override TNextModel SetValueText(string valueText)
+	    public override TNextModel SetValueText(string valueText)
         {
             Me.Text = valueText;
             return this.NextModel;

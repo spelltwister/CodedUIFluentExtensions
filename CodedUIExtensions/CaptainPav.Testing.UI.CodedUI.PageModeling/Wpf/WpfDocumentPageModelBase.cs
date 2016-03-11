@@ -10,9 +10,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf
     {
         protected WpfDocumentPageModelBase(WpfWindow bw) : base(bw) { }
 
-        internal protected override WpfWindow Me
-        {
-            get { return this.DocumentWindow; }
-        }
+        internal protected override WpfWindow Me => this.DocumentWindow;
     }
 }

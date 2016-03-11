@@ -7,23 +7,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Win
     {
         protected const string SecurityWindowName = "Internet Explorer Security";
 
-        internal protected override WinWindow Me
-        {
-            get
-            {
-                return new WinWindow().Extend(WinWindow.PropertyNames.Name, SecurityWindowName, PropertyExpressionOperator.EqualTo);
-            }
-        }
+        internal protected override WinWindow Me => new WinWindow().Extend(WinWindow.PropertyNames.Name, SecurityWindowName, PropertyExpressionOperator.EqualTo);
 
-        protected WinButton AllowButton
-        {
-            get
-            {
-                return this.Me.Find<WinButton>(WinButton.PropertyNames.Name, "Allow", PropertyExpressionOperator.EqualTo);
-            }
-        }
+	    protected WinButton AllowButton => this.Me.Find<WinButton>(WinButton.PropertyNames.Name, "Allow", PropertyExpressionOperator.EqualTo);
 
-        internal readonly T AllowModel;
+	    internal readonly T AllowModel;
         public IESecurityWindow(T allowModel)
         {
             this.AllowModel = allowModel;
@@ -36,6 +24,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Win
             {
                 Mouse.Click(this.AllowButton);
             }
+
             return AllowModel;
         }
     }

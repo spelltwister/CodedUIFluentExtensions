@@ -24,7 +24,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
         {
             if (null == nextModel)
             {
-                throw new ArgumentNullException("nextModel");
+                throw new ArgumentNullException(nameof(nextModel));
             }
             NextModel = nextModel;
         }

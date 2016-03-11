@@ -10,15 +10,9 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         public HtmlDataList() : base(DataListTag) { }
         public HtmlDataList(UITestControl parent) : base(parent, DataListTag) { }
 
-        public IEnumerable<HtmlDataListOption> Options
-        {
-            get
-            {
-                return this.FindAll<HtmlDataListOption>();
-            }
-        }
+        public IEnumerable<HtmlDataListOption> Options => this.FindAll<HtmlDataListOption>();
 
-        public class HtmlDataListOption : HtmlCustomTag
+	    public class HtmlDataListOption : HtmlCustomTag
         {
             public static readonly string DataListOptionTagName = "option";
 
@@ -26,7 +20,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
             public HtmlDataListOption(UITestControl parent) : base(parent, DataListOptionTagName) { }
             public HtmlDataListOption(HtmlDataList parent) : base(parent, DataListOptionTagName) { }
 
-            public string Value { get { return this.ValueAttribute; } }
+            public string Value => this.ValueAttribute;
         }
     }
 }
