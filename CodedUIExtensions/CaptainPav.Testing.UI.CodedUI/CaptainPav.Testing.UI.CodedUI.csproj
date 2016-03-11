@@ -50,7 +50,9 @@
     <Compile Include="Html\AdditionalControls\HtmlArticle.cs" />
     <Compile Include="Html\AdditionalControls\HtmlAside.cs" />
     <Compile Include="Html\AdditionalControls\HtmlCanvas.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlColorInput.cs" />
     <Compile Include="Html\HtmlControlPropertyGetterExtensions.cs" />
+    <Compile Include="Html\HtmlCustomInput.cs" />
     <Compile Include="Html\HtmlCustomTag.cs" />
     <Compile Include="Html\AdditionalControls\HtmlDataList.cs" />
     <Compile Include="Html\AdditionalControls\HtmlDetails.cs" />
@@ -68,6 +70,8 @@
     <Compile Include="Html\AdditionalControls\HtmlSection.cs" />
     <Compile Include="Html\AdditionalControls\HtmlSubmitButton.cs" />
     <Compile Include="Html\AdditionalControls\HtmlUnorderedList.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlNumberInput.cs" />
+    <Compile Include="Html\AdditionalControls\HtmlPasswordInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Win\FluentWinSearchExtensions.cs" />
     <Compile Include="Wpf\AdditionalControls\WpfDataItem.cs" />

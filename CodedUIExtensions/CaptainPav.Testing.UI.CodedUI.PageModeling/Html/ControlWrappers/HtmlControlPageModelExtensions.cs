@@ -75,6 +75,16 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
             return new HtmlTextValuedControlPageModelWrapper<T, TValue>(htmlControl, stringToValueFunc);
         }
 
+	    public static IReadWriteTextValuePageModel<double?, TNextModel> AsPageModel<TNextModel>(this HtmlNumberInput numberInput, TNextModel nextModel) where TNextModel : IPageModel
+	    {
+		    return new HtmlNumberInputControlPageModelWrapper<TNextModel>(numberInput, nextModel);
+	    } 
+
+	    public static IValueablePageModel<string, TNextModel> AsPageModel<TNextModel>(this HtmlPasswordInput password, TNextModel nextModel) where TNextModel : IPageModel
+	    {
+		    return ((HtmlEdit) password).AsPageModel(nextModel);
+	    } 
+
         #region Read Write Text Value Extensions
         public static IReadWriteTextValuePageModel<TValue, TNextModel> AsPageModel<TNextModel, TValue>(this HtmlEdit textBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc) where TNextModel : IPageModel
         {

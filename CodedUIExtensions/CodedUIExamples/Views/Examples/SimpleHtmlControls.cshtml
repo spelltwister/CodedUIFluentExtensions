@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "SimpleHtmlControls";
+}
+
+<h2>Simple Html Controls</h2>
+
+<p>In this example, we will look at how to manipulate simple HTML input controls.</p>
+
+<fieldset>
+	<legend>Simple Inputs</legend>
+	<div>
+		<label for="usernameInput">User Name</label>
+		<input type="text" id="usernameInput"/>
+	</div>
+	<div style="display: none">
+		<input type="text" id="hiddenTextInput"/>
+	</div>
+	<div>
+		<label for="disabledInput">Disabled</label>
+		<input disabled type="text" id="disabledInput" value="testValue"/>
+	</div>
+	<div>
+		<label for="passwordInput">Password</label>
+		<input type="password" id="passwordInput"/>
+	</div>
+	<div>
+		<label for="checkboxInput">Check?</label>
+		<input type="checkbox" id="checkboxInput"/>
+	</div>
+	<div>
+		<label for="numberInput">Favorite Number</label>
+		<input type="number" id="numberInput"/>
+	</div>
+	<div>
+		<label for="ageInput">Age</label>
+		<input type="number" min="0" max="110" id="ageInput"/>
+	</div>
+	<div>
+		<label for="colorInput">Color</label>
+		<input type="color" id="colorInput"/>
+	</div>
+</fieldset>

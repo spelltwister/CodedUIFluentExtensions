@@ -71,7 +71,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(testFunc, timeOut))
             {
-                return false;
+                //return false;
             }
             return toTest.CanFind();
         }
@@ -133,7 +133,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(testFunc, timeOut))
             {
-                return false;
+                //return false;
             }
             return toTest.CanNotFind();
         }
@@ -344,7 +344,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(condition, wait))
             {
-                return false;
+                //return false;
             }
             return toTest.IsRendered();
         }
@@ -475,7 +475,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(condition, wait))
             {
-                return false;
+                //return false;
             }
             return toTest.IsNotRendered();
         }
@@ -556,7 +556,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(condition, wait))
             {
-                return false;
+                //return false;
             }
             return toTest.IsClickable();
         }
@@ -634,7 +634,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(condition, wait))
             {
-                return false;
+                //return false;
             }
             return toTest.IsNotClickable();
         }
@@ -694,7 +694,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(condition, wait))
             {
-                return false;
+                //return false;
             }
             return toTest.IsActionable();
         }
@@ -752,7 +752,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         {
             if (!toTest.WaitForControlCondition(condition, wait))
             {
-                return false;
+                //return false;
             }
             return toTest.IsNotActionable();
         }

@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-	  <HintPath>$(ProgramFiles)\Microsoft Visual Studio 14.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.TestTools.UITesting.dll</HintPath>
+      <HintPath>$(ProgramFiles)\Microsoft Visual Studio 14.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.TestTools.UITesting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,6 +73,7 @@
     <Compile Include="Html\ControlWrappers\HtmlEditableDivControlPageModelWrapper.cs" />
     <Compile Include="Html\ControlWrappers\HtmlEditableSpanControlPageModelWrapper.cs" />
     <Compile Include="Html\ControlWrappers\HtmlLabelControlPageModelWrapper.cs" />
+    <Compile Include="Html\ControlWrappers\HtmlNumberInputControlPageModelWrapper.cs" />
     <Compile Include="Html\ControlWrappers\HtmlProgressBarControlPageModelWrapper.cs" />
     <Compile Include="Html\ControlWrappers\HtmlRadioButtonControlPageModelWrapper.cs" />
     <Compile Include="Html\ControlWrappers\HtmlSliderControlPageModelWrapper.cs" />

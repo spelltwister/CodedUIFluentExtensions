@@ -30,9 +30,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         /// <param name="expressionOperator">
         /// The expression operator used when comparing tag names
         /// </param>
-        public HtmlCustomTag(string tagName, PropertyExpressionOperator expressionOperator = PropertyExpressionOperator.EqualTo) : this(null, tagName, expressionOperator)
-        {
-        }
+        public HtmlCustomTag(string tagName, PropertyExpressionOperator expressionOperator = PropertyExpressionOperator.EqualTo) : this(null, tagName, expressionOperator) { }
 
         /// <summary>
         /// Gets a search control that is able to find Html tags when the
@@ -51,7 +49,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         {
             if (String.IsNullOrWhiteSpace(tagName))
             {
-                throw new ArgumentException("Tag name cannot be null, empty, or white space.", "tagName");
+                throw new ArgumentException("Tag name cannot be null, empty, or white space.", nameof(tagName));
             }
 
             this._tagName = tagName;

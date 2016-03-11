@@ -9,7 +9,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
     /// </summary>
     /// <typeparam name="TUIControl"></typeparam>
     /// <typeparam name="TNextModel"></typeparam>
-    public abstract class SelectableControlPageModelWrapper<TUIControl, TNextModel> : HasNextModelUIControlPageModelWrapperBase<TUIControl, TNextModel>, ISelectablePageModel<TNextModel>, IValueablePageModel<bool, TNextModel>, IValuedPageModel<bool>
+    public abstract class SelectableControlPageModelWrapper<TUIControl, TNextModel> : HasNextModelUIControlPageModelWrapperBase<TUIControl, TNextModel>, ISelectablePageModel<TNextModel>, IValueablePageModel<bool, TNextModel>, IValuedPageModel<bool>, IReadWriteValuePageModel<bool, TNextModel>
         where TUIControl : UITestControl
         where TNextModel : IPageModel
     {
@@ -26,9 +26,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
             return SetSelected(toValue);
         }
 
-        bool IValuedPageModel<bool>.Value
-        {
-            get { return this.IsSelected; }
-        }
+        bool IValuedPageModel<bool>.Value => this.IsSelected;
     }
 }

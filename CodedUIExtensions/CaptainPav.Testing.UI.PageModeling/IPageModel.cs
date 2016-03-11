@@ -31,7 +31,7 @@ namespace CaptainPav.Testing.UI.PageModeling
         /// this method.  The only way for it to return false would
         /// be that element does not exist anywhere in the page.
         /// </remarks>
-        bool CanFind(int? wait);
+        bool CanFind(int? wait = null);
 
         /// <summary>
         /// Tries to find the control and returns true if the model
