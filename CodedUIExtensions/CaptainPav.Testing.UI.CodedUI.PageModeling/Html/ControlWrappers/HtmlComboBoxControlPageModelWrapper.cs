@@ -70,7 +70,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
 
             if (!selectionState && this.IsSelected)
             {
-                BrowserWindow parentWindow = this._control.TopParent as BrowserWindow;
+                BrowserWindow parentWindow = this.Me.TopParent as BrowserWindow;
                 if (parentWindow != null && parentWindow.Process.ProcessName == "iexplore")
                 {
                     dynamic test = this.Container.NativeElement;
