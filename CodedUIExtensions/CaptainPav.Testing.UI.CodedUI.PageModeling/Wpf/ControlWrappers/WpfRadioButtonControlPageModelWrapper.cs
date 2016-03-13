@@ -9,14 +9,15 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
     {
         public WpfRadioButtonControlPageModelWrapper(WpfRadioButton toWrap, TNextModel nextModel) : base(toWrap, nextModel) { }
 
-        public override bool IsSelected => this._control.Selected;
+        public override bool IsSelected => this.Me.Selected;
 
-	    public override TNextModel SetSelected(bool selectionState)
+        public override TNextModel SetSelected(bool selectionState)
         {
             if (selectionState != this.IsSelected)
             {
-                this._control.Selected = selectionState;
+                this.Me.Selected = selectionState;
             }
+
             return this.NextModel;
         }
     }

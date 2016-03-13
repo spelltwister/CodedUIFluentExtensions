@@ -12,17 +12,16 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf
     /// </typeparam>
     public abstract class WpfChildPageModelBase<T> : WpfPageModelBase<T> where T : WpfControl
     {
-        protected readonly T _me;
         protected WpfChildPageModelBase(WpfWindow bw, T me) : base(bw)
         {
-	        if (null == me)
-	        {
-		        throw new ArgumentNullException(nameof(me));
-	        }
+            if (null == me)
+            {
+                throw new ArgumentNullException(nameof(me));
+            }
 
-            this._me = me;
+            this.Me = me;
         }
 
-        internal protected override T Me => this._me;
+        internal protected override T Me { get; }
     }
 }

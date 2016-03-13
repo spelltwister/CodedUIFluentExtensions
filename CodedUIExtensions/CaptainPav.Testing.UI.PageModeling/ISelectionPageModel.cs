@@ -98,7 +98,7 @@ namespace CaptainPav.Testing.UI.PageModeling
     /// This interface would be used when the item type is not a standard list
     /// item type.
     /// </remarks>
-    public interface INamedSelectionPageModel<out TValue, out TNextModel, out TListItem> : ISelectionPageModel<TValue, TNextModel, TListItem>, INamedPageModel
+    public interface INamedSelectionPageModel<out TValue, out TNextModel, out TListItem> : ISelectionPageModel<TValue, TNextModel, TListItem>
         where TNextModel : IPageModel
         where TListItem : ISelectablePageModel<TNextModel>, IValuedPageModel<TValue>, INamedPageModel
     {

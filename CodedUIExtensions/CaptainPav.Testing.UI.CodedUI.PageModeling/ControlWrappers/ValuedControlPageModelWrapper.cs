@@ -14,6 +14,6 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
             this.ControlToValueFunc = controlToValueFunc;
         }
 
-        public TValue Value => this.ControlToValueFunc(this._control);
+        public TValue Value => this.ControlToValueFunc(this.Me);
     }
 }

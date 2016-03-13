@@ -30,7 +30,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
         /// </returns>
         public TNextModel Click()
         {
-            Mouse.Click(this._control);
+            Mouse.Click(this.Me);
             return this.NextModel;
         }
 
@@ -42,7 +42,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
         /// </returns>
         public TNextModel DoubleClick()
         {
-            Mouse.DoubleClick(this._control);
+            Mouse.DoubleClick(this.Me);
             return this.NextModel;
         }
     }

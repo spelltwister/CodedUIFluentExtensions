@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
@@ -17,12 +18,16 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html
     /// </remarks>
     public abstract class HtmlChildPageModelBase<T> : HtmlPageModelBase<T> where T : HtmlControl
     {
-        protected readonly T _me;
         protected HtmlChildPageModelBase(BrowserWindow bw, T me) : base(bw)
         {
-            this._me = me;
+            if (null == me)
+            {
+                throw new ArgumentNullException(nameof(me));
+            }
+
+            this.Me = me;
         }
 
-        internal protected override T Me => this._me;
+        internal protected override T Me { get; }
     }
 }

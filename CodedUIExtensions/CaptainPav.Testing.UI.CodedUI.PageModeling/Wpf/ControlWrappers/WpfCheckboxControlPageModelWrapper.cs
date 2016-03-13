@@ -9,16 +9,16 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
     {
         public WpfCheckboxControlPageModelWrapper(WpfCheckBox toWrap, TNextModel nextModel) : base (toWrap, nextModel) { }
 
-        public override bool IsSelected => this._control.Checked;
+        public override bool IsSelected => this.Me.Checked;
 
-	    public override TNextModel SetSelected(bool selectionState)
+        public override TNextModel SetSelected(bool selectionState)
         {
             if (selectionState != this.IsSelected)
             {
-                this._control.Checked = selectionState;
+                this.Me.Checked = selectionState;
             }
 
-            return NextModel;
+            return this.NextModel;
         }
     }
 }

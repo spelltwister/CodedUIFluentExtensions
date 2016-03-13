@@ -17,8 +17,8 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
 
 		public HtmlNumberInputControlPageModelWrapper(HtmlNumberInput toWrap, TNextModel nextModel) : base(toWrap, nextModel) { }
 
-		public double? Value => this._control.Value;
-		public string ValueText => this._control.ValueAttribute;
+		public double? Value => this.Me.Value;
+		public string ValueText => this.Me.ValueAttribute;
 
 		public TNextModel SetValue(double? toValue)
 		{
@@ -32,7 +32,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
 		public TNextModel SetValueText(string valueText)
 		{
 			HtmlEdit adapter = new HtmlEdit();
-			adapter.CopyFrom(this._control);
+			adapter.CopyFrom(this.Me);
 			adapter.Text = valueText;
 			return NextModel;
 		}

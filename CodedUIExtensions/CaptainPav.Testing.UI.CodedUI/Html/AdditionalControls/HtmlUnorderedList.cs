@@ -11,6 +11,7 @@ namespace CaptainPav.Testing.UI.CodedUI.Html
         internal HtmlListBase(string tagName) : base(tagName) { }
         internal HtmlListBase(UITestControl parent, string tagName) : base(parent, tagName) { }
 
+        // TODO: Make sure only the first level children are included and not nested list child items
         /// <summary>
         /// Gets the Items in the list
         /// </summary>

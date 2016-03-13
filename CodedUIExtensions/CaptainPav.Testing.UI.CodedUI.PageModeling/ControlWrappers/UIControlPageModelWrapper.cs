@@ -12,17 +12,17 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
     /// </typeparam>
     public class UIControlPageModelWrapper<T> : PageModelBase<T> where T : UITestControl
     {
-        protected readonly T _control;
         public UIControlPageModelWrapper(T control)
         {
             if (null == control)
             {
                 throw new ArgumentNullException(nameof(control));
             }
-            this._control = control;
+
+            this.Me = control;
         }
 
-        internal protected override T Me => this._control;
+        internal protected override T Me { get; }
     }
 
     /// <summary>
