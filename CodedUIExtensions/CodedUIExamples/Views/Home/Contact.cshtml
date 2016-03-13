@@ -1,17 +1,28 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="container">
+    <div class="row">
+        <!-- Map Column -->
+        <div class="col-md-8">
+            <!-- Embedded Google Map -->
+            <iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d436381.2730339548!2d-83.099205!3d42.352711!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8824ca0110cb1d75%3A0x5776864e35b9c4d2!2sDetroit%2C+MI!5e1!3m2!1sen!2sus!4v1431013738274"></iframe>
+        </div>
+        <!-- Contact Details Column -->
+        <div class="col-md-4">
+            <h3>Send Us an Email</h3>
+            <p>
+                <i class="fa fa-envelope-o"></i>
+                <abbr title="Email">E</abbr>: <a href="mailto:info@visualchimera.com">info@visualchimera.com</a>
+            </p>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            <h3>Connect With Us</h3>
+            <ul class="list-unstyled list-inline list-social-icons">
+                <li>
+                    <a href="https://twitter.com/mpavlak12" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -8,36 +8,118 @@
 <p>In this example, we will look at how to manipulate simple HTML input controls.</p>
 
 <fieldset>
-	<legend>Simple Inputs</legend>
-	<div>
-		<label for="usernameInput">User Name</label>
-		<input type="text" id="usernameInput"/>
-	</div>
-	<div style="display: none">
-		<input type="text" id="hiddenTextInput"/>
-	</div>
-	<div>
-		<label for="disabledInput">Disabled</label>
-		<input disabled type="text" id="disabledInput" value="testValue"/>
-	</div>
-	<div>
-		<label for="passwordInput">Password</label>
-		<input type="password" id="passwordInput"/>
-	</div>
-	<div>
-		<label for="checkboxInput">Check?</label>
-		<input type="checkbox" id="checkboxInput"/>
-	</div>
-	<div>
-		<label for="numberInput">Favorite Number</label>
-		<input type="number" id="numberInput"/>
-	</div>
-	<div>
-		<label for="ageInput">Age</label>
-		<input type="number" min="0" max="110" id="ageInput"/>
-	</div>
-	<div>
-		<label for="colorInput">Color</label>
-		<input type="color" id="colorInput"/>
-	</div>
+    <legend>Simple Inputs</legend>
+    <div>
+        <label for="usernameInput">User Name</label>
+        <input type="text" id="usernameInput"/>
+        <details>
+            <summary>Code Comparison</summary>
+            <div data-code-type="native">
+                <pre>
+                    <code>
+                        [TestInitialize]
+		                public void NavigateToSimpleHtmlControlExamplesPage()
+		                {
+			                this.window = BrowserWindow.Launch("http://localhost:7104/Examples/Example1");
+		                }
+                        [TestMethod]
+                        public void ManipulateTextInput()
+                        {
+                            HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+                            bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+
+                            // no fieldset available
+                            HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+                            fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+
+                            Assert.IsTrue(fieldset.TryFind());
+
+                            HtmlEdit userNameEdit = new HtmlEdit(fieldset);
+                            userNameEdit.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "usernameInput");
+
+                            Assert.IsTrue(string.IsNullOrWhiteSpace(userNameEdit.Text));
+                            userNameEdit.Text = "MyUserName";
+                            Assert.IsTrue(StringComparer.Ordinal.Equals(userNameEdit.Text, "MyUserName"));
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div data-code-type="fluent">
+                <pre>
+                    <code>
+                        [TestInitialize]
+		                public void NavigateToSimpleHtmlControlExamplesPage()
+		                {
+			                this.window = BrowserWindow.Launch("http://localhost:7104/Examples/Example1");
+		                }
+		                [TestMethod]
+		                public void ManipulateTextInput()
+		                {
+			                var usernameEdit =
+			                this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
+					                   .Find&lt;HtmlFieldset&gt;()
+					                   .Find&lt;HtmlEdit&gt;("usernameInput");
+			
+			                Assert.IsTrue(string.IsNullOrWhiteSpace(usernameEdit.Text));
+			                usernameEdit.Text = "MyUserName";
+			                Assert.IsTrue(StringComparer.Ordinal.Equals(usernameEdit.Text, "MyUserName"));
+		                }
+                    </code>
+                </pre>
+            </div>
+            <div data-code-type="pageModeling">
+                <pre>
+                    <code>
+                        private ISimpleHtmlControlsPageModel model;
+		                [TestInitialize]
+		                public void NavigateToSimpleHtmlControlExamplesPage()
+		                {
+			                //BrowserWindow.CurrentBrowser = "Chrome";
+			                this.model = new SimpleHtmlControlsPageModel(BrowserWindow.Launch("http://localhost:7104/Examples/Example1"));
+		                }
+		                [TestMethod]
+		                public void ManipulateTextInput()
+		                {
+			                Assert.IsTrue(String.IsNullOrWhiteSpace(model.UserName.Value));
+			                model.UserName.SetValue("MyUserName");
+			                Assert.IsTrue(StringComparer.Ordinal.Equals(model.UserName.Value, "MyUserName"));
+		                }
+                    </code>
+                </pre>
+            </div>
+        </details>
+    </div>
+    <div style="display: none">
+        <input type="text" id="hiddenTextInput"/>
+    </div>
+    <div>
+        <label for="disabledInput">Disabled</label>
+        <input disabled type="text" id="disabledInput" value="testValue"/>
+    </div>
+    <div>
+        <label for="passwordInput">Password</label>
+        <input type="password" id="passwordInput"/>
+    </div>
+    <div>
+        <label for="checkboxInput">Check?</label>
+        <input type="checkbox" id="checkboxInput"/>
+    </div>
+    <div>
+        <label for="numberInput">Favorite Number</label>
+        <input type="number" id="numberInput"/>
+    </div>
+    <div>
+        <label for="ageInput">Age</label>
+        <input type="number" min="0" max="110" id="ageInput"/>
+    </div>
+    <div>
+        <label for="colorInput">Color</label>
+        <input type="color" id="colorInput"/>
+    </div>
 </fieldset>
+
+<div id="codeComparisonContainer">
+    <div id="nativeCode">
+        
+    </div>
+</div>
