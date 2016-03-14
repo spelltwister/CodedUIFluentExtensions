@@ -111,5 +111,36 @@ namespace Lib.Tests.Fluent
 
             passwordInput.Text = "myPassword";
         }
+
+        [TestMethod]
+        public void BadPasswordModelTests()
+        {
+            var passwordInput =
+            this.window.Find<HtmlDiv>("layoutBodyContainer")
+                       .Find<HtmlFieldset>()
+                       .Find<HtmlEdit>("passwordInput");
+
+            Assert.IsTrue(passwordInput.TryFind());
+
+            try
+            {
+                passwordInput.EnsureClickable();
+            }
+            catch { }
+
+            Point p;
+            Assert.IsTrue(passwordInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+
+            passwordInput.Text = "myPassword";
+
+            try
+            {
+                var pwd = passwordInput.Text;
+                Assert.Fail("Should not be able to get password value.");
+            }
+            catch (NotSupportedException)
+            {
+            }
+        }
     }
 }
