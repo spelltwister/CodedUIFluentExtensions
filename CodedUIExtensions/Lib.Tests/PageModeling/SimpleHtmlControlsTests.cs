@@ -23,7 +23,7 @@ namespace Lib.Tests.PageModeling
 		public void NavigateToSimpleHtmlControlExamplesPage()
 		{
 			//BrowserWindow.CurrentBrowser = "Chrome";
-			this.model = new SimpleHtmlControlsPageModel(BrowserWindow.Launch("http://localhost:7104/Examples/Example1"));
+			this.model = new SimpleHtmlControlsPageModel(BrowserWindow.Launch("http://codeduiexamples.com/Examples/Example1"));
 		}
 
 		[TestMethod]

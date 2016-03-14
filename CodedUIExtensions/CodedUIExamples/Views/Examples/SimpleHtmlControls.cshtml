@@ -16,85 +16,252 @@
             <summary>Code Comparison</summary>
             <div data-code-type="native">
                 <pre>
-                    <code>
-                        [TestInitialize]
-		                public void NavigateToSimpleHtmlControlExamplesPage()
-		                {
-			                this.window = BrowserWindow.Launch("http://localhost:7104/Examples/Example1");
-		                }
-                        [TestMethod]
-                        public void ManipulateTextInput()
-                        {
-                            HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
-                            bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+<code>
+[TestInitialize]
+public void NavigateToSimpleHtmlControlExamplesPage()
+{
+	this.window = BrowserWindow.Launch("http://codeduiexamples/Examples/Example1");
+}
+[TestMethod]
+public void ManipulateTextInput()
+{
+    HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+    bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
 
-                            // no fieldset available
-                            HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
-                            fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+    // no fieldset available
+    HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+    fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
 
-                            Assert.IsTrue(fieldset.TryFind());
+    Assert.IsTrue(fieldset.TryFind());
 
-                            HtmlEdit userNameEdit = new HtmlEdit(fieldset);
-                            userNameEdit.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "usernameInput");
+    HtmlEdit userNameEdit = new HtmlEdit(fieldset);
+    userNameEdit.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "usernameInput");
 
-                            Assert.IsTrue(string.IsNullOrWhiteSpace(userNameEdit.Text));
-                            userNameEdit.Text = "MyUserName";
-                            Assert.IsTrue(StringComparer.Ordinal.Equals(userNameEdit.Text, "MyUserName"));
-                        }
-                    </code>
+    Assert.IsTrue(string.IsNullOrWhiteSpace(userNameEdit.Text));
+    userNameEdit.Text = "MyUserName";
+    Assert.IsTrue(StringComparer.Ordinal.Equals(userNameEdit.Text, "MyUserName"));
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="fluent">
+                <pre>
+<code>
+[TestInitialize]
+public void NavigateToSimpleHtmlControlExamplesPage()
+{
+	this.window = BrowserWindow.Launch("http://codeduiexamples/Examples/Example1");
+}
+[TestMethod]
+public void ManipulateTextInput()
+{
+	var usernameEdit =
+	this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
+				.Find&lt;HtmlFieldset&gt;()
+				.Find&lt;HtmlEdit&gt;("usernameInput");
+			
+	Assert.IsTrue(string.IsNullOrWhiteSpace(usernameEdit.Text));
+	usernameEdit.Text = "MyUserName";
+	Assert.IsTrue(StringComparer.Ordinal.Equals(usernameEdit.Text, "MyUserName"));
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="pageModeling">
+                <pre>
+<code>
+private ISimpleHtmlControlsPageModel model;
+[TestInitialize]
+public void NavigateToSimpleHtmlControlExamplesPage()
+{
+	//BrowserWindow.CurrentBrowser = "Chrome";
+	this.model = new SimpleHtmlControlsPageModel(BrowserWindow.Launch("http://codeduiexamples/Examples/Example1"));
+}
+[TestMethod]
+public void ManipulateTextInput()
+{
+	Assert.IsTrue(String.IsNullOrWhiteSpace(model.UserName.Value));
+	model.UserName.SetValue("MyUserName");
+	Assert.IsTrue(StringComparer.Ordinal.Equals(model.UserName.Value, "MyUserName"));
+}
+</code>
+                </pre>
+            </div>
+        </details>
+    </div>
+    <div>
+        <label for="hiddenTextInput">Hidden Input: [ trust me, it's there :) ]</label>
+        <input type="text" id="hiddenTextInput" style="display: none"/>
+        <details>
+            <summary>Code Comparison</summary>
+            <div data-code-type="native">
+                <pre>
+<code>
+[TestMethod]
+public void TestHiddenInput()
+{
+    HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+    bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+    
+    // no fieldset available
+    HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+    fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+    
+    HtmlEdit hiddenEdit = new HtmlEdit(fieldset);
+    hiddenEdit.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "hiddenTextInput");
+    
+    Assert.IsTrue(hiddenEdit.TryFind(), "Should be able to find the hidden input since it is in the markup.");
+    
+    Point p;
+    Assert.IsFalse(hiddenEdit.TryGetClickablePoint(out p), "Should not be able to click on a hidden input.");
+}
+</code>
                 </pre>
             </div>
             <div data-code-type="fluent">
                 <pre>
                     <code>
-                        [TestInitialize]
-		                public void NavigateToSimpleHtmlControlExamplesPage()
-		                {
-			                this.window = BrowserWindow.Launch("http://localhost:7104/Examples/Example1");
-		                }
-		                [TestMethod]
-		                public void ManipulateTextInput()
-		                {
-			                var usernameEdit =
-			                this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
-					                   .Find&lt;HtmlFieldset&gt;()
-					                   .Find&lt;HtmlEdit&gt;("usernameInput");
-			
-			                Assert.IsTrue(string.IsNullOrWhiteSpace(usernameEdit.Text));
-			                usernameEdit.Text = "MyUserName";
-			                Assert.IsTrue(StringComparer.Ordinal.Equals(usernameEdit.Text, "MyUserName"));
-		                }
-                    </code>
+[TestMethod]
+public void TestHiddenInput()
+{
+    var hiddenEdit =
+    this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
+               .Find&lt;HtmlFieldset&gt;()
+               .Find&lt;HtmlEdit&gt;("hiddenTextInput");
+    
+    Assert.IsTrue(hiddenEdit.TryFind(), "Should be able to find the hidden input since it is in the markup.");
+    
+    System.Drawing.Point p;
+    Assert.IsFalse(hiddenEdit.TryGetClickablePoint(out p), "Should not be able to click on a hidden input.");
+}
+</code>
                 </pre>
             </div>
             <div data-code-type="pageModeling">
                 <pre>
-                    <code>
-                        private ISimpleHtmlControlsPageModel model;
-		                [TestInitialize]
-		                public void NavigateToSimpleHtmlControlExamplesPage()
-		                {
-			                //BrowserWindow.CurrentBrowser = "Chrome";
-			                this.model = new SimpleHtmlControlsPageModel(BrowserWindow.Launch("http://localhost:7104/Examples/Example1"));
-		                }
-		                [TestMethod]
-		                public void ManipulateTextInput()
-		                {
-			                Assert.IsTrue(String.IsNullOrWhiteSpace(model.UserName.Value));
-			                model.UserName.SetValue("MyUserName");
-			                Assert.IsTrue(StringComparer.Ordinal.Equals(model.UserName.Value, "MyUserName"));
-		                }
-                    </code>
+<code>
+[TestMethod]
+public void TestHiddenInput()
+{
+	Assert.IsTrue(model.HiddenTextbox.CanFind(), "Cannot find hidden text box.");
+	Assert.IsTrue(model.HiddenTextbox.IsNotRendered(), "Hidden text box should not be rendered.");
+	Assert.IsTrue(model.HiddenTextbox.IsNotClickable(), "Hidden input should not be clickable.");
+}
+</code>
                 </pre>
             </div>
         </details>
     </div>
-    <div style="display: none">
-        <input type="text" id="hiddenTextInput"/>
-    </div>
     <div>
         <label for="disabledInput">Disabled</label>
         <input disabled type="text" id="disabledInput" value="testValue"/>
+        <details>
+            <summary>Code Comparison</summary>
+            <div data-code-type="native">
+                <pre>
+<code>
+[TestMethod]
+public void TestDisabledInput()
+{
+    HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+    bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+    
+    HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+    fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+    
+    HtmlEdit disabledInput = new HtmlEdit(fieldset);
+    disabledInput.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "disabledInput");
+    
+    Assert.IsTrue(disabledInput.TryFind(), "Disabled text box should be able to be found.");
+    
+    try
+    {
+        disabledInput.EnsureClickable();
+    }
+    catch { }
+    
+    Point p;
+    Assert.IsTrue(disabledInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+    
+    Assert.IsFalse(disabledInput.Enabled);
+    
+    Assert.IsTrue(StringComparer.OrdinalIgnoreCase.Equals("testValue", disabledInput.Text));
+    
+    try
+    {
+        disabledInput.Text = "Other Value";
+        Assert.Fail("Attempting to set text of a disabled input should throw an exception.");
+    }
+    catch (ActionNotSupportedOnDisabledControlException)
+    {
+    }
+    
+    Assert.IsTrue(StringComparer.OrdinalIgnoreCase.Equals("testValue", disabledInput.Text));
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="fluent">
+                <pre>
+                    <code>
+[TestMethod]
+public void TestDisabledInput()
+{
+    var disabledInput =
+    this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
+               .Find&lt;HtmlFieldset&gt;()
+               .Find&lt;HtmlEdit&gt;("disabledInput");
+    Assert.IsTrue(disabledInput.TryFind(), "Disabled text box should be able to be found.");
+    try
+    {
+        disabledInput.EnsureClickable();
+    }
+    catch { }
+    Point p;
+    Assert.IsTrue(disabledInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+    Assert.IsFalse(disabledInput.Enabled);
+    Assert.IsTrue(StringComparer.OrdinalIgnoreCase.Equals("testValue", disabledInput.Text));
+    try
+    {
+        disabledInput.Text = "Other Value";
+        Assert.Fail("Attempting to set text of a disabled input should throw an exception.");
+    }
+    catch (ActionNotSupportedOnDisabledControlException)
+    {
+    }
+    Assert.IsTrue(StringComparer.OrdinalIgnoreCase.Equals("testValue", disabledInput.Text));
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="pageModeling">
+                <pre>
+<code>
+[TestMethod]
+public void TestDisabledInput()
+{
+	Assert.IsTrue(model.DisabledTextbox.CanFind(), "Disabled text box should be able to be found.");
+	Assert.IsTrue(model.DisabledTextbox.IsRendered(), "Disabled text box should be rendered.");
+	Assert.IsTrue(model.DisabledTextbox.IsClickable(), "There should be a clickable point for the disabled textbox.");
+	Assert.IsTrue(model.DisabledTextbox.IsNotActionable(), "Disabled textbox should not be actionable.");
+	
+    Assert.IsTrue(StringComparer.OrdinalIgnoreCase.Equals("testValue", model.DisabledTextbox.Value));
+	
+    try
+	{
+		model.DisabledTextbox.SetValue("Other Value");
+		Assert.Fail("Attempting to set text of a disabled input should throw an exception.");
+	}
+	catch (ActionNotSupportedOnDisabledControlException)
+	{
+	}
+	
+    Assert.IsTrue(StringComparer.OrdinalIgnoreCase.Equals("testValue", model.DisabledTextbox.Value));
+}
+</code>
+                </pre>
+            </div>
+        </details>
     </div>
     <div>
         <label for="passwordInput">Password</label>

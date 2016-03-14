@@ -500,6 +500,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </remarks>
         public static bool IsClickable(this UITestControl toTest)
         {
+            try
+            {
+                toTest.EnsureClickable();
+            }
+            catch { }
             return toTest.CanGetClickablePoint();
         }
 
