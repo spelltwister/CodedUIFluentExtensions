@@ -57,14 +57,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
         #endregion
 
         #region Selection Extensions
-        public static ISelectionPageModel<TValue, TNextModel, WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this WpfComboBox combobox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
+        public static ISelectionPageModel<TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this WpfComboBox combobox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
         {
             return new WpfComboBoxControlPageModelWrapper<TValue, TNextModel>(combobox, nextModel, stringToValue, valueToString);
         }
 
-        public static ISelectionPageModel<string, TNextModel, WpfComboBoxItemControlPageModelWrapper<TNextModel>> AsPageModel<TNextModel>(this WpfComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
+        public static INamedSelectionPageModel<string, TNextModel> AsPageModel<TNextModel>(this WpfComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
         {
-            return new WpfComboBoxControlPageModelWrapper<TNextModel>(comboBox, nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
+            return new WpfComboBoxControlPageModelWrapper<string, TNextModel>(comboBox, nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
         #endregion
 

@@ -6,7 +6,8 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
 {
     public abstract class ComboboxControlPageModelWrapper<TUIType, TValue, TNextModel, TSelectionType> : TextValuableControlPageModelWrapperBase<TUIType, TValue, TNextModel>,
-        ISelectionPageModel<TValue, TNextModel, TSelectionType>, ITextValueablePageModel<TValue, TNextModel>
+        ISelectionPageModel<TValue, TNextModel, TSelectionType>, ITextValueablePageModel<TValue, TNextModel>,
+        INamedSelectionPageModel<TValue, TNextModel, TSelectionType>
         where TUIType : UITestControl
         where TNextModel : IPageModel
         where TSelectionType : ISelectablePageModel<TNextModel>, IValuedPageModel<TValue>, INamedPageModel

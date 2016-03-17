@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
 {
-    public class WpfComboBoxControlPageModelWrapper<TValue, TNextModel> : ComboboxControlPageModelWrapper<WpfComboBox, TValue, TNextModel, WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel>>
+    public class WpfComboBoxControlPageModelWrapper<TValue, TNextModel> : ComboboxControlPageModelWrapper<WpfComboBox, TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>>, INamedSelectionPageModel<TValue, TNextModel>
         where TNextModel : IPageModel
     {
         public  WpfComboBoxControlPageModelWrapper(WpfComboBox toWrap, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc)
@@ -15,7 +15,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
         {
         }
 
-        public override IEnumerable<WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel>> Items
+        public override IEnumerable<INamedSelectionItemPageModel<TValue, TNextModel>> Items
         {
             get
             {
@@ -45,7 +45,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Wpf.ControlWrappers
         }
     }
 
-    public class WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel> : ComboboxItemControlPageModelWrapper<WpfListItem, WpfComboBox, TValue, TNextModel>
+    public class WpfComboBoxItemControlPageModelWrapper<TValue, TNextModel> : ComboboxItemControlPageModelWrapper<WpfListItem, WpfComboBox, TValue, TNextModel>, INamedSelectionItemPageModel<TValue, TNextModel>
         where TNextModel : IPageModel
     {
         public WpfComboBoxItemControlPageModelWrapper(WpfListItem control, WpfComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<WpfListItem, string> itemToStringFunc)
