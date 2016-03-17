@@ -44,7 +44,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </returns>
         public static bool CanFind(this UITestControl toTest, int? wait)
         {
-            return toTest.CanFind(x => x.WaitForControlExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+            if (wait.HasValue)
+            {
+                return toTest.CanFind(x => x.WaitForControlExist(wait.Value));
+            }
+            return toTest.CanFind();
         }
 
         /// <summary>
@@ -107,7 +111,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </returns>
         public static bool CanNotFind(this UITestControl toTest, int? wait)
         {
-            return toTest.CanNotFind(x => x.WaitForControlNotExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+            if (wait.HasValue)
+            {
+                return toTest.CanNotFind(x => x.WaitForControlNotExist(wait.Value));
+            }
+            return toTest.CanNotFind();
         }
 
         /// <summary>
@@ -283,7 +291,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </remarks>
         public static bool IsRendered(this UITestControl toTest, int? wait)
         {
-            return toTest.IsRendered(x => x.WaitForControlExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+            if (wait.HasValue)
+            {
+                return toTest.IsRendered(x => x.WaitForControlExist(wait.Value));
+            }
+            return toTest.IsRendered();
         }
 
         /// <summary>
@@ -443,7 +455,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </remarks>
         public static bool IsNotRendered(this UITestControl toTest, int? wait)
         {
-            return toTest.IsNotRendered(x => x.WaitForControlNotExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+            if (wait.HasValue)
+            {
+                return toTest.IsNotRendered(x => x.WaitForControlNotExist(wait.Value));
+            }
+            return toTest.IsNotRendered();
         }
 
         /// <summary>
@@ -530,7 +546,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </remarks>
         public static bool IsClickable(this UITestControl toTest, int? wait)
         {
-            return toTest.IsClickable(x => x.WaitForControlExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+            if (wait.HasValue)
+            {
+                return toTest.IsClickable(x => x.WaitForControlExist(wait.Value));
+            }
+            return toTest.IsClickable();
         }
 
         /// <summary>
@@ -608,7 +628,11 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling
         /// </remarks>
         public static bool IsNotClickable(this UITestControl toTest, int? wait)
         {
-            return toTest.IsNotClickable(x => x.WaitForControlNotExist(wait ?? Playback.PlaybackSettings.WaitForReadyTimeout));
+            if (wait.HasValue)
+            {
+                return toTest.IsNotClickable(x => x.WaitForControlNotExist(wait.Value));
+            }
+            return toTest.IsNotClickable();
         }
 
         /// <summary>

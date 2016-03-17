@@ -131,5 +131,41 @@ namespace Lib.Tests.CUIT
 
             passwordInput.Text = "myPassword";
         }
+
+        [TestMethod]
+        public void BadPasswordModelTests()
+        {
+            HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+            bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+
+            // no fieldset available
+            HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+            fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+
+            HtmlEdit passwordInput = new HtmlEdit(fieldset);
+            passwordInput.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "passwordInput");
+
+            Assert.IsTrue(passwordInput.TryFind());
+
+            try
+            {
+                passwordInput.EnsureClickable();
+            }
+            catch { }
+
+            Point p;
+            Assert.IsTrue(passwordInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+
+            passwordInput.Text = "myPassword";
+
+            try
+            {
+                var pwd = passwordInput.Text;
+                Assert.Fail("Should not be able to get password value.");
+            }
+            catch (NotSupportedException)
+            {
+            }
+        }
     }
 }

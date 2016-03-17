@@ -266,6 +266,176 @@ public void TestDisabledInput()
     <div>
         <label for="passwordInput">Password</label>
         <input type="password" id="passwordInput"/>
+        <details>
+            <summary>Code Comparison</summary>
+            <div data-code-type="native">
+                <pre>
+<code>
+[TestMethod]
+public void PasswordTests()
+{
+    HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+    bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+   
+    HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+    fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+    
+    HtmlEdit passwordInput = new HtmlEdit(fieldset);
+    passwordInput.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "passwordInput");
+    
+    Assert.IsTrue(passwordInput.TryFind());
+    
+    try
+    {
+        passwordInput.EnsureClickable();
+    }
+    catch { }
+    
+    Point p;
+    Assert.IsTrue(passwordInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+    
+    passwordInput.Text = "myPassword";
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="fluent">
+                <pre>
+                <code>
+[TestMethod]
+public void PasswordTests()
+{
+    var passwordInput =
+    this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
+               .Find&lt;HtmlFieldset&gt;()
+               .Find&lt;HtmlEdit&gt;("passwordInput");
+    
+    Assert.IsTrue(passwordInput.TryFind());
+    try
+    {
+        passwordInput.EnsureClickable();
+    }
+    catch { }
+    
+    Point p;
+    Assert.IsTrue(passwordInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+    passwordInput.Text = "myPassword";
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="pageModeling">
+                <pre>
+<code>
+[TestMethod]
+public void PasswordTests()
+{
+	Assert.IsTrue(model.Password.IsActionable());
+	model.Password.SetValue("myPassword");
+}
+</code>
+                </pre>
+            </div>
+        </details>
+        <details>
+            <summary>Code Comparison - Incorrect Password Manipulation</summary>
+            <div data-code-type="native">
+                <pre>
+<code>
+[TestMethod]
+public void BadPasswordModelTests()
+{
+    HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+    bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+    
+    HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+    fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+    
+    HtmlEdit passwordInput = new HtmlEdit(fieldset);
+    passwordInput.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "passwordInput");
+    
+    Assert.IsTrue(passwordInput.TryFind());
+    
+    try
+    {
+        passwordInput.EnsureClickable();
+    }
+    catch { }
+    
+    Point p;
+    Assert.IsTrue(passwordInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+    
+    passwordInput.Text = "myPassword";
+    
+    try
+    {
+        var pwd = passwordInput.Text;
+        Assert.Fail("Should not be able to get password value.");
+    }
+    catch (NotSupportedException)
+    {
+    }
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="fluent">
+                <pre>
+                <code>
+[TestMethod]
+public void BadPasswordModelTests()
+{
+    var passwordInput =
+    this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
+               .Find&lt;HtmlFieldset&gt;()
+               .Find&lt;HtmlEdit&gt;("passwordInput");
+    
+    Assert.IsTrue(passwordInput.TryFind());
+    
+    try
+    {
+        passwordInput.EnsureClickable();
+    }
+    catch { }
+    
+    Point p;
+    Assert.IsTrue(passwordInput.TryGetClickablePoint(out p), "There should be a point on screen for the disabled input.");
+    
+    passwordInput.Text = "myPassword";
+    try
+    {
+        var pwd = passwordInput.Text;
+        Assert.Fail("Should not be able to get password value.");
+    }
+    catch (NotSupportedException)
+    {
+    }
+}
+</code>
+                </pre>
+            </div>
+            <div data-code-type="pageModeling">
+                <pre>
+<code>
+[TestMethod]
+public void BadPasswordModelTests()
+{
+	Assert.IsTrue(model.Password.IsActionable());
+	model.PasswordBadModel.SetValue("myPassword");
+
+	try
+	{
+		var pwd = model.PasswordBadModel.Value;
+		Assert.Fail("Should not be able to get password value.");
+	}
+	catch(NotSupportedException)
+	{
+	}
+}
+</code>
+                </pre>
+            </div>
+        </details>
     </div>
     <div>
         <label for="checkboxInput">Check?</label>
