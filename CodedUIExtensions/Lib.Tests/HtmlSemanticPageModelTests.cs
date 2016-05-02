@@ -12,7 +12,7 @@ namespace Lib.Tests
     [CodedUITest]
     public class HtmlSemanticPageModelTests
     {
-        readonly Lazy<BrowserWindow> _lazyWindow = new Lazy<BrowserWindow>(() => BrowserWindow.Locate("Semantic Page Model Tests"));
+        readonly Lazy<BrowserWindow> _lazyWindow = new Lazy<BrowserWindow>(() => BrowserWindow.Launch("http://codeduiexamples.com/Examples/Legacy"));
         BrowserWindow Window { get { return this._lazyWindow.Value; } }
         
         [TestMethod]
@@ -49,6 +49,7 @@ namespace Lib.Tests
             Assert.IsTrue(new SemanticTestPageModel(this.Window).EditableDiv.SetValue(testString).EditableDiv.Value == testString);
         }
 
+        [Ignore]
         [TestMethod]
         public void EditableSpanCanSetText()
         {

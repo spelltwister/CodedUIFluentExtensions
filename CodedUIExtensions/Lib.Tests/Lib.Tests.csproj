@@ -60,9 +60,6 @@
     <Compile Include="SemanticTestPageModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SemanticModelTests.html" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CaptainPav.Testing.UI.CodedUI.PageModeling\CaptainPav.Testing.UI.CodedUI.PageModeling.csproj">
       <Project>{D179901A-0411-4FDB-8E39-77BDC552DBCF}</Project>
       <Name>CaptainPav.Testing.UI.CodedUI.PageModeling</Name>

@@ -154,3 +154,6 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/CodedUIExtensions/packages
+/CodedUIExtensions/.vs/config
+/CodedUIExtensions/CodedUIExamples/Properties/PublishProfiles

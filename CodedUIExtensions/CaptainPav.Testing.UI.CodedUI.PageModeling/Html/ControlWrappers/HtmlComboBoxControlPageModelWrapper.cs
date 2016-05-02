@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
 {
-    public class HtmlComboBoxControlPageModelWrapper<TValue, TNextModel> : ComboboxControlPageModelWrapper<HtmlComboBox, TValue, TNextModel, HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel>>
+    public class HtmlComboBoxControlPageModelWrapper<TValue, TNextModel> : ComboboxControlPageModelWrapper<HtmlComboBox, TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>>, INamedSelectionPageModel<TValue, TNextModel>
         where TNextModel : IPageModel
     {
         public HtmlComboBoxControlPageModelWrapper(HtmlComboBox toWrap, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc)
@@ -16,7 +16,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
         {
         }
 
-        public override IEnumerable<HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel>> Items
+        public override IEnumerable<INamedSelectionItemPageModel<TValue, TNextModel>> Items
         {
             get
             {
@@ -47,7 +47,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
     }
 
 
-    public class HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel> : ComboboxItemControlPageModelWrapper<HtmlListItem, HtmlComboBox, TValue, TNextModel>
+    public class HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel> : ComboboxItemControlPageModelWrapper<HtmlListItem, HtmlComboBox, TValue, TNextModel>, INamedSelectionItemPageModel<TValue, TNextModel>
         where TNextModel : IPageModel
     {
         public HtmlComboBoxItemControlPageModelWrapper(HtmlListItem control, HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<HtmlListItem, string> itemToStringFunc) : base(control, comboBox, nextModel, stringToValueFunc, itemToStringFunc)

@@ -154,7 +154,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
             return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf);
         } 
 
-        public static ISelectionPageModel<TValue, TNextModel, HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
+        public static ISelectionPageModel<TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
         {
             return new HtmlComboBoxControlPageModelWrapper<TValue, TNextModel>(comboBox, nextModel, stringToValue, valueToString);
         }
