@@ -8,15 +8,15 @@ using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 
 namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
 {
-    public class HtmlComboBoxControlPageModelWrapper<TValue, TNextModel> : ComboboxControlPageModelWrapper<HtmlComboBox, TValue, TNextModel, HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel>>
-        where TNextModel : IPageModel
+    public class HtmlComboBoxControlPageModelWrapper<TValue, TNextModel> : ComboboxControlPageModelWrapper<HtmlComboBox, TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>>, INamedSelectionPageModel<TValue, TNextModel>
+       where TNextModel : IPageModel
     {
         public HtmlComboBoxControlPageModelWrapper(HtmlComboBox toWrap, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<TValue, string> valueToStringFunc)
             : base(toWrap, nextModel, stringToValueFunc, valueToStringFunc)
         {
         }
 
-        public override IEnumerable<HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel>> Items
+        public override IEnumerable<INamedSelectionItemPageModel<TValue, TNextModel>> Items
         {
             get
             {
@@ -40,14 +40,14 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
             get
             {
                 return this.Me.Items
-                              .OfType<HtmlListItem>()
-                              .Select(x => new HtmlComboBoxItemControlPageModelWrapper<TNextModel>(x, this.Me, this.NextModel));
+                            .OfType<HtmlListItem>()
+                            .Select(x => new HtmlComboBoxItemControlPageModelWrapper<TNextModel>(x, this.Me, this.NextModel));
             }
         }
     }
 
 
-    public class HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel> : ComboboxItemControlPageModelWrapper<HtmlListItem, HtmlComboBox, TValue, TNextModel>
+    public class HtmlComboBoxItemControlPageModelWrapper<TValue, TNextModel> : ComboboxItemControlPageModelWrapper<HtmlListItem, HtmlComboBox, TValue, TNextModel>, INamedSelectionItemPageModel<TValue, TNextModel>
         where TNextModel : IPageModel
     {
         public HtmlComboBoxItemControlPageModelWrapper(HtmlListItem control, HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValueFunc, Func<HtmlListItem, string> itemToStringFunc) : base(control, comboBox, nextModel, stringToValueFunc, itemToStringFunc)
@@ -59,9 +59,9 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
 
         public override string Name => Me.DisplayText;
 
-	    public override bool IsSelected => Me.Selected;
+        public override bool IsSelected => Me.Selected;
 
-	    public override TNextModel SetSelected(bool selectionState)
+        public override TNextModel SetSelected(bool selectionState)
         {
             if (selectionState && !this.IsSelected)
             {
