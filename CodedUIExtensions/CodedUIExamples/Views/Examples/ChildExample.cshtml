@@ -1,0 +1,97 @@
+﻿<div id="customerSearchContainer">
+    <!-- ko with: goodCustomersVm -->
+    @Html.Partial("_CustomerSearch")
+    <!-- /ko -->
+</div>
+<div id="suckyCustomers">
+    <!-- ko with: suckyCustomersVm -->
+    @Html.Partial("_CustomerSearch")
+    <!-- /ko -->
+</div>
+<div id="newsArea">
+    <!-- ko with: newsVm -->
+    <!-- /ko -->
+</div>
+
+@section scripts {
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+
+    <script>
+
+        function CustomerSearchViewModel() {
+            var self = this;
+            this.searchCriteria = {
+                name: ko.observable(null),
+                id: ko.observable(null)
+            };
+            this.searchResult = ko.observable(null);
+            this.search = function() {
+                var result = [];
+                var test = null;
+                if (self.searchCriteria.name()) {
+                    test = self.searchName(self.searchCriteria.name());
+                    if(test)
+                    result.push.apply(result, test);
+                }
+
+                if (self.searchCriteria.id()) {
+                    test = self.searchId(self.searchCriteria.id());
+                    if(test)
+                        result.push.apply(result, test);
+                }
+
+                self.searchResult(result);
+            };
+
+            this.customers = [
+                {
+                    customerId: 123,
+                    name: "Jenny",
+                    state: "MI",
+                    status: 1
+                }, {
+                    customerId: 234,
+                    name: "John",
+                    state: "FL",
+                    status: 0
+                }, {
+                    customerId: 222,
+                    name: "Jessica",
+                    state: "AZ",
+                    status: 1
+                }, {
+                    customerId: 111,
+                    name: "Michelle",
+                    state: "MI",
+                    status: 1
+                }, {
+                    customerId: 321,
+                    name: "Rachel",
+                    state: "NY",
+                    status: 0
+                }, {
+                    customerId: 456,
+                    name: "Bob",
+                    state: "ME",
+                    status: 1
+                }
+            ];
+
+            this.searchName = function(name) {
+                return this.customers.filter(function(c) { return c.name.indexOf(name) !== -1; });
+            };
+
+            this.searchId = function(id) {
+                return this.customers.filter(function(c) { return (''+c.customerId) === id; });
+            };
+        }
+
+        var vm = {
+            goodCustomersVm: new CustomerSearchViewModel(),
+            suckyCustomersVm: new CustomerSearchViewModel(),
+            newsVm: {}
+        };
+
+        ko.applyBindings(vm);
+    </script>
+}

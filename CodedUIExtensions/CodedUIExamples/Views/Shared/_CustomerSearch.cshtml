@@ -1,0 +1,15 @@
+﻿<div data-control-type="customerSearchCriteria">
+    <!-- ko with: searchCriteria -->
+    <input type="text" data-criteria="id" data-bind="textInput: id" placeholder="Customer ID"/>
+    <input type="text" data-criteria="name" data-bind="textInput: name" placeholder="Name"/>
+    <!-- /ko -->
+    <button data-bind="click: function() { $data.search(); }">Search</button>
+</div>
+<div data-control-type="resultArea">
+    <ul data-bind="foreach: searchResult">
+        <li data-control-type="customerRow">
+            <span data-id="name"  data-bind="text: name"></span>
+            <span data-id="state" data-bind="text: state"></span>
+        </li>
+    </ul>
+</div>

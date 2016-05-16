@@ -54,7 +54,9 @@
     <Compile Include="CUIT\SimpleHtmlControlsTests.cs" />
     <Compile Include="Fluent\SimpleHtmlControlsTests.cs" />
     <Compile Include="HtmlSemanticPageModelTests.cs" />
+    <Compile Include="PageModeling\ChildModelTypesTests.cs" />
     <Compile Include="PageModeling\PageModels\SimpleHtmlControlsPageModel.cs" />
+    <Compile Include="PageModeling\PageModels\ChildModelTypes.cs" />
     <Compile Include="PageModeling\SimpleHtmlControlsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SemanticTestPageModel.cs" />

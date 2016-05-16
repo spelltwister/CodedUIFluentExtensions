@@ -15,6 +15,11 @@ namespace CodedUIExamples.Controllers
 		    return View("SimpleHtmlControls");
 	    }
 
+        public ActionResult Example2()
+        {
+            return View("ChildExample");
+        }
+
         public ActionResult Legacy()
         {
             return View();
