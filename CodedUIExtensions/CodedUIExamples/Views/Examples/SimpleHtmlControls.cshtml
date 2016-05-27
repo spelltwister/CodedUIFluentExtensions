@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "SimpleHtmlControls";
+﻿@{
+    ViewBag.Title = "Simple Html Controls";
 }
 
 <h2>Simple Html Controls</h2>
@@ -20,7 +19,7 @@
 [TestInitialize]
 public void NavigateToSimpleHtmlControlExamplesPage()
 {
-	this.window = BrowserWindow.Launch("http://codeduiexamples/Examples/Example1");
+	this.window = BrowserWindow.Launch("http://codeduiexamples.com/Examples/Example1");
 }
 [TestMethod]
 public void ManipulateTextInput()
@@ -50,7 +49,7 @@ public void ManipulateTextInput()
 [TestInitialize]
 public void NavigateToSimpleHtmlControlExamplesPage()
 {
-	this.window = BrowserWindow.Launch("http://codeduiexamples/Examples/Example1");
+	this.window = BrowserWindow.Launch("http://codeduiexamples.com/Examples/Example1");
 }
 [TestMethod]
 public void ManipulateTextInput()
@@ -75,7 +74,7 @@ private ISimpleHtmlControlsPageModel model;
 public void NavigateToSimpleHtmlControlExamplesPage()
 {
 	//BrowserWindow.CurrentBrowser = "Chrome";
-	this.model = new SimpleHtmlControlsPageModel(BrowserWindow.Launch("http://codeduiexamples/Examples/Example1"));
+	this.model = new SimpleHtmlControlsPageModel(BrowserWindow.Launch("http://codeduiexamples.com/Examples/Example1"));
 }
 [TestMethod]
 public void ManipulateTextInput()
