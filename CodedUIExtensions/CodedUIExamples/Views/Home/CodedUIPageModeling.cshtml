@@ -1,0 +1,190 @@
+﻿@{
+	ViewBag.Title = "Coded UI Page Modeling";
+}
+
+<h2>Coded UI implementation of Page Modeling</h2>
+<p>
+	This project is an implementation of the Page Modeling abstraction over Coded UI. Essentially, this
+	project provides a way to convert Coded UI objects into an object implementing all of the natural
+	interfaces for that UI element. Additionally, the page models in this project implement a context driven
+	approach where the result of every action is a new context representing the most likely thing the user
+	will interact with next.  Since that probably doesn't make much sense, here is an example.
+</p>
+<pre>
+<code>
+    public abstract class PageModelBase&lt;T&gt; : IPageModel where T : UITestControl
+    {
+        internal protected abstract T Me { get; }
+        public virtual bool IsVisible(int? wait = null)
+        {
+            return this.Me.IsVisible(wait);
+        }
+        public virtual bool IsClickable(int? wait = null)
+        {
+            return this.Me.IsClickable(wait);
+        }
+        public virtual bool IsHidden(int? wait = null)
+        {
+            return this.Me.IsHidden(wait);
+        }
+        public virtual bool IsNotClickable(int? wait = null)
+        {
+            return this.Me.IsNotClickable(wait);
+        }
+        public virtual bool CanFind(int? wait = null)
+        {
+            return this.Me.CanFind(wait);
+        }
+        public virtual bool CanNotFind(int? wait = null)
+        {
+            return this.Me.CanNotFind(wait);
+        }
+        public virtual bool IsActionable(int? wait = null)
+        {
+            return this.Me.IsActionable(wait);
+        }
+        public virtual bool IsNotActionable(int? wait = null)
+        {
+            return this.Me.IsNotActionable(wait);
+        }
+        
+        public bool IsRendered(int? wait = null)
+        {
+            return this.Me.IsRendered(wait);
+        }
+        public bool IsNotRendered(int? wait = null)
+        {
+            return this.Me.IsNotRendered(wait);
+        }
+    }
+    public class UIControlPageModelWrapper&lt;T&gt; : PageModelBase&lt;T&gt; where T : UITestControl
+    {
+        public UIControlPageModelWrapper(T control)
+        {
+            if (null == control)
+            {
+                throw new ArgumentNullException(nameof(control));
+            }
+            this.Me = control;
+        }
+        internal protected override T Me { get; }
+    }
+    public abstract class HasNextModelUIControlPageModelWrapperBase&lt;TUIControl, TNextModel&gt; : UIControlPageModelWrapper&lt;TUIControl&gt;
+        where TUIControl : UITestControl
+        where TNextModel : IPageModel
+    {
+        protected readonly TNextModel NextModel;
+        protected HasNextModelUIControlPageModelWrapperBase(TUIControl control, TNextModel nextModel) : base(control)
+        {
+            if (null == nextModel)
+            {
+                throw new ArgumentNullException(nameof(nextModel));
+            }
+            this.NextModel = nextModel;
+        }
+    }
+	
+	public class ClickableControlPageModelWrapper&lt;TUIControl, TNextModel&gt; : HasNextModelUIControlPageModelWrapperBase&lt;TUIControl, TNextModel&gt;, IClickablePageModel&lt;TNextModel&gt; 
+        where TUIControl : UITestControl
+        where TNextModel : IPageModel
+    {
+        public ClickableControlPageModelWrapper(TUIControl control, TNextModel nextModel) : base(control, nextModel)
+        {
+        }
+        public TNextModel Click()
+        {
+            Mouse.Click(this.Me);
+            return this.NextModel;
+        }
+        public TNextModel DoubleClick()
+        {
+            Mouse.DoubleClick(this.Me);
+            return this.NextModel;
+        }
+    }
+</code>
+</pre>
+<p>
+	The above code shows the class hierarchy used to eventually implement a clickable control.
+	<br />
+	To start, we have the PageModelBase type. This type simply implements a reasonable default for the common
+	behaviors and observations that every page model should have. The functionality is implemented entirely using
+	extension methods found in the Fluent Extensions library. The UIControlPageModelWrapper implements the base type
+	by constructor injection of the UI Element to wrap into a Page Model.
+	<br />
+	Next we have HasNextModelUIControlPageModelWrapperBase. This type provides a mechanism for capturing the next
+	most likely context with which the user will interact. In this case, the result of a click action will be the
+	most likely next thing the user will manipulate. Consider the button pops up a dialog. The result of the button
+	press should then be the referece to the dialog.
+	<br />
+	Finally, there is the ClickableControlPageModelWrapper which adds the behavior of click and double click. As noted above,
+	the result of any action (behavior) is the next most likely page model with which the user will interact. This constructor
+	takes a reference to the model that should be returned after a click or double click action. A reasonable extension to this
+	class would be allowing different next models based on whether click or double click was performed.
+</p>
+<p>
+	Beyond the base types, which are probably not easily used outside of this abstraction, there are a set of extension methods
+	which provide a much nicer experience for converting UI elements into Page Models. Effectively, there are a bunch
+	of .AsPageModel(/*...*/) and .As*PageModel(/*...*/) extension methods that convert UI elements into Page Models and expose the dependencies as
+	method arguments. The .AsPageModel(/*...*/) extensions implement a reasonable default for the control being wrapped. If the
+	default page model is not sufficient, there are ways to forcibly wrap elements into any page model type, given the dependencies
+	for converting the object to whatever page model. Again, probably confusing so here is an example.
+</p>
+<pre>
+<code>
+    public static IClickablePageModel&lt;TNextModel&gt; AsClickablePageModel&lt;TNextModel&gt;(this UITestControl current, TNextModel nextModel) where TNextModel : IPageModel
+    {
+        return new ClickableControlPageModelWrapper&lt;TNextModel&gt;(current, nextModel);
+    }
+    public static IClickablePageModel&lt;TNextModel&gt; AsPageModel&lt;TNextModel&gt;(this HtmlAreaHyperlink link, TNextModel nextModel) where TNextModel : IPageModel
+    {
+        return link.AsClickablePageModel(nextModel);
+    }
+</code>
+</pre>
+<p>
+	Above, there is code for converting an element into a clickable element. You could explicitly new up a ClickableControlPageModelWrapper, specify the type arguments,
+	pass the UI element in, and specify the next model to use after clicking. However, I find it easier to use the search extensions to find a UI element as then call
+	.AsPageModel(nextModel) or .AsClickablePageModel(nextModel). For a hyperlink, it may look something like:
+	<pre><code>
+    public IClickablePageModel&lt;INewsPage&gt; NewsLink
+    {
+        get
+        {
+             return this.Me.Find&lt;HtmlDiv&gt;("containerId").Find&lt;HtmlHyperlink&gt;("newsLink").AsPageModel(new NewsPage(this.parent));
+        }
+    }
+</code></pre>
+</p>
+<h2>Chosing Page Models</h2>
+<p>
+	So far, we have looked at converting native HtmlControls into PageModels, but user controls are also page models composed of other user controls and / or native controls.
+	As a tester, you will need to be able to convert these complex controls into page model representation. There are a few page model base types that can help get you started
+	in just about any use case. I will use HTML as the reference, but WPF and Win controls also have these base types.
+	<br />
+	Every page model wrapper assumes there are at least two piece of information available. Firstly, what is my <code>parent</code>. The <code>parent</code> represents the application
+	container. In Html, this would be the BrowserWindow. In WPF, this is typically a WpfWindow. Secondly, there is a reference, called <code>Me</code>, to the UI element being wrapped
+	as a page model.  Both of these are super important for limiting the search scope of the models.
+</p>
+<h3>HtmlPageModelBase</h3>
+<p>
+	This base model simply requires that the derived control specify the browser instance that contains the control and provides a reference to the HtmlDocument element.
+	This type is abstract and does not specify any Me. It is the job of the derived type to specify how the me element is found. The parent is passed via constructor injection
+	similar to normal CodedUI controls.
+</p>
+<h3>HtmlDocumentPageModelBase</h3>
+<p>
+	This model type is a convenient base type that considers the entire document window as the UI element being modeled. Typically this would represent a layout or other
+	base page type concept. You will likely find properties like Navigation, Content, Footer, ... which are present in the layout and on every page.
+</p>
+<h3>HtmlChildPageModelBase</h3>
+<p>
+	This is also known as a Dynamic Child model and is used when the model is unable to find itself in the page. This is typically used for result lists or other repeaters which
+	are not guarenteed to be present on the page. <a href="@Url.Action("Example2", "Examples")">Example 2</a> goes into more detail about this.
+</p>
+<h3>StaticChildPageModelBase</h3>
+<p>
+	A static child represents a nested control that is only able to find itself given some parent container context. This base type exposes an additional property <code>ParentScope</code>
+	which provides access to the UI element representing the containing control's UI element. This allows the static child to limit its search scope to the parent UI element.
+	<a href="@Url.Action("Example2", "Examples")">Example 2</a> goes into more detail about this.
+</p>

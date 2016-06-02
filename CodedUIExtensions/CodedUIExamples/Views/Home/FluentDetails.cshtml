@@ -1,0 +1,80 @@
+﻿@{
+	ViewBag.Title = "Fluent Extensions";
+}
+
+<h2>Coded UI Fluent Extensions</h2>
+
+<p>
+	The goal of the Coded UI Fluent Extensions is to provide a more maintainable and readable way to
+	describe how to search for UI elements in an application. In traditional Coded UI, a test writer
+	would describe the control to find by specifying a parent and in following lines, add search or
+	filter properties for how to find the component, given the parent. With the fluent extensions,
+	a test writer would start from an element and, using method chaining, describe the search path
+	in a much more natural way. Here is a comparison of code:
+
+	<h3>Coded UI Native</h3>
+	<pre>
+<code>
+[TestInitialize]
+public void NavigateToSimpleHtmlControlExamplesPage()
+{
+	this.window = BrowserWindow.Launch("http://codeduiexamples.com/Examples/Example1");
+}
+
+[TestMethod]
+public void ManipulateTextInput()
+{
+    HtmlDiv bodyContainerDiv = new HtmlDiv(this.window);
+    bodyContainerDiv.SearchProperties.Add(HtmlDiv.PropertyNames.Id, "layoutBodyContainer");
+
+    // no fieldset available
+    HtmlControl fieldset = new HtmlCustom(bodyContainerDiv);
+    fieldset.SearchProperties.Add(HtmlControl.PropertyNames.TagName, "fieldset");
+
+    Assert.IsTrue(fieldset.TryFind());
+
+    HtmlEdit userNameEdit = new HtmlEdit(fieldset);
+    userNameEdit.SearchProperties.Add(HtmlEdit.PropertyNames.Id, "usernameInput");
+
+    Assert.IsTrue(string.IsNullOrWhiteSpace(userNameEdit.Text));
+
+    userNameEdit.Text = "MyUserName";
+
+    Assert.IsTrue(StringComparer.Ordinal.Equals(userNameEdit.Text, "MyUserName"));
+}
+</code>
+</pre>
+	<h3>Fluent Extensions</h3>
+	<pre>
+<code>
+[TestInitialize]
+public void NavigateToSimpleHtmlControlExamplesPage()
+{
+	this.window = BrowserWindow.Launch("http://codeduiexamples.com/Examples/Example1");
+}
+
+[TestMethod]
+public void ManipulateTextInput()
+{
+	var usernameEdit =
+	this.window.Find&lt;HtmlDiv&gt;("layoutBodyContainer")
+                   .Find&lt;HtmlFieldset&gt;()
+                   .Find&lt;HtmlEdit&gt;("usernameInput");
+			
+	Assert.IsTrue(string.IsNullOrWhiteSpace(usernameEdit.Text));
+	usernameEdit.Text = "MyUserName";
+	Assert.IsTrue(StringComparer.Ordinal.Equals(usernameEdit.Text, "MyUserName"));
+}
+</code>
+</pre>
+	Using the fluent extensions, the test code is drastically reduced and is far more readable.
+</p>
+<h3>Extends Coded UI</h3>
+<p>
+	One of the biggest strengths of this extension library is that it is completely based off of
+	Microsoft's Coded UI and does not require programming against a new set of control abstractions.
+	In fact, all of the additional UI elements that were added (eg, HTML5 tags) are derived from one of
+	the base Coded UI types. This means that any code written using the extensions has an <strong>exact</strong>
+	equivalent using Coded UI native and the new controls can be manipulated <strong>exactly</strong> the same way any other
+	native control would be.
+</p>
