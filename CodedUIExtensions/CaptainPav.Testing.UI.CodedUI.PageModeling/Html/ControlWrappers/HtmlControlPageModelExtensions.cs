@@ -154,14 +154,19 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.Html.ControlWrappers
             return cell.AsPageModel(StandardFunctionProvider.StringReturnSelf);
         } 
 
-        public static ISelectionPageModel<TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
+        public static INamedSelectionPageModel<TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>> AsPageModel<TNextModel, TValue>(this HtmlComboBox comboBox, TNextModel nextModel, Func<string, TValue> stringToValue, Func<TValue, string> valueToString) where TNextModel : IPageModel
         {
             return new HtmlComboBoxControlPageModelWrapper<TValue, TNextModel>(comboBox, nextModel, stringToValue, valueToString);
         }
+
+	    public static INamedSelectionPageModel<string, TNextModel, INamedSelectionItemPageModel<string, TNextModel>> AsNamedSelectionPageModel<TNextModel>(this HtmlComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
+		{
+		    return new HtmlComboBoxControlPageModelWrapper<string, TNextModel>(comboBox, nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
+	    }
 
         public static ISelectionPageModel<string, TNextModel, HtmlComboBoxItemControlPageModelWrapper<TNextModel>> AsPageModel<TNextModel>(this HtmlComboBox comboBox, TNextModel nextModel) where TNextModel : IPageModel
         {
             return new HtmlComboBoxControlPageModelWrapper<TNextModel>(comboBox, nextModel, StandardFunctionProvider.StringReturnSelf, StandardFunctionProvider.StringReturnSelf);
         }
-    }
+	}
 }

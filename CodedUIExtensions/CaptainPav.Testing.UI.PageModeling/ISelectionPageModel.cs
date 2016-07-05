@@ -98,7 +98,7 @@ namespace CaptainPav.Testing.UI.PageModeling
     /// This interface would be used when the item type is not a standard list
     /// item type.
     /// </remarks>
-    public interface INamedSelectionPageModel<out TValue, out TNextModel, out TListItem> : ISelectionPageModel<TValue, TNextModel, TListItem>
+    public interface INamedSelectionPageModel<TValue, out TNextModel, out TListItem> : ISelectionPageModel<TValue, TNextModel, TListItem>, IReadWriteTextValuePageModel<TValue, TNextModel>
         where TNextModel : IPageModel
         where TListItem : ISelectablePageModel<TNextModel>, IValuedPageModel<TValue>, INamedPageModel
     {
@@ -119,7 +119,7 @@ namespace CaptainPav.Testing.UI.PageModeling
     /// has a Name value displayed to the user and a backing value that is
     /// actually used when the item is selected.
     /// </remarks>
-    public interface INamedSelectionPageModel<out TValue, out TNextModel> : INamedSelectionPageModel<TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>>
+    public interface INamedSelectionPageModel<TValue, out TNextModel> : INamedSelectionPageModel<TValue, TNextModel, INamedSelectionItemPageModel<TValue, TNextModel>>
         where TNextModel : IPageModel
     {
     }

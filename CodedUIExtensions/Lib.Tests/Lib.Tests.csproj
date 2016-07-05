@@ -55,6 +55,7 @@
     <Compile Include="Fluent\SimpleHtmlControlsTests.cs" />
     <Compile Include="HtmlSemanticPageModelTests.cs" />
     <Compile Include="PageModeling\ChildModelTypesTests.cs" />
+    <Compile Include="PageModeling\PageModels\DataAttributesModel.cs" />
     <Compile Include="PageModeling\PageModels\SimpleHtmlControlsPageModel.cs" />
     <Compile Include="PageModeling\PageModels\ChildModelTypes.cs" />
     <Compile Include="PageModeling\SimpleHtmlControlsTests.cs" />

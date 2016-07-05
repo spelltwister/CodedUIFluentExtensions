@@ -78,7 +78,15 @@ namespace Lib.Tests
             ISelectionPageModel_StandardTests(page.Combobox);
         }
 
-        [TestMethod]
+		[TestMethod]
+	    public void NamedComboboxCanSelectItems()
+	    {
+		    var page = new SemanticTestPageModel(this.Window);
+			//ISelectionPageModel_StandardTests(page.NamedCombobox); // TODO: types are slightly not aligned correctly
+			INamedSelectionPageModel_StandardTests(page.NamedCombobox);
+	    }
+
+		[TestMethod]
         public void AbbreviationSetupCorrectly()
         {
             var afa = new SemanticTestPageModel(this.Window).AFAIK;
@@ -103,23 +111,37 @@ namespace Lib.Tests
                 AssertValidState(selection);
             }
 
-            selection.Items.First().SetSelected(true);
-            AssertValidState(selection);
-
-            if (selection.Items.Skip(1).Any())
-            {
-                selection.Items.Skip(1).First().SetSelected(true);
-                AssertValidState(selection);
-            }
-
-            if (selection.Items.Skip(2).Any())
-            {
-                selection.Items.Last().SetSelected(true);
-                AssertValidState(selection);
-            }
+	        foreach (var selectionItem in selection.Items)
+	        {
+		        selectionItem.SetSelected(true);
+				AssertValidState(selection);
+	        }
         }
 
-        private static void AssertNothingSelected<T, U, V>(ISelectionPageModel<T, U, V> selection)
+		private static void INamedSelectionPageModel_StandardTests<T, U, V>(INamedSelectionPageModel<T, U, V> selection)
+			where U : IPageModel
+			where V : INamedSelectionItemPageModel<T, U>
+		{
+			if (!selection.Items.Any())
+			{
+				Assert.Inconclusive();
+			}
+
+			if (selection.SelectedItem != null)
+			{
+				selection.SelectedItem.SetSelected(false);
+				AssertValidState(selection);
+			}
+
+			foreach (var name in selection.Items.Select(x => x.Name))
+			{
+				selection.SetValueText(name);
+				AssertValidState(selection);
+				Assert.IsTrue(StringComparer.Ordinal.Equals(selection.SelectedItem.Name, name));
+			}
+		}
+
+		private static void AssertNothingSelected<T, U, V>(ISelectionPageModel<T, U, V> selection)
             where U : IPageModel
             where V : ISelectablePageModel<U>, ITextValuedPageModel<T>
         {
@@ -147,5 +169,34 @@ namespace Lib.Tests
                 Assert.IsTrue(selection.SelectedItem.IsSelected);
             }
         }
-    }
+
+		private static void AssertNothingSelected<T, U, V>(INamedSelectionPageModel<T, U, V> selection)
+			where U : IPageModel
+			where V : INamedSelectionItemPageModel<T, U>
+		{
+			Assert.IsTrue(selection.Items.All(x => !x.IsSelected));
+		}
+
+		private static void AssertSingleSelection<T, U, V>(INamedSelectionPageModel<T, U, V> selection)
+			where U : IPageModel
+			where V : INamedSelectionItemPageModel<T, U>
+		{
+			Assert.IsTrue(selection.Items.SkipWhile(x => !x.IsSelected).Skip(1).All(x => !x.IsSelected));
+		}
+
+		private static void AssertValidState<T, U, V>(INamedSelectionPageModel<T, U, V> selection)
+			where U : IPageModel
+			where V : INamedSelectionItemPageModel<T, U>
+		{
+			if (selection.SelectedItem == null)
+			{
+				AssertNothingSelected(selection);
+			}
+			else
+			{
+				AssertSingleSelection(selection);
+				Assert.IsTrue(selection.SelectedItem.IsSelected);
+			}
+		}
+	}
 }
