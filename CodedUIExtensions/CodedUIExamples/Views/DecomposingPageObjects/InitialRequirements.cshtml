@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Initial Requirements - Decomposing Page Objects";
+}
+
+<!-- ko if: false-->
+Loading app.  Please wait...
+<!-- /ko -->
+
+<div data-bind="visible: true" style="display: none">
+    <nav>
+        <ul>
+            <li><button data-bind="click: function() { $data.navLogin(); }">Login</button></li>
+            <li><button data-bind="click: function() { $data.navRegister(); }">Register</button></li>
+            <li><button data-bind="click: function() { $data.navAccountSettings(); }">Account Settings</button></li>
+        </ul>
+    </nav>
+
+    <div id="loginControl" data-bind="with: loginVM, visible: isLoginVisible">
+        <!-- ko with: credentialsVM -->
+        @Html.Partial("_UsernamePassword")
+        <!-- /ko -->
+        <button disabled data-bind="enable: canLogin, click: function() { $parent.login(); }">Login</button>
+    </div>
+
+    <div id="registerControl" data-bind="with: registerVM, visible: isRegisterVisible">
+        <!-- ko with: credentialsVM -->
+        @Html.Partial("_UsernamePassword")
+        <!-- /ko -->
+
+        <input type="password" data-bind="textInput: confirmPassword " />
+
+        <button disabled data-bind="enable: canRegister, click: function() { $parent.register(); }">Register</button>
+    </div>
+
+    <div id="accountSettingsControl" data-bind="with: accountSettingsVM, visible: isAccountSettingsVisible">
+        <div>
+            <input type="text" data-bind="textInput: firstName" placeholder="First Name" />
+            <input type="text" data-bind="textInput: lastName" placeholder="Last Name" />
+
+            <button data-bind="click: function() { $parent.saveAccountSettings(); }">Save</button>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+
+    <script src="~/Scripts/ViewModels_Initial.js"></script>
+    <script>
+
+            var vm = new AppViewModel();
+
+            $(function() {
+                ko.applyBindings(vm);
+            });
+
+    </script>
+}

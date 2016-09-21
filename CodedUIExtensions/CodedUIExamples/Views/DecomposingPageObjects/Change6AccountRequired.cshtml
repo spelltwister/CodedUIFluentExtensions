@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Change 6 - Account Required - Decomposing Page Objects";
+}
+
+<!-- ko if: false-->
+Loading app.  Please wait...
+<!-- /ko -->
+
+<div data-bind="visible: true" style="display: none">
+    <nav>
+        <ul>
+            <li><button data-bind="click: function() { $data.navLogin(); }">Login</button></li>
+            <li><button data-bind="click: function() { $data.navRegister(); }">Register</button></li>
+            <li><button data-bind="click: function() { $data.navAccountSettings(); }">Account Settings</button></li>
+            <!-- ko if: currentUser() && currentUser().firstName && currentUser().lastName -->
+            <li><button data-bind="click: function() { $data.navOrders(); }">Orders</button></li>
+            <!-- /ko -->
+        </ul>
+    </nav>
+
+    <div id="loginControl" data-bind="with: loginVM, visible: isLoginVisible">
+        <!-- ko with: credentialsVM -->
+        @Html.Partial("_UsernamePassword")
+        <!-- /ko -->
+        <button disabled data-bind="enable: canLogin, click: function() { $parent.login(); }">Login</button>
+    </div>
+
+    <div id="registerControl" data-bind="with: registerVM, visible: isRegisterVisible">
+        <!-- ko with: credentialsVM -->
+        @Html.Partial("_UsernamePassword")
+        <!-- /ko -->
+
+        <input type="password" data-bind="textInput: confirmPassword, visible: credentialsVM.hasCredentials" />
+
+        <button disabled data-bind="enable: canRegister, visible: credentialsVM.hasCredentials, click: function() { $parent.register(); }">Register</button>
+    </div>
+
+    <div id="accountSettingsControl" data-bind="with: accountSettingsVM, visible: isAccountSettingsVisible">
+        <div>
+            <input type="text" data-bind="textInput: firstName" placeholder="First Name" />
+            <input type="text" data-bind="textInput: lastName" placeholder="Last Name" />
+
+            <button data-bind="click: function() { $parent.saveAccountSettings(); }">Save</button>
+        </div>
+    </div>
+
+    <div id="ordersControl" data-bind="with: ordersVM, visible: isOrdersVisible">
+        <div>
+            <!-- ko ifnot: isNewOrderVisible -->
+            <button data-bind="click: function() { $data.newOrder(); }">Add</button>
+            <!-- /ko -->
+            <!-- ko if: isNewOrderVisible -->
+            <button data-bind="click: function() { $data.cancelNewOrder(); }">Cancel</button>
+
+            <input type="text" data-bind="textInput: orderId" placeholder="Order ID" />
+            <input type="text" data-bind="textInput: name" placeholder="Name"/>
+            <!-- ko if: orderId -->
+            <input type="number" data-bind="value: quantity" title="Quantity"/>
+            <!-- /ko -->
+            $<input type="number" step="0.01" data-bind="value: price" title="Price" />
+
+            <button disabled data-bind="enable: isCompleteOrder, click: function() { $data.save(); }">Save</button>
+            <!-- /ko -->
+        </div>
+        <ul data-bind="foreach: orders">
+            <li data-bind="attr: { 'data-order-id': orderId }">
+                Order ID: <span data-bind="text: orderId">ABC123</span><br />
+                Name: <span data-bind="text: name">Product Name</span><br />
+                Quantity: <span data-bind="text: quantity">42</span><br />
+                Price: $<span data-bind="text: (+price).toFixed(2)">10.00</span><br />
+                <button data-bind="click: function() { $parent.orders.remove($data); }">Delete</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+
+    <script src="~/Scripts/ViewModels_OrdersPageQuantityDelete.js"></script>
+    <script>
+
+        var vm = new AppViewModel();
+
+        $(function() {
+            ko.applyBindings(vm);
+        });
+
+    </script>
+}

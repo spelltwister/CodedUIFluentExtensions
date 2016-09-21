@@ -52,6 +52,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CUIT\SimpleHtmlControlsTests.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\AccountSettingsPageModel.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\INewUserScenarios.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\IOrderItem.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\LayoutPageModelBase.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\NavPageModel.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\OrdersOrchestrations.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\OrdersPageModel.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\OrdersRowPageModel.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\OrdersTests_PageModels.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\RegisterOrchestations.cs" />
+    <Compile Include="DecomposingPageObjects\AccountRequired\RegisterPageModel.cs" />
+    <Compile Include="DecomposingPageObjects\ButtonHidden\NewUserAccountSettingsTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\ButtonHidden\RegistrationTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\InitialRequirements\RegistrationTests_SimpleRefactoring.cs" />
+    <Compile Include="DecomposingPageObjects\InitialRequirements\RegistrationTests_TestInitialize.cs" />
+    <Compile Include="DecomposingPageObjects\InitialRequirements\RegistrationTests_NoStrategy.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPageAddCancel\NewUserAccountSettingsTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPageAddCancel\OrdersTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPageAddCancel\RegistrationTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPageQuantityDelete\OrdersTests_PageModels.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPageQuantityDelete\OrdersTests_PageModels_Orchestration.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPageQuantityDelete\OrdersTests_PageModels_RefactorLayout.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPage\NewUserAccountSettingsTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPage\OrdersTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\OrdersPage\RegistrationTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\PasswordHidden\NewUserAccountSettingsTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\PasswordHidden\RegistrationTests_SimpleRefactoring_TestMethod.cs" />
+    <Compile Include="DecomposingPageObjects\PasswordHidden\RegistrationTests_PageObjects.cs" />
+    <Compile Include="DecomposingPageObjects\PasswordHidden\RegistrationTests_SimpleRefactoring_AlwaysAssert.cs" />
+    <Compile Include="DecomposingPageObjects\TestConfig.cs" />
     <Compile Include="Fluent\SimpleHtmlControlsTests.cs" />
     <Compile Include="HtmlSemanticPageModelTests.cs" />
     <Compile Include="PageModeling\ChildModelTypesTests.cs" />

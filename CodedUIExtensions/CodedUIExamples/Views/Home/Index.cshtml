@@ -62,12 +62,45 @@
             You can <a href="https://github.com/spelltwister/CodedUIFluentExtensions">download the source code from github</a> and run the tests to see exactly how the code works.
             <ol>
                 <li>
-                    <a href="examples/example1">Simple Html Input Controls</a><br/>
+                    <a href="@Url.Action("Example1", "Examples")">Simple Html Input Controls</a><br/>
                     Examples of manipulating various html input controls.
                 </li>
                 <li>
-                    <a href="examples/example2">Static Child (Nested Controls)</a><br />
+                    <a href="@Url.Action("Example2", "Examples")">Static Child (Nested Controls)</a><br/>
                     Examples of how to use the Static Child base class for distinguishing nested controls on a page.
+                </li>
+            </ol>
+            Here is a set of refactorings to understand why Page Objects and Page Models can help your test code.
+            <ol>
+                <li>
+                    <a href="@Url.Action("InitialRequirements", "DecomposingPageObjects")">Initial Requirements</a>
+                    Initial sample app tests with no strategy for how to perform testing.
+                </li>
+                <li>
+                    <a href="@Url.Action("Change1", "DecomposingPageObjects")">Hide Confirm Password</a>
+                    First requirement change to hide the confirm password input until both username and password have been set.
+                </li>
+                <li>
+                    <a href="@Url.Action("Change2", "DecomposingPageObjects")">Hide Register Button</a>
+                    Second requirement change to hide the register button until both username and password have been set.
+                </li>
+                <li>
+                    <a href="@Url.Action("Change3", "DecomposingPageObjects")">Add Orders Page</a>
+                    Add an Orders page where logged in users can place orders.
+                </li>
+                <li>
+                    <a href="@Url.Action("Change4", "DecomposingPageObjects")">Add and Cancel Buttons</a>
+                    First change to Orders page to not show new order fields until the Add button is clicked. Also,
+                    include a cancel button which will hide the new order fields.
+                </li>
+                <li>
+                    <a href="@Url.Action("Change5", "DecomposingPageObjects")">Quantity and Delete</a>
+                    Second change to the Orders page to add a quantity field which only shows when an Order ID has been set.
+                    Also, add a delete button to the orders table for each order.
+                </li>
+                <li>
+                    <a href="@Url.Action("Change6", "DecomposingPageObjects")">Account Required</a>
+                    Require that the user has first and last name before entering orders.
                 </li>
             </ol>
         </p>

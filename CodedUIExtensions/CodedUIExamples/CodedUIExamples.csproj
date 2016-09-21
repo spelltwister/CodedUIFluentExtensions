@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DecomposingPageObjectsController.cs" />
     <Compile Include="Controllers\ExamplesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -205,6 +206,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModels_Initial.js" />
+    <Content Include="Scripts\ViewModels_OrdersPage.js" />
+    <Content Include="Scripts\ViewModels_OrdersPageQuantityDelete.js" />
+    <Content Include="Scripts\ViewModels_OrdersPageAddCancel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -226,6 +231,14 @@
     <Content Include="Views\Examples\Legacy.cshtml" />
     <Content Include="Views\Examples\ChildExample.cshtml" />
     <Content Include="Views\Shared\_CustomerSearch.cshtml" />
+    <Content Include="Views\DecomposingPageObjects\InitialRequirements.cshtml" />
+    <Content Include="Views\Shared\_UsernamePassword.cshtml" />
+    <Content Include="Views\DecomposingPageObjects\Change1PasswordHidden.cshtml" />
+    <Content Include="Views\DecomposingPageObjects\Change2ButtonHidden.cshtml" />
+    <Content Include="Views\DecomposingPageObjects\Change3OrdersPage.cshtml" />
+    <Content Include="Views\DecomposingPageObjects\Change4AddCancelOrders.cshtml" />
+    <Content Include="Views\DecomposingPageObjects\Change5QuantityDelete.cshtml" />
+    <Content Include="Views\DecomposingPageObjects\Change6AccountRequired.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
