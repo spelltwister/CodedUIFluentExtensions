@@ -64,7 +64,12 @@ namespace Lib.Tests
             get { return this.DocumentWindow.Find<HtmlComboBox>().AsPageModel(this); }
         }
 
-        public IReadWriteTextValuePageModel<string, SemanticTestPageModel> EditableSpan
+		public INamedSelectionPageModel<string, SemanticTestPageModel, INamedSelectionItemPageModel<string, SemanticTestPageModel>> NamedCombobox
+		{
+			get { return this.DocumentWindow.Find<HtmlComboBox>().AsNamedSelectionPageModel(this); }
+		}
+
+		public IReadWriteTextValuePageModel<string, SemanticTestPageModel> EditableSpan
         {
             get { return this.DocumentWindow.Find<HtmlEditableSpan>().AsPageModel(this); }
         }

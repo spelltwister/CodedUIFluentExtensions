@@ -16,7 +16,7 @@ namespace CaptainPav.Testing.UI.CodedUI.PageModeling.ControlWrappers
         {
         }
 
-        public override string ValueText => null != this.SelectedItem ? this.SelectedItem.Name : null;
+	    public override string ValueText => this.SelectedItem?.Name;
 
 	    public override TNextModel SetValueText(string toValue)
         {

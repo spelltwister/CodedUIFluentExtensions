@@ -106,6 +106,7 @@ namespace CaptainPav.Testing.UI.CodedUI
             catch
             {
                 propertyValue = default(T);
+	            return false;
             }
             return true;
         }

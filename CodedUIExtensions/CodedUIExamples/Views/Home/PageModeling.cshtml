@@ -1,0 +1,115 @@
+﻿@{
+	ViewBag.Title = "Page Modeling";
+}
+
+<h2>Page Modeling</h2>
+
+<p>
+	The page modeling abstraction provides a platform agnostic set of interfaces that can describe
+	User Interface controls according to the behaviors and observations of a UI control. If you are
+	developing an application using an MVVM approach, then the page models end up mirroring your view models.
+	<a href="http://michaelpavlakcoding.blogspot.com/2015/06/page-modeling-with-mvvm-component.html">This blog post</a> details what this may look like.
+</p>
+
+<p>
+	The set of interfaces provided for page modeling try to provide a consistent way to interact with UI controls
+	based on the expected behaviors and observations of a control. For example, a TextBox has a behavior that, when enabled,
+	the user can enter text into the TextBox. It has an observation that the client (user or application) can read out the
+	value stored in the TextBox. Additional observations may be available if the actual value of the TextBox is, say, a money value (decimal type).
+	<code>IReadWriteTextValuePageModel</code> provides the ability to set a money value into the text box directly and read it out directly allowing
+	the transformation logic from string to decimal and back to be part of the modeled control.
+</p>
+
+<p>
+	The relationship of Page Model behaviors and observations can be seen in the following diagram.
+	<figure>
+		<img src="@Url.Content("~/Content/img/PageModelRelationships.png")" />
+		<figcaption>Page Model Relationships</figcaption>
+	</figure>
+</p>
+
+<h3>IPageModel</h3>
+<p>
+	Every Page Model inherits the IPageModel interface to ensure that every page model implementation includes methods
+	to test whether the element:
+	<ul>
+		<li>Is present in the page</li>
+		<li>Is visible to the user</li>
+		<li>Is enabled</li>
+		<li>...</li>
+	</ul>
+
+	Every UI element will support these basic tests and possibly more.
+</p>
+
+<h3>Value Conatiner Page Models</h3>
+<p>
+	Often, controls are used to store values, and display representations of that value, to the user. Most of the page model
+	types support interacting with the value the control is storing to provide very natural semantics for manipulating the
+	stored value.
+
+	Each page model tries to capture the smallest aspect possbile for the expected behavior and observation of the control.
+	Because of this, reading and writing are each a separate interface and can be used together during implementation for a
+	read / write type of control. There are also interfaces which simply join the functionality together for convenience*.
+
+	<h4>IValuablePageModel</h4>
+	This model type represents controls which can have a value set into the control. A Password control typically supports
+	writing to the control, but not reading from the control and would only implement the IValuablePageModel interface.
+	This interface supports setting the value of the control and the type of value is generic. A number input may use double,
+	int, decimal, or whatever number type as the actual value stored. A text input often has a string type storage, but as
+	can be seen in the ITextValuablePageModel, the text many represent a different value type. Use IValuablePageModel when
+	the string does not represent something different internally; otherwise, use ITextValuablePageModel.
+
+	<h4>IValuedPageModel</h4>
+	This would be the read interface to go along with IValuablePageModel. Controls implementing this interface can have
+	their value read by the user, but not necessarily set by the user.
+
+	<h4>ITextValuablePageModel</h4>
+	This model type represents controls which can have their value set either by a string representation (think IFormattable),
+	or set directly by the actual type. A good example of this would be a date picker. The user cannot enter a DateTime object
+	into the date picker field, but they can enter a formatted date like '1/31/1990' to represent the date Jan 31st, 1990. When
+	writing tests, the tester can simply set the value using DateTime objects or a formatted date string. Often it is easier
+	when writing tests to not worry about the expected format of the string and let the page model figure it out.
+
+	<h4>ITextValuedPageModel</h4>
+	This is the read interface to go along with ITextValuablePageModel. Controls implementing this interface can have their
+	value read as the string representation or the actual underlying value type. This removes the need for the test to know
+	how to convert between the string representation of the value and the actual value.
+
+	<h4>IReadWrite*PageModel</h4>
+	These page models simply inherit both the read and write methods of the page model type.
+
+	<h4>INamedPageModel</h4>
+	This interface is used when the control has a name that is shown to the user. The best example of this would be a combobox
+	where the items each have a name shown to the user to describe the option being selected. Primarily, this allows the
+	test to observe something interesting about the control and use that to make assertions or decisions.
+
+	<h4>ISelectablePageModel</h4>
+	This interface is used when the control is considered selected or not. This would be useful for controls like a
+	two-state checkbox or a dropdown containing Yes and No options.
+
+	<h4>ISelectionPageModel</h4>
+	This interface is used when the user is presented a list of items from which to make selections. The classic example
+	would be a combobox.
+</p>
+
+<h3>IClickablePageModel</h3>
+<p>
+	This interface is for controls for which have a meaningful click action. While any control may be clickable, the point
+	of this interface is to highlight that this control has a behavior that is trigged by clicking. If the control type
+	used does not normally have a click action, but the application enabled click, the control is free to also implement the
+	IClickablePageModel interface.
+</p>
+
+<h3>IDialogPageModels</h3>
+<p>
+	These models represent common dialog behaviors and observations. Dialogs typically present the user some information
+	and a way to either act on that information, or simply acknowledge the message.
+</p>
+
+<p>
+	<i>
+		*While it is for convenience, you must make sure not to assume that controls which are both read-able and write-able
+		implement the read-write interface.  It is perfectly valid to simply implement both the read and write interfaces.
+	</i>
+</p>

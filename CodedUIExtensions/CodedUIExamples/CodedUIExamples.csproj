@@ -170,6 +170,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\PageModelRelationships.png" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="favicon.ico" />
@@ -231,6 +232,9 @@
     <Content Include="Views\Examples\Legacy.cshtml" />
     <Content Include="Views\Examples\ChildExample.cshtml" />
     <Content Include="Views\Shared\_CustomerSearch.cshtml" />
+    <Content Include="Views\Home\FluentDetails.cshtml" />
+    <Content Include="Views\Home\PageModeling.cshtml" />
+    <Content Include="Views\Home\CodedUIPageModeling.cshtml" />
     <Content Include="Views\DecomposingPageObjects\InitialRequirements.cshtml" />
     <Content Include="Views\Shared\_UsernamePassword.cshtml" />
     <Content Include="Views\DecomposingPageObjects\Change1PasswordHidden.cshtml" />

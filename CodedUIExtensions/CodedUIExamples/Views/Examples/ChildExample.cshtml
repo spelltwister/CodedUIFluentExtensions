@@ -1,97 +1,287 @@
-﻿<div id="customerSearchContainer">
-    <!-- ko with: goodCustomersVm -->
-    @Html.Partial("_CustomerSearch")
-    <!-- /ko -->
+﻿@{
+	ViewBag.Title = "Child Page Models";
+}
+
+<h2>Child Page Models</h2>
+
+<p>In this example, we will explore when and how to use the child page model types.  There are two types of child page models, Static and Dynamic, and it is important to understand each.</p>
+<div>
+	<h3>Static Child Page model</h3>
+	<p>
+		Static child page models are models which are able to find themselves in the markup relative to some parent node. Typically, this type of child model is used when composing a control from smaller controls. The controls used in the composition of the larger control are able to find themselves given some parent.
+	</p>
+
+	<h3>[Dynamic] Child Page Model</h3>
+	<p>
+		Dynamic child page models are models which are not able to find themselves in the markup and have to be explicitly converted into a page model by the parent model. Typically, this type of child model is used to represent things that repeat and are not always present on the screen. Search results are a good example of this type of model where each result item is not able to find itself and the parent dictates how each item is modeled. It is the responsibility of the test to interrogate the items in the collection and perform assertions. It is not the model's responsibility to find a specific result in the result set.
+	</p>
 </div>
-<div id="suckyCustomers">
-    <!-- ko with: suckyCustomersVm -->
-    @Html.Partial("_CustomerSearch")
-    <!-- /ko -->
+<div>
+	Follows are two search controls that allow the user to find customers by id or name.  Each control is composed of a Search Criteria and a Search Result.  Search Criteria and Search Result are both standalone controls that have been composed into a customer search control.  Each is able to find itself given the parent Customer Search control.  Each returned customer is a dynamic child that has no way of finding itself and these children are not always present.  The Search Result control is responsible for giving out a collection of search result items that the test can interrogate.
 </div>
+
+<fieldset>
+	<legend>Good Customers</legend>
+	<div id="customerSearchContainer">
+		<!-- ko with: goodCustomersVm -->
+		@Html.Partial("_CustomerSearch")
+		<!-- /ko -->
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Sucky Customers</legend>
+	<div id="suckyCustomers">
+		<!-- ko with: suckyCustomersVm -->
+		@Html.Partial("_CustomerSearch")
+		<!-- /ko -->
+	</div>
+</fieldset>
+
 <div id="newsArea">
-    <!-- ko with: newsVm -->
-    <!-- /ko -->
+	<!-- ko with: newsVm -->
+	<!-- /ko -->
+</div>
+
+<div>
+	<h3>The Code</h3>
+	<p>
+		The first thing to model is the page. In this case, I will call it the Customer News Page. On the page, there are the following elements:
+		<ol>
+			<li>Good Customer Search</li>
+			<li>Sucky Customer Search</li>
+			<li>News Area</li>
+		</ol>
+		Each of these becomes a property of the main page model.
+	</p>
+	<pre>
+<code>
+    public interface ICustomerNewsPage : IPageModel
+    {
+        ICustomerSearch GoodCustomers { get; }
+        ICustomerSearch SuckeyCustomers { get; }
+        IPageModel NewsArea { get; }
+    }
+</code>
+</pre>
+	<p>
+		Now that there is a model for the page, we can fill in the sub models. For now, the news area is <i>some</i> page model type that is not important. The customer search model would look like this:
+	</p>
+	<pre>
+<code>
+    public interface ICustomerSearch : IPageModel
+    {
+        ICustomerSearchCriteria SearchCriteria { get; }
+        ICustomerSearchResults SearchResults { get; }
+    }
+</code>
+</pre>
+	<p>Each of the nest controls becomes a property of this composed control and gets its own definition.</p>
+	<pre>
+	<code>
+    public interface ICustomerSearchCriteria : IPageModel
+    {
+        IValueablePageModel&lt;string, ICustomerSearchCriteria&gt; CustomerName { get; }
+        IValueablePageModel&lt;string, ICustomerSearchCriteria&gt; CustomerId { get; }
+        IClickablePageModel&lt;ICustomerSearch&gt; Search { get; } 
+    }
+			
+    public interface ICustomerSearchResults : IPageModel
+    {
+        IEnumerable&lt;ICustomerRow&gt; Customers { get; } 
+    }
+</code>
+</pre>
+	<p>
+		The Customer Search Criteria is simply the name and id inputs and the search button; all of which can be modeled by a native interface. The Search Results are a collection of customer result rows which is a complex type that gets its own interface.
+	</p>
+	<pre>
+<code>
+    public interface ICustomerRow
+    {
+        string Name { get; }
+        string State { get; }
+    }
+</code>
+</pre>
+	<p>Notice that the Customer Row only has readonly data properties that can be used by the test.</p>
+	<p>Now that the interfaces have been created to describe the UI, we can decide how to actually implement them. The main Customer News Page would be an HtmlDocumentPageModel since it represents the entire document window. You could use HtmlBasePageModel here as well, depending on how you want to handle navigation. For simplicity, we'll consider the entire document window as the page model.</p>
+	<pre>
+<code>
+    public class CustomerNewsPage : HtmlDocumentPageModelBase, ICustomerNewsPage
+    {
+        public CustomerNewsPage(BrowserWindow bw) : base(bw)
+        {
+        }
+        public ICustomerSearch GoodCustomers => new CustomerSearch(this.parent, this.Me.Find&lt;HtmlDiv&gt;("customerSearchContainer"));
+        public ICustomerSearch SuckeyCustomers => new CustomerSearch(this.parent, this.Me.Find&lt;HtmlDiv&gt;("suckyCustomers"));
+        public IPageModel NewsArea => this.Me.Find&lt;HtmlDiv&gt;("newsArea").AsPageModel();
+    }
+</code>
+</pre>
+	<p>It is the responsibility of this page model to describe where the child models can be found. Here, the 'sucky' customer search is found in the div whose id is 'suckyCustomers'.</p>
+	<p>
+		Since there are multiple Search Controls on the page, the search control page model must be told which one it represents; the good or the sucky and therefore is a Dynamic Child Page Model type.
+	</p>
+	<pre>
+<code>
+    public class CustomerSearch : HtmlChildPageModelBase&lt;HtmlDiv&gt;, ICustomerSearch
+    {
+        public CustomerSearch(BrowserWindow bw, HtmlDiv me) : base(bw, me)
+        {
+        }
+        public ICustomerSearchCriteria SearchCriteria => new CustomerSearchCriteria(this.parent, this);
+        public ICustomerSearchResults SearchResults => new CustomerSearchResults(this.parent, this);
+    }
+</code>
+</pre>
+	<p>Each of the nest controls is able to find itself, given the search control parent and therefore these are Static Child Page Models</p>
+	<pre>
+	<code>
+    public class CustomerSearchCriteria : HtmlStaticChildPageModelBase&lt;HtmlDiv, CustomerSearch, HtmlDiv&gt;, ICustomerSearchCriteria
+    {
+        public IValueablePageModel&lt;string, ICustomerSearchCriteria&gt; CustomerName => this.Me.Find&lt;HtmlEdit&gt;()
+                                                                                           .WithDataAttribute("criteria", "name")
+                                                                                           .AsPageModel(this);
+        public IValueablePageModel&lt;string, ICustomerSearchCriteria&gt; CustomerId => this.Me.Find&lt;HtmlEdit&gt;()
+                                                                                         .WithDataAttribute("criteria", "id")
+                                                                                         .AsPageModel(this);
+        public IClickablePageModel&lt;ICustomerSearch&gt; Search => this.Me.Find&lt;HtmlButton&gt;().AsPageModel(this.parentModel);
+        public CustomerSearchCriteria(BrowserWindow bw, CustomerSearch parentModel) : base(bw, parentModel)
+        {
+        }
+        protected override HtmlDiv Me => this.ParentScope.Find&lt;HtmlDiv&gt;().WithDataAttribute("control-type", "customerSearchCriteria");
+    }
+	
+    public class CustomerSearchResults : HtmlStaticChildPageModelBase&lt;HtmlDiv, CustomerSearch, HtmlDiv&gt;, ICustomerSearchResults
+    {
+        public CustomerSearchResults(BrowserWindow bw, CustomerSearch parentModel) : base(bw, parentModel)
+        {
+        }
+        protected override HtmlDiv Me => this.ParentScope.Find&lt;HtmlDiv&gt;().WithDataAttribute("control-type", "resultArea");
+        public IEnumerable&lt;ICustomerRow&gt; Customers => this.Me.Find&lt;HtmlUnorderedList&gt;()
+                                                             .Items
+                                                             .Select(x => new CustomerRow(this.parent, x));
+    }
+</code>
+</pre>
+	<p>
+		Static child page models have a special property called <code>ParentScope</code> which provides access to the UI element representing the parent. This helps narrow down the search by starting with the parent element.
+	</p>
+	<p>
+		Lastly, we have the customer row items. Each row is unable to find itself and may not even be present which makes it a Dynamic Child Page Model.
+	</p>
+	<pre>
+<code>
+    public class CustomerRow : HtmlChildPageModelBase&lt;HtmlReadonlyListItem&gt;, ICustomerRow
+    {
+        public CustomerRow(BrowserWindow bw, HtmlReadonlyListItem me) : base(bw, me)
+        {
+        }
+        public string Name => this.Me.Find&lt;HtmlSpan&gt;().WithDataAttribute("id", "name").DisplayText;
+        public string State => this.Me.Find&lt;HtmlSpan&gt;().WithDataAttribute("id", "state").DisplayText;
+    }
+</code>		
+</pre>
+	<p>Remember, that the customer row simply gives out information that the test can use to make assertions.</p>
+	<pre>
+<code>
+    [TestMethod]
+    public void WhenFilteringByName_ThenAllResultsContainThatName()
+    {
+        var goodCustomers = this.model.GoodCustomers;
+        goodCustomers.SearchCriteria
+                     .CustomerName.SetValue("J")
+                     .Search.Click();
+        if (!goodCustomers.SearchResults.Customers.Any())
+        {
+            Assert.Inconclusive();
+        }
+        Assert.IsTrue(goodCustomers.SearchResults.Customers.All(x => x.Name.Contains("J")));
+    }
+</code>
+</pre>
 </div>
 
 @section scripts {
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
+	<script src="~/Scripts/knockout-3.4.0.js"></script>
 
-    <script>
+	<script>
 
-        function CustomerSearchViewModel() {
-            var self = this;
-            this.searchCriteria = {
-                name: ko.observable(null),
-                id: ko.observable(null)
-            };
-            this.searchResult = ko.observable(null);
-            this.search = function() {
-                var result = [];
-                var test = null;
-                if (self.searchCriteria.name()) {
-                    test = self.searchName(self.searchCriteria.name());
-                    if(test)
-                    result.push.apply(result, test);
-                }
+		function CustomerSearchViewModel() {
+			var self = this;
+			this.searchCriteria = {
+				name: ko.observable(null),
+				id: ko.observable(null)
+			};
+			this.searchResult = ko.observable(null);
+			this.search = function () {
+				var result = [];
+				var test = null;
+				if (self.searchCriteria.name()) {
+					test = self.searchName(self.searchCriteria.name());
+					if (test)
+						result.push.apply(result, test);
+				}
 
-                if (self.searchCriteria.id()) {
-                    test = self.searchId(self.searchCriteria.id());
-                    if(test)
-                        result.push.apply(result, test);
-                }
+				if (self.searchCriteria.id()) {
+					test = self.searchId(self.searchCriteria.id());
+					if (test)
+						result.push.apply(result, test);
+				}
 
-                self.searchResult(result);
-            };
+				self.searchResult(result);
+			};
 
-            this.customers = [
+			this.customers = [
                 {
-                    customerId: 123,
-                    name: "Jenny",
-                    state: "MI",
-                    status: 1
+                	customerId: 123,
+                	name: "Jenny",
+                	state: "MI",
+                	status: 1
                 }, {
-                    customerId: 234,
-                    name: "John",
-                    state: "FL",
-                    status: 0
+                	customerId: 234,
+                	name: "John",
+                	state: "FL",
+                	status: 0
                 }, {
-                    customerId: 222,
-                    name: "Jessica",
-                    state: "AZ",
-                    status: 1
+                	customerId: 222,
+                	name: "Jessica",
+                	state: "AZ",
+                	status: 1
                 }, {
-                    customerId: 111,
-                    name: "Michelle",
-                    state: "MI",
-                    status: 1
+                	customerId: 111,
+                	name: "Michelle",
+                	state: "MI",
+                	status: 1
                 }, {
-                    customerId: 321,
-                    name: "Rachel",
-                    state: "NY",
-                    status: 0
+                	customerId: 321,
+                	name: "Rachel",
+                	state: "NY",
+                	status: 0
                 }, {
-                    customerId: 456,
-                    name: "Bob",
-                    state: "ME",
-                    status: 1
+                	customerId: 456,
+                	name: "Bob",
+                	state: "ME",
+                	status: 1
                 }
-            ];
+			];
 
-            this.searchName = function(name) {
-                return this.customers.filter(function(c) { return c.name.indexOf(name) !== -1; });
-            };
+			this.searchName = function (name) {
+				return this.customers.filter(function (c) { return c.name.indexOf(name) !== -1; });
+			};
 
-            this.searchId = function(id) {
-                return this.customers.filter(function(c) { return (''+c.customerId) === id; });
-            };
-        }
+			this.searchId = function (id) {
+				return this.customers.filter(function (c) { return ('' + c.customerId) === id; });
+			};
+		}
 
-        var vm = {
-            goodCustomersVm: new CustomerSearchViewModel(),
-            suckyCustomersVm: new CustomerSearchViewModel(),
-            newsVm: {}
-        };
+		var vm = {
+			goodCustomersVm: new CustomerSearchViewModel(),
+			suckyCustomersVm: new CustomerSearchViewModel(),
+			newsVm: {}
+		};
 
-        ko.applyBindings(vm);
-    </script>
+		ko.applyBindings(vm);
+	</script>
 }
