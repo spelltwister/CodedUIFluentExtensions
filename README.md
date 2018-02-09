@@ -105,3 +105,16 @@ into this:
 	    model.UserName.SetValue("MyUserName");
 	    Assert.IsTrue(StringComparer.Ordinal.Equals(model.UserName.Value, "MyUserName"))
     }
+
+----------
+
+If you run into issues where dependent assemblies cannot be found, add a binding redirect to your app.config file.  I use this with Visual Studio 2017 15.5.6.
+
+    <runtime>
+      <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+        <dependentAssembly>
+          <assemblyIdentity name="Microsoft.VisualStudio.TestTools.UITest.Extension" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+          <bindingRedirect oldVersion="1.0.0.0-15.0.0.0" newVersion="15.0.0.0" />
+        </dependentAssembly>
+      </assemblyBinding>
+  </runtime>
